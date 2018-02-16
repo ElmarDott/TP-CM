@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                        http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>libraries</name>
+    <description>Collection of all Libraries.</description>
+
+    <groupId>org.europa</groupId>
+    <artifactId>libraries</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>bundle-logging</module>
+        <module>bundle-spring</module>
+        <module>bundle-hibernate</module>
+    </modules>
+
+    <build>
+        <defaultGoal>deploy</defaultGoal>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- for auth. in Repository Server (e.g. NEXUS) plaste in settings.xml -->
+    <!-- servers>
+        <server>
+            <id>releases</id>
+            <username>deploy-release@user</username>
+            <password>s3cr3t</password>
+        </server>
+        <server>
+            <id>snapshots</id>
+            <username>deploy-snapshot@user</username>
+            <password>s3cr3t</password>
+        </server>
+    </servers>
+    -->
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Internal Releases</name>
+            <url>http://localhost/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Internal Snapshots</name>
+            <url>http://localhost/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <site>
+            <id>deploy</id>
+            <name>Site Deploy</name>
+            <url>http://localhost/http/root/mvn-site/</url>
+        </site>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>java.net</id>
+            <url>https://maven.java.net/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>maven2</id>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>sonatype</id>
+            <url>http://oss.sonatype.org/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>mule</id>
+            <url> https://repository.mulesoft.org/nexus/content/repositories/public </url>
+        </repository>
+        <repository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>springsource</id>
+            <url>http://repo.springsource.org/release</url>
+        </repository>
+        <repository>
+            <id>spring-milestone</id>
+            <url>http://maven.springframework.org/milestone</url>
+        </repository>
+        <repository>
+            <id>jboss-hibernate</id>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>hibernate-spatial</id>
+            <url>http://www.hibernatespatial.org/repository</url>
+        </repository>
+        <repository>
+            <id>OSGEO-GeoTools</id>
+            <url>http://download.osgeo.org/webdav/geotools/</url>
+        </repository>
+        <repository>
+            <id>primefaces</id>
+            <url>http://repository.primefaces.org</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mule</id>
+            <url> https://repository.mulesoft.org/nexus/content/repositories/public </url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <!-- ==================================================================  -->
+    <!-- ===========================   REPORTS   ==========================  -->
+    <!-- ==================================================================  -->
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.4</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.8</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>index</report>
+                            <report>summary</report>
+                            <report>dependency-management</report>
+                            <report>dependencies</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>
