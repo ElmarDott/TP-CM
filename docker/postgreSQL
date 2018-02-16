@@ -1,0 +1,4 @@
+docker pull postgres
+
+docker run -p5432:5432 -v /home/john/Programs/docker/postgreSQL:/var/lib/postgresql/data postgres
+
