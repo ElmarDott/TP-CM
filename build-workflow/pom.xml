@@ -14,7 +14,7 @@
 
     <groupId>org.europa.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -29,6 +29,7 @@
 
         <framework.spring.version>5.0.2</framework.spring.version>
         <framework.hibernate.version>4.3.11</framework.hibernate.version>
+        <framework.test.jgiven.version>0.15.3</framework.test.jgiven.version>
 
         <java.sdk.version>1.8</java.sdk.version>
         <java.ee.version>7.0</java.ee.version>
@@ -267,12 +268,27 @@
                 <plugin>
                     <groupId>com.tngtech.jgiven</groupId>
                     <artifactId>jgiven-maven-plugin</artifactId>
-                    <version>0.15.3</version>
+                    <version>${framework.test.jgiven.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>com.tngtech.jgiven</groupId>
+                <artifactId>jgiven-maven-plugin</artifactId>
+                <configuration>
+                    <title>together Platform [Module:${project.artifactId}] - JGiven Behavior Driven Design Report (BDD)</title>
+                    <outputDirectory>${project.build.directory}/site/jgiven</outputDirectory>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
@@ -347,8 +363,20 @@
             </dependency>
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
-                <artifactId>jgiven-junit</artifactId>
-                <version>0.15.3</version>
+                <artifactId>jgiven-core</artifactId>
+                <version>${framework.test.jgiven.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.tngtech.jgiven</groupId>
+                <artifactId>jgiven-junit5</artifactId>
+                <version>${framework.test.jgiven.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.tngtech.jgiven</groupId>
+                <artifactId>jgiven-spring</artifactId>
+                <version>${framework.test.jgiven.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -401,7 +429,15 @@
         </dependency>
         <dependency>
             <groupId>com.tngtech.jgiven</groupId>
-            <artifactId>jgiven-junit</artifactId>
+            <artifactId>jgiven-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tngtech.jgiven</groupId>
+            <artifactId>jgiven-junit5</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tngtech.jgiven</groupId>
+            <artifactId>jgiven-spring</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
@@ -510,15 +546,6 @@
             </plugin>
 
             <plugin>
-                <groupId>com.tngtech.jgiven</groupId>
-                <artifactId>jgiven-maven-plugin</artifactId>
-                <version>0.15.3</version>
-                <configuration>
-                    <format>html</format>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.9.0</version>
@@ -623,7 +650,7 @@
                 <role>CEO</role>
                 <role>Architect</role>
                 <role>Build Maanager</role>
-                <role>Lead DDeveloper</role>
+                <role>Lead Developer</role>
             </roles>
             <email>elmar.dott@gmail.com</email>
         </developer>
