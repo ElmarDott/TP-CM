@@ -14,7 +14,7 @@
 
     <groupId>org.europa.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -741,24 +741,6 @@
             <id>release</id>
             <build>
                 <defaultGoal>deploy</defaultGoal>
-
-                <filters>
-                    <filter>src/main/filter/production.properties</filter>
-                </filters>
-
-                <resources>
-                    <resource>
-                        <directory>src/main/resources/</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-                <testResources>
-                    <testResource>
-                        <directory>src/test/resources/</directory>
-                        <filtering>true</filtering>
-                    </testResource>
-                </testResources>
-
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
