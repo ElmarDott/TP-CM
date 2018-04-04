@@ -10,7 +10,7 @@
     <name>libraries</name>
     <description>Collection of all Libraries.</description>
 
-    <groupId>org.europa</groupId>
+    <groupId>io.github.together</groupId>
     <artifactId>libraries</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>

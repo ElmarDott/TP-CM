@@ -9,12 +9,12 @@
 
     <name>Bundle: Hibernate</name>
     <parent>
-        <groupId>org.europa</groupId>
+        <groupId>io.github.together</groupId>
         <artifactId>libraries</artifactId>
         <version>1.0</version>
     </parent>
 
-    <groupId>org.europa.libraries</groupId>
+    <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-hibernate</artifactId>
     <version>4.3.11</version>
     <packaging>pom</packaging>

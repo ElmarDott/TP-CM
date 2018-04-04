@@ -9,12 +9,12 @@
 
     <name>Bundle: Spring</name>
     <parent>
-        <groupId>org.europa</groupId>
+        <groupId>io.github.together</groupId>
         <artifactId>libraries</artifactId>
         <version>1.0</version>
     </parent>
 
-    <groupId>org.europa.libraries</groupId>
+    <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
     <version>5.0.2</version>
     <packaging>pom</packaging>

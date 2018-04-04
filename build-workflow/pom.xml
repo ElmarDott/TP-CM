@@ -12,9 +12,9 @@
     <inceptionYear>01/2013</inceptionYear>
     <url>https://enrebaja.wordpress.com/diaries-in-digital/</url>
 
-    <groupId>org.europa.together</groupId>
+    <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -357,19 +357,19 @@
 
             <!-- Bundels -->
             <dependency>
-                <groupId>org.europa.libraries</groupId>
+                <groupId>io.github.together.libraries</groupId>
                 <artifactId>bundle-logging</artifactId>
                 <version>1.2.3</version>
                 <type>pom</type>
             </dependency>
             <dependency>
-                <groupId>org.europa.libraries</groupId>
+                <groupId>io.github.together.libraries</groupId>
                 <artifactId>bundle-spring</artifactId>
                 <version>${framework.spring.version}</version>
                 <type>pom</type>
             </dependency>
             <dependency>
-                <groupId>org.europa.libraries</groupId>
+                <groupId>io.github.together.libraries</groupId>
                 <artifactId>bundle-hibernate</artifactId>
                 <version>${framework.hibernate.version}</version>
                 <type>pom</type>
