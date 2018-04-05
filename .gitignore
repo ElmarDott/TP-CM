@@ -1,2 +1,3 @@
 /**/target/
 /maven/settings-security.xml
+/build-workflow/nbactions.xml

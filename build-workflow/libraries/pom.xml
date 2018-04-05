@@ -33,37 +33,39 @@
         </plugins>
     </build>
 
-    <!-- for auth. in Repository Server (e.g. NEXUS) plaste in settings.xml -->
+    <!-- for auth. in Repository Server (e.g. NEXUS) paste in settings.xml -->
     <!-- servers>
         <server>
-            <id>releases</id>
+            <id>OSSRH-releases</id>
             <username>deploy-release@user</username>
             <password>s3cr3t</password>
         </server>
         <server>
-            <id>snapshots</id>
+            <id>OSSRH-snapshots</id>
             <username>deploy-snapshot@user</username>
             <password>s3cr3t</password>
         </server>
     </servers>
     -->
 
+    <!-- Deploy  -->
     <distributionManagement>
         <repository>
-            <id>releases</id>
-            <name>Internal Releases</name>
-            <url>http://localhost/nexus/content/repositories/releases/</url>
+            <id>OSSRH-releases</id>
+            <name>Community Support - Open Source Project Repository Hosting</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
         <snapshotRepository>
-            <id>snapshots</id>
-            <name>Internal Snapshots</name>
-            <url>http://localhost/nexus/content/repositories/snapshots/</url>
+            <id>OSSRH-snapshots</id>
+            <name>Community Support - Open Source Project Repository Hosting</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
-        <site>
-            <id>deploy</id>
-            <name>Site Deploy</name>
-            <url>http://localhost/http/root/mvn-site/</url>
-        </site>
+        <!-- site>
+            <id>local-site</id>
+            <name>Local deployed site</name>
+            <url>file:///home/wiki/local/apache2/htdocs/mext</url>
+        </site -->
     </distributionManagement>
 
     <repositories>

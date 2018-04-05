@@ -14,7 +14,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -42,15 +42,11 @@
         <keystore.pwd>{ZeIhBJI7mVQHVieNURsLLmmzbUS5a2dmAvB5eMubq/E=}</keystore.pwd>
     </properties>
 
-    <prerequisites>
-        <maven>${maven.version}</maven>
-    </prerequisites>
-
     <!-- =================================================================== -->
     <!-- =========================== BUILD ================================= -->
     <!-- =================================================================== -->
     <build>
-        <defaultGoal>deploy</defaultGoal>
+        <defaultGoal>install</defaultGoal>
 
         <pluginManagement>
             <plugins>
@@ -339,6 +335,10 @@
                     <includes>org/europa/together/**/*.java</includes>
                     <excludes>org/europa/together/**/*Test.java</excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
@@ -714,24 +714,40 @@
         </developer>
     </developers>
 
-    <!-- Deploy the generated Project Website -->
+    <!-- for auth. in Repository Server (e.g. NEXUS) paste in settings.xml -->
+    <!-- servers>
+        <server>
+            <id>OSSRH-releases</id>
+            <username>deploy-release@user</username>
+            <password>s3cr3t</password>
+        </server>
+        <server>
+            <id>OSSRH-snapshots</id>
+            <username>deploy-snapshot@user</username>
+            <password>s3cr3t</password>
+        </server>
+    </servers -->
+
+    <!-- Deploy  -->
     <distributionManagement>
         <repository>
-            <id>releases</id>
-            <name>Internal Releases</name>
-            <url>http://localhost/nexus/content/repositories/releases/</url>
+            <id>OSSRH-releases</id>
+            <name>Community Support - Open Source Project Repository Hosting</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
         <snapshotRepository>
-            <id>snapshots</id>
-            <name>Internal Snapshots</name>
-            <url>http://localhost/nexus/content/repositories/snapshots/</url>
+            <id>OSSRH-snapshots</id>
+            <name>Community Support - Open Source Project Repository Hosting</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
-        <site>
-            <id>deploy</id>
-            <name>Site Deploy</name>
-            <url>scp://www.sample.com/project-sites/collaboration/</url>
-        </site>
+        <!-- site>
+            <id>local-site</id>
+            <name>Local deployed site</name>
+            <url>file:///home/wiki/local/apache2/htdocs/mext</url>
+        </site -->
     </distributionManagement>
+
 
     <!-- ==================================================================  -->
     <!-- ===========================   PROFILES   =========================  -->
@@ -741,6 +757,18 @@
             <id>release</id>
             <build>
                 <defaultGoal>deploy</defaultGoal>
+
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-war-plugin</artifactId>
+                            <configuration>
+                                <warSourceExcludes>**/*.css,**/*.js</warSourceExcludes>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -761,13 +789,6 @@
                         <configuration>
                             <debug>false</debug>
                             <optimize>true</optimize>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <configuration>
-                            <warSourceExcludes>**/*.css,**/*.js</warSourceExcludes>
                         </configuration>
                     </plugin>
                     <plugin>
