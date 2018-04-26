@@ -7,8 +7,10 @@
                         http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>libraries</name>
-    <description>Collection of all Libraries.</description>
+    <name>together Platform - libraries</name>
+    <description>Reactor POM: Collection of all Libraries.</description>
+    <inceptionYear>01/2013</inceptionYear>
+    <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
 
     <groupId>io.github.together</groupId>
     <artifactId>libraries</artifactId>
@@ -21,10 +23,37 @@
         <module>bundle-hibernate</module>
     </modules>
 
+    <properties>
+        <gpg.keyname>togetherPlatform</gpg.keyname>
+    </properties>
+
+    <scm>
+        <connection>scm:git:https://github.com/ElmarDott/TP-CM.git</connection>
+        <developerConnection>scm:git:file://media/veracrypt1/repositories/git-togetherPlatform/Modules/CM</developerConnection>
+        <url>scm:git:https://github.com/ElmarDott/TP-CM.git</url>
+    </scm>
+
     <build>
-        <defaultGoal>deploy</defaultGoal>
+        <defaultGoal>install</defaultGoal>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>${skipJarSigner}</skip>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -33,34 +62,18 @@
         </plugins>
     </build>
 
-    <!-- for auth. in Repository Server (e.g. NEXUS) paste in settings.xml -->
-    <!-- servers>
-        <server>
-            <id>OSSRH-releases</id>
-            <username>deploy-release@user</username>
-            <password>s3cr3t</password>
-        </server>
-        <server>
-            <id>OSSRH-snapshots</id>
-            <username>deploy-snapshot@user</username>
-            <password>s3cr3t</password>
-        </server>
-    </servers>
-    -->
-
     <!-- Deploy  -->
     <distributionManagement>
-        <repository>
-            <id>OSSRH-releases</id>
-            <name>Community Support - Open Source Project Repository Hosting</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
         <snapshotRepository>
-            <id>OSSRH-snapshots</id>
+            <id>ossrh</id>
             <name>Community Support - Open Source Project Repository Hosting</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <name>Community Support - Open Source Project Repository Hosting</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
         <!-- site>
             <id>local-site</id>
             <name>Local deployed site</name>
@@ -160,4 +173,25 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <developers>
+        <developer>
+            <id>CEO</id>
+            <name>Elmar Dott</name>
+            <roles>
+                <role>CEO</role>
+                <role>Architect</role>
+                <role>Build Maanager</role>
+                <role>Lead Developer</role>
+            </roles>
+            <email>elmar.dott@gmail.com</email>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License - Version 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+        </license>
+    </licenses>
 </project>

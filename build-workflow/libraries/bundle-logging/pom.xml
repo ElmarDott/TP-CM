@@ -7,7 +7,11 @@
                         http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Bundle: Logging (Logback)</name>
+    <name>TP-Bundle: Logging (Logback)</name>
+    <description>BUNDLE POM: Collection of Logging dependencies.</description>
+    <inceptionYear>01/2013</inceptionYear>
+    <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
+
     <parent>
         <groupId>io.github.together</groupId>
         <artifactId>libraries</artifactId>
@@ -57,4 +61,31 @@
             <version>${dependency.logback.version}</version>
         </dependency>
     </dependencies>
+
+    <developers>
+        <developer>
+            <id>CEO</id>
+            <name>Elmar Dott</name>
+            <roles>
+                <role>CEO</role>
+                <role>Architect</role>
+                <role>Build Maanager</role>
+                <role>Lead Developer</role>
+            </roles>
+            <email>elmar.dott@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/ElmarDott/TP-CM.git</connection>
+        <developerConnection>scm:git:file://media/veracrypt1/repositories/git-togetherPlatform/Modules/CM</developerConnection>
+        <url>scm:git:https://github.com/ElmarDott/TP-CM.git</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License - Version 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+        </license>
+    </licenses>
 </project>

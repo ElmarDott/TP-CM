@@ -10,7 +10,7 @@
     <name>together Platform - BUILD Workflow</name>
     <description>Default Build Workflow Definition for together Platform.</description>
     <inceptionYear>01/2013</inceptionYear>
-    <url>https://enrebaja.wordpress.com/diaries-in-digital/</url>
+    <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
@@ -29,6 +29,7 @@
 
         <framework.spring.version>5.0.2</framework.spring.version>
         <framework.hibernate.version>4.3.11</framework.hibernate.version>
+        <framework.logging.version>1.2.3</framework.logging.version>
         <framework.test.jgiven.version>0.15.3</framework.test.jgiven.version>
 
         <java.sdk.version>1.8</java.sdk.version>
@@ -43,6 +44,11 @@
         <gpg.keyname>togetherPlatform</gpg.keyname>
     </properties>
 
+    <scm>
+        <connection>scm:git:https://github.com/ElmarDott/TP-CM.git</connection>
+        <developerConnection>scm:git:file://media/veracrypt1/repositories/git-togetherPlatform/Modules/CM</developerConnection>
+        <url>scm:git:https://github.com/ElmarDott/TP-CM.git</url>
+    </scm>
     <!-- =================================================================== -->
     <!-- =========================== BUILD ================================= -->
     <!-- =================================================================== -->
@@ -374,7 +380,7 @@
             <dependency>
                 <groupId>io.github.together.libraries</groupId>
                 <artifactId>bundle-logging</artifactId>
-                <version>1.2.3</version>
+                <version>${framework.logging.version}</version>
                 <type>pom</type>
             </dependency>
             <dependency>
