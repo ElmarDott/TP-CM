@@ -27,8 +27,8 @@
         <skipTests>false</skipTests>
         <skipEnforcer>false</skipEnforcer>
 
-        <framework.spring.version>5.0.2</framework.spring.version>
-        <framework.hibernate.version>4.3.11</framework.hibernate.version>
+        <framework.spring.version>5.0.8</framework.spring.version>
+        <framework.hibernate.version>5.3.5</framework.hibernate.version>
         <framework.logging.version>1.2.3</framework.logging.version>
         <framework.test.jgiven.version>0.16.0</framework.test.jgiven.version>
 
@@ -120,7 +120,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.7.0</version>
+                    <version>3.8.0</version>
                     <configuration>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <source>${java.sdk.version}</source>
@@ -304,7 +304,7 @@
                 <plugin>
                     <groupId>org.openclover</groupId>
                     <artifactId>clover-maven-plugin</artifactId>
-                    <version>4.2.1</version>
+                    <version>4.3.0</version>
                     <executions>
                         <execution>
                             <phase>pre-site</phase>
@@ -320,7 +320,7 @@
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.4.0.905</version>
+                    <version>3.4.1.1168</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -666,7 +666,7 @@
             <plugin>
                 <groupId>org.openclover</groupId>
                 <artifactId>clover-maven-plugin</artifactId>
-                <version>4.2.1</version>
+                <version>4.3.0</version>
                 <configuration>
                     <jdk>${java.sdk.version}</jdk>
                     <title>together Platform [Module:${project.artifactId}] - Coverrage Report</title>
