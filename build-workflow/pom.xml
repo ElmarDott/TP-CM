@@ -28,7 +28,7 @@
         <skipEnforcer>false</skipEnforcer>
 
         <framework.spring.version>5.0.8</framework.spring.version>
-        <framework.hibernate.version>5.3.5</framework.hibernate.version>
+        <framework.hibernate.version>4.3.11</framework.hibernate.version>
         <framework.logging.version>1.2.3</framework.logging.version>
         <framework.test.jgiven.version>0.16.0</framework.test.jgiven.version>
 
@@ -304,7 +304,7 @@
                 <plugin>
                     <groupId>org.openclover</groupId>
                     <artifactId>clover-maven-plugin</artifactId>
-                    <version>4.3.0</version>
+                    <version>4.2.1</version>
                     <executions>
                         <execution>
                             <phase>pre-site</phase>
@@ -666,7 +666,7 @@
             <plugin>
                 <groupId>org.openclover</groupId>
                 <artifactId>clover-maven-plugin</artifactId>
-                <version>4.3.0</version>
+                <version>4.2.1</version>
                 <configuration>
                     <jdk>${java.sdk.version}</jdk>
                     <title>together Platform [Module:${project.artifactId}] - Coverrage Report</title>
@@ -676,7 +676,7 @@
                     <project>
                         <groupId>org.europa.together</groupId>
                         <artifactId>build-workflow</artifactId>
-                        <version>1.0.3</version>
+                        <version>${project.version}</version>
                     </project>
                 </configuration>
             </plugin>

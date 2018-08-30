@@ -24,7 +24,7 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-hibernate</artifactId>
-    <version>5.3.5</version>
+    <version>4.3.11</version>
     <packaging>pom</packaging>
 
     <dependencies>
@@ -70,7 +70,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.3.jre7</version>
+            <version>9.4.1212</version>
         </dependency>
         <dependency>
             <groupId>org.xerial</groupId>
