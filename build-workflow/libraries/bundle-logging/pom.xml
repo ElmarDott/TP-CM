@@ -12,12 +12,6 @@
     <inceptionYear>01/2013</inceptionYear>
     <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
 
-    <parent>
-        <groupId>io.github.together</groupId>
-        <artifactId>libraries</artifactId>
-        <version>1.0</version>
-    </parent>
-
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-logging</artifactId>
     <version>1.2.3</version>

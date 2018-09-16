@@ -16,18 +16,20 @@
     <inceptionYear>01/2013</inceptionYear>
     <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
 
-    <parent>
-        <groupId>io.github.together</groupId>
-        <artifactId>libraries</artifactId>
-        <version>1.0</version>
-    </parent>
-
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-hibernate</artifactId>
-    <version>4.3.11</version>
+    <version>5.3.6</version>
     <packaging>pom</packaging>
 
     <dependencies>
+
+        <!-- FIX -->
+        <dependency>
+            <artifactId>jboss-logging</artifactId>
+            <groupId>org.jboss.logging</groupId>
+            <version>3.2.0.Final</version>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -38,22 +40,28 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${project.version}.Final</version>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
             <version>${project.version}.Final</version>
         </dependency>
 
+        <!-- Bean Validation -->
         <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.4.2.Final</version>
         </dependency>
         <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>jta</artifactId>
-            <version>1.1</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
+            <version>5.4.2.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>2.2.6</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- JDBC DRIVER -->
@@ -70,7 +78,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4.1212</version>
+            <version>42.2.5</version>
         </dependency>
         <dependency>
             <groupId>org.xerial</groupId>

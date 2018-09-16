@@ -12,29 +12,22 @@
     <inceptionYear>01/2013</inceptionYear>
     <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
 
-    <parent>
-        <groupId>io.github.together</groupId>
-        <artifactId>libraries</artifactId>
-        <version>1.0</version>
-    </parent>
-
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
     <version>5.0.8</version>
     <packaging>pom</packaging>
 
     <dependencies>
-        <!-- dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
-            <version>1.4.01</version>
-            <scope>runtime</scope>
-        </dependency -->
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${project.version}.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
