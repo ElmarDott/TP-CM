@@ -27,10 +27,10 @@
         <skipTests>false</skipTests>
         <skipEnforcer>false</skipEnforcer>
 
-        <framework.spring.version>5.0.8</framework.spring.version>
+        <framework.spring.version>5.1.0</framework.spring.version>
         <framework.hibernate.version>5.3.6</framework.hibernate.version>
         <framework.logging.version>1.2.3</framework.logging.version>
-        <framework.test.jgiven.version>0.16.0</framework.test.jgiven.version>
+        <framework.test.jgiven.version>0.16.1</framework.test.jgiven.version>
 
         <java.sdk.version>1.8</java.sdk.version>
         <java.ee.version>7.0</java.ee.version>
@@ -42,6 +42,7 @@
         <keystore.file>${basedir}/src/site/resources/keystore.iks</keystore.file>
         <keystore.pwd>{ZeIhBJI7mVQHVieNURsLLmmzbUS5a2dmAvB5eMubq/E=}</keystore.pwd>
         <gpg.keyname>togetherPlatform</gpg.keyname>
+        <swagger.directory>${project.build.directory}/swagger</swagger.directory>
     </properties>
 
     <scm>
@@ -200,7 +201,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-scm-plugin</artifactId>
-                    <version>1.10.0</version>
+                    <version>1.11.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -304,7 +305,7 @@
                 <plugin>
                     <groupId>org.openclover</groupId>
                     <artifactId>clover-maven-plugin</artifactId>
-                    <version>4.2.1</version>
+                    <version>4.3.1</version>
                     <executions>
                         <execution>
                             <phase>pre-site</phase>
@@ -320,7 +321,7 @@
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.4.1.1168</version>
+                    <version>3.5.0.1254</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -361,6 +362,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
@@ -400,13 +405,13 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.3.0</version>
+                <version>5.3.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-runner</artifactId>
-                <version>1.3.0</version>
+                <version>1.3.1</version>
                 <scope>test</scope>
             </dependency>
 
@@ -414,7 +419,7 @@
             <dependency>
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
-                <version>1.5.7</version>
+                <version>1.5.8</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

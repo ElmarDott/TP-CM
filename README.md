@@ -119,4 +119,9 @@ like this project, let me know it an rate it with a star.
 |        |  - dependencies: TP-BUNDLE Hibernate 4.3.11
 |        |  - dependencies: TP-BUNDLE Logback 1.2.3
 |--------|----------------------------------------------------------------------
+| 1.0.8  | in progress (TP-CORE 1.1.0)
+|        |  - update dependency Versions
+|--------|----------------------------------------------------------------------
+|        |
+|        |
 |        |
