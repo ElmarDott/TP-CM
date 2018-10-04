@@ -42,7 +42,6 @@
         <keystore.file>${basedir}/src/site/resources/keystore.iks</keystore.file>
         <keystore.pwd>{ZeIhBJI7mVQHVieNURsLLmmzbUS5a2dmAvB5eMubq/E=}</keystore.pwd>
         <gpg.keyname>togetherPlatform</gpg.keyname>
-        <swagger.directory>${project.build.directory}/swagger</swagger.directory>
     </properties>
 
     <scm>
@@ -361,10 +360,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.github.kongchen</groupId>
-                <artifactId>swagger-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
