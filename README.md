@@ -27,7 +27,7 @@ PARENT POM: build workflow
 <parent>
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 </parent>
 ```
 For useing the Bundels in your project you can place the following connfiguration
@@ -119,7 +119,7 @@ like this project, let me know it an rate it with a star.
 |        |  - dependencies: TP-BUNDLE Hibernate 4.3.11
 |        |  - dependencies: TP-BUNDLE Logback 1.2.3
 |--------|----------------------------------------------------------------------
-| 1.0.8  | in progress (TP-CORE 1.1.0)
+| 1.0.8  | published: 13-Oct-2018 Maven Central (TP-CORE-1.1.0)
 |        |  - update dependency Versions
 |--------|----------------------------------------------------------------------
 |        |
