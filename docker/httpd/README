@@ -1,0 +1,7 @@
+Apache 2 + PHP 7.2 : pull php:7.3-apache
+
+    CMD/>  docker run -d -p 80:80 --name php-7.3 -v /media/veracrypt1/htdocs:/var/www/html -v /media/veracrypt1/Applications/docker/apache/php-7.3:/etc/apache2 php:7.3-apache
+           docker start php-7.3
+           docker stop php-7.3
+    URI/>  localhost
+    DOC/>  https://hub.docker.com/_/php/

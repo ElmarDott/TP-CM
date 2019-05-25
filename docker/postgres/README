@@ -1,0 +1,7 @@
+PostgreSQL DBMS 11.1 : pull postgres
+
+    CMD/>  docker run -d -p 5432:5432 --name postgres -v /media/veracrypt1/Applications/docker/postgreSQL:/var/lib/postgresql/data postgres
+           docker start postgres
+           docker stop postgres
+    URI/>  172.17.0.1:5432   User: postgres PWD: n/a
+    DOC/>  https://docs.docker.com/samples/library/postgres/
