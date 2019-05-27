@@ -40,7 +40,7 @@ PARENT POM: build workflow
 <parent>
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.0.9</version>
+    <version>1.1.0</version>
 </parent>
 ```
 For useing the Bundels in your project you can place the following connfiguration
@@ -67,6 +67,18 @@ don't need to insert the <dependency> section.
                 <version>${framework.hibernate.version}</version>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>io.github.together.libraries</groupId>
+                <artifactId>bundle-jarkarta</artifactId>
+                <version>${framework.jarkarta.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>io.github.together.libraries</groupId>
+                <artifactId>bundle-spring-security</artifactId>
+                <version>${framework.spring-security.version}</version>
+                <type>pom</type>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -85,6 +97,14 @@ don't need to insert the <dependency> section.
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
     <type>pom</type>
+</dependency>
+<dependency>
+    <groupId>io.github.together.libraries</groupId>
+    <artifactId>bundle-jarkarta</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.github.together.libraries</groupId>
+    <artifactId>bundle-spring-security</artifactId>
 </dependency>
 </dependencies>
 ...
@@ -130,10 +150,11 @@ In the case you like this project, let me know it and rate it with a star.
 
 |Version | Comment
 |--------|----------------------------------------------------------------------
-| 1.0.9  | in process
-|        |  - modify mvn compiler plugin for annotation processing
-|        |  - change license to APache 2.0
-|        |  . update dependencies
+| 1.1.0  | published: 5/2019 Maven Central (TP-CORE-1.2.0)
+|        |  - change license to Apache 2.0
+|        |  - extend bundle-jarkarta (JEE 7.0)
+|        |  - extend bundle-spring-security 
+|        |  - update dependencies
 |--------|----------------------------------------------------------------------
 | 1.0.8  | published: 10/2018 Maven Central (TP-CORE-1.1.0)
 |        |  - update dependency Versions

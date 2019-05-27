@@ -13,46 +13,49 @@
     <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
 
     <groupId>io.github.together.libraries</groupId>
-    <artifactId>bundle-logging</artifactId>
-    <version>1.7.26</version>
+    <artifactId>bundle-jarkarta</artifactId>
+    <version>7.0</version>
     <packaging>pom</packaging>
-
-    <properties>
-        <dependency.slf4j.version>1.7.26</dependency.slf4j.version>
-        <dependency.logback.version>1.2.3</dependency.logback.version>
-    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${dependency.slf4j.version}</version>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${dependency.slf4j.version}</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>${dependency.slf4j.version}</version>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.faces</artifactId>
+            <version>2.2.19</version>
         </dependency>
 
+        <!-- JaxRs support & Swagger API -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${dependency.logback.version}</version>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>1.19.4</version>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${dependency.logback.version}</version>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jaxrs</artifactId>
+            <version>1.5.22</version>
+        </dependency>
+
+        <!-- ui support -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>7.0</version>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-access</artifactId>
-            <version>${dependency.logback.version}</version>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>1.14.1</version>
         </dependency>
     </dependencies>
 

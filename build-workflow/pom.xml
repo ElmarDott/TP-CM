@@ -14,7 +14,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.0.9-SNAPSHOT</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -25,13 +25,15 @@
         <skipTests>false</skipTests>
         <skipCoveralls>true</skipCoveralls>
         <skipClover>false</skipClover>
-        <skipJarSigner>true</skipJarSigner>
+        <skipJarSigner>false</skipJarSigner>
         <skipJavaDoc>false</skipJavaDoc>
         <skipEnforcer>false</skipEnforcer>
 
-        <framework.spring.version>5.1.6</framework.spring.version>
+        <framework.spring.version>5.1.7</framework.spring.version>
         <framework.hibernate.version>5.3.10</framework.hibernate.version>
         <framework.logging.version>1.7.26</framework.logging.version>
+        <framework.jarkarta.version>7.0</framework.jarkarta.version>
+        <framework.spring-security.version>5.1.5</framework.spring-security.version>
         <framework.test.jgiven.version>0.17.1</framework.test.jgiven.version>
 
         <java.sdk.version>1.8</java.sdk.version>
@@ -39,11 +41,8 @@
         <maven.version>3.5.0</maven.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <checkstyle.rules>${basedir}/src/site/resources/checkstyle-rules.xml</checkstyle.rules>
-        <license.file>${basedir}/src/site/resources/gnu3_license.html</license.file>
-        <keystore.file>${basedir}/src/site/resources/keystore.iks</keystore.file>
-        <keystore.pwd>{ZeIhBJI7mVQHVieNURsLLmmzbUS5a2dmAvB5eMubq/E=}</keystore.pwd>
-        <gpg.keyname>togetherPlatform</gpg.keyname>
+        <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
+        <license.file>${basedir}/src/site/resources/license.html</license.file>
     </properties>
 
     <scm>
@@ -136,7 +135,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.2</version>
+                    <version>3.0.0-M3</version>
                     <configuration>
                         <skipTests>${skipTests}</skipTests>
                         <argLine>-XX:-UseSplitVerifier</argLine>
@@ -147,7 +146,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.2</version>
                     <executions>
                         <execution>
                             <id>default-jar</id>
@@ -188,12 +187,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
+                    <version>3.0.0-M1</version>
                 </plugin>
 
                 <!-- RELEASE artifact -->
@@ -220,27 +219,9 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jarsigner-plugin</artifactId>
-                    <version>1.4</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>sign</goal>
-                                <goal>verify</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                     <configuration>
-                        <keystore>${keystore.file}</keystore>
-                        <alias>together</alias>
-                        <storepass>${keystore.pwd}</storepass>
-                        <keypass>${keystore.pwd}</keypass>
-                        <!-- VERIFY -->
-                        <verbose>true</verbose>
-                        <certs>true</certs>
+                        <keyname>${gpg.keyname}</keyname>
+                        <passphraseServerId>${gpg.keyname}</passphraseServerId>
                     </configuration>
                 </plugin>
 
@@ -375,6 +356,11 @@
 
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+            </plugin>
+
+            <plugin>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-maven-plugin</artifactId>
                 <configuration>
@@ -384,6 +370,10 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.openclover</groupId>
@@ -428,18 +418,30 @@
                 <version>${framework.hibernate.version}</version>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>io.github.together.libraries</groupId>
+                <artifactId>bundle-jarkarta</artifactId>
+                <version>${framework.jarkarta.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>io.github.together.libraries</groupId>
+                <artifactId>bundle-spring-security</artifactId>
+                <version>${framework.spring-security.version}</version>
+                <type>pom</type>
+            </dependency>
 
             <!-- TEST FRAMEWORKS -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.4.2</version>
+                <version>5.5.0-M1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-runner</artifactId>
-                <version>1.4.2</version>
+                <version>1.5.0-M1</version>
                 <scope>test</scope>
             </dependency>
 
@@ -636,7 +638,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.0.0-M3</version>
             </plugin>
 
             <plugin>
@@ -781,11 +783,6 @@
     <profiles>
         <profile>
             <id>release</id>
-
-            <properties>
-                <skipCoveralls>false</skipCoveralls>
-                <skipJarSigner>false</skipJarSigner>
-            </properties>
             <build>
                 <defaultGoal>deploy</defaultGoal>
 
@@ -854,33 +851,20 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <configuration>
-                            <skip>${skipJarSigner}</skip>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
-                        </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-jarsigner-plugin</artifactId>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
                         <configuration>
-                            <skip>${skipJarSigner}</skip>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
                 </plugins>
-                <!--
-                 - scm update
-                 - scm commit changes
-                 - mvn build
-                 - mvn deploy to nexus
-                 - mvn release
-                        - scm tag
-                        - incremnt version
-                        - scm commit
-                        - mvn build
-                -->
             </build>
         </profile>
     </profiles>
-
 </project>
