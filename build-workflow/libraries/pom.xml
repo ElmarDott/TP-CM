@@ -65,7 +65,7 @@
         </repository>
         <repository>
             <id>mule</id>
-            <url> https://repository.mulesoft.org/nexus/content/repositories/public </url>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/public</url>
         </repository>
         <repository>
             <id>apache.snapshots</id>

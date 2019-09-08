@@ -25,8 +25,8 @@ detailed information how to run the image in the context of together platform.
 
 ### Prerequisites
 
-* Java 8 SE JDK
-* Maven 3.5.x
+* Java 11 SE JDK
+* Maven 3.6.x
 * Docker
 * NetBeans IDE (recommended) / JetBrains IntelliJ / Eclipse
 
@@ -82,31 +82,31 @@ don't need to insert the <dependency> section.
         </dependencies>
     </dependencyManagement>
 
-</dependencies>
-<dependency>
-    <groupId>io.github.together.libraries</groupId>
-    <artifactId>bundle-logging</artifactId>
-    <type>pom</type>
-</dependency>
-<dependency>
-    <groupId>io.github.together.libraries</groupId>
-    <artifactId>bundle-hibernate</artifactId>
-    <type>pom</type>
-</dependency>
-<dependency>
-    <groupId>io.github.together.libraries</groupId>
-    <artifactId>bundle-spring</artifactId>
-    <type>pom</type>
-</dependency>
-<dependency>
-    <groupId>io.github.together.libraries</groupId>
-    <artifactId>bundle-jarkarta</artifactId>
-</dependency>
-<dependency>
-    <groupId>io.github.together.libraries</groupId>
-    <artifactId>bundle-spring-security</artifactId>
-</dependency>
-</dependencies>
+    </dependencies>
+    <dependency>
+        <groupId>io.github.together.libraries</groupId>
+        <artifactId>bundle-logging</artifactId>
+        <type>pom</type>
+    </dependency>
+    <dependency>
+        <groupId>io.github.together.libraries</groupId>
+        <artifactId>bundle-hibernate</artifactId>
+        <type>pom</type>
+    </dependency>
+    <dependency>
+        <groupId>io.github.together.libraries</groupId>
+        <artifactId>bundle-spring</artifactId>
+        <type>pom</type>
+    </dependency>
+    <dependency>
+        <groupId>io.github.together.libraries</groupId>
+        <artifactId>bundle-jarkarta</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.github.together.libraries</groupId>
+        <artifactId>bundle-spring-security</artifactId>
+    </dependency>
+    </dependencies>
 ...
 
 ## Usage
@@ -149,6 +149,9 @@ In the case you like this project, let me know it and rate it with a star.
 ## Release Notes
 
 |Version | Comment
+|--------|----------------------------------------------------------------------
+| 1.1.1  | in progres (TP-CORE-1.2.0)
+|        |  - migrate from java 8 to java 11 
 |--------|----------------------------------------------------------------------
 | 1.1.0  | published: 5/2019 Maven Central (TP-CORE-1.2.0)
 |        |  - change license to Apache 2.0
