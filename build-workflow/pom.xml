@@ -22,19 +22,19 @@
     </modules>
 
     <properties>
+        <skipCoveralls>false</skipCoveralls>
         <skipTests>false</skipTests>
         <skipClover>false</skipClover>
         <skipJarSigner>false</skipJarSigner>
         <skipJavaDoc>false</skipJavaDoc>
         <skipEnforcer>true</skipEnforcer>
-        <skipCoveralls>true</skipCoveralls>
 
         <framework.spring.version>5.1.9</framework.spring.version>
-        <framework.hibernate.version>5.3.11</framework.hibernate.version>
+        <framework.hibernate.version>5.3.13</framework.hibernate.version>
         <framework.logging.version>1.7.28</framework.logging.version>
-        <framework.jarkarta.version>7.0</framework.jarkarta.version>
-        <framework.spring-security.version>5.1.6</framework.spring-security.version>
-        <framework.test.jgiven.version>0.17.1</framework.test.jgiven.version>
+        <framework.jarkarta.version>8.0</framework.jarkarta.version>
+        <framework.spring-security.version>5.2.0</framework.spring-security.version>
+        <framework.test.jgiven.version>0.18.2</framework.test.jgiven.version>
 
         <java.sdk.version>11</java.sdk.version>
         <java.ee.version>7.0</java.ee.version>
@@ -194,21 +194,37 @@
 
                 <!-- REPORTING -->
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.8.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.5</version>
+                    <executions>
+                        <execution>
+                            <id>pre-unit-test</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                            <configuration>
+                                <configuration>
+                                    <destFile>${project.build.directory}/jacoco.exec</destFile>
+                                </configuration>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>post-unit-test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <configuration>
+                                <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+                                <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
                     <configuration>
-                        <skip>${skipJavaDoc}</skip>
-                        <includeDependencySources>false</includeDependencySources>
-                        <quiet>true</quiet>
-                        <docencoding>${project.build.sourceEncoding}</docencoding>
-                        <maxmemory>1g</maxmemory>
-                        <failOnError>false</failOnError>
+                        <excludes>
+                            <exclude>org/europa/together/business/**/*</exclude>
+                        </excludes>
                     </configuration>
                 </plugin>
 
@@ -252,54 +268,38 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.4</version>
-                    <executions>
-                        <execution>
-                            <phase>pre-site</phase>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>report</id>
-                            <phase>prepare-package</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <excludes>
-                            <exclude>org/europa/together/business/**/*</exclude>
-                        </excludes>
-                    </configuration>
-                </plugin>
-
-                <plugin>
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
                     <version>4.3.0</version>
-                    <executions>
-                        <execution>
-                            <phase>install</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                     <configuration>
                         <skip>${skipCoveralls}</skip>
-                        <!-- coberturaReports>${project.build.directory}/cobertura/coverage.xml</coberturaReports -->
-                        <jacocoReports>${project.build.directory}/jacoco/jacoco.xml</jacocoReports>
+                        <jacocoReports>${project.build.directory}/site/jacoco/jacoco.xml</jacocoReports>
                     </configuration>
                 </plugin>
 
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.6.0.1398</version>
+                    <version>3.7.0.1746</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.8.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.1</version>
+                    <configuration>
+                        <skip>${skipJavaDoc}</skip>
+                        <includeDependencySources>false</includeDependencySources>
+                        <quiet>true</quiet>
+                        <docencoding>${project.build.sourceEncoding}</docencoding>
+                        <maxmemory>1g</maxmemory>
+                        <failOnError>false</failOnError>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -335,23 +335,28 @@
                 <artifactId>apiguardian-api</artifactId>
                 <version>1.1.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>annotations</artifactId>
+                <version>3.0.1</version>
+                <scope>provided</scope>
+            </dependency>
 
-            <!-- Fix: java 9 missing dependencies -->
-
+            <!-- Java 9 Modularization Dependencies -->
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
-                <version>2.3.0</version>
+                <version>2.3.1</version>
             </dependency>
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>2.3.0</version>
+                <version>2.3.2</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
-                <version>2.3.0</version>
+                <version>2.3.2</version>
             </dependency>
             <dependency>
                 <groupId>javax.activation</groupId>
@@ -393,23 +398,22 @@
 
             <!-- TEST FRAMEWORKS -->
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.5.1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.platform</groupId>
-                <artifactId>junit-platform-runner</artifactId>
-                <version>1.5.1</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- SMTP Server Mock -->
-            <dependency>
+                <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
                 <version>1.5.10</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.bean-matchers</groupId>
+                <artifactId>bean-matchers</artifactId>
+                <version>0.11</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.10.19</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -430,16 +434,17 @@
                 <version>${framework.test.jgiven.version}</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.10.19</version>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>5.5.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>com.google.code.bean-matchers</groupId>
-                <artifactId>bean-matchers</artifactId>
-                <version>0.11</version>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-runner</artifactId>
+                <version>1.5.2</version>
                 <scope>test</scope>
             </dependency>
 
@@ -469,6 +474,10 @@
             <groupId>org.apiguardian</groupId>
             <artifactId>apiguardian-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>annotations</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>javax.xml.bind</groupId>
@@ -487,18 +496,18 @@
             <artifactId>activation</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-        </dependency>
-
+        <!-- Do not change order for test frameworks -->
         <dependency>
             <groupId>com.icegreen</groupId>
             <artifactId>greenmail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.bean-matchers</groupId>
+            <artifactId>bean-matchers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
         </dependency>
         <dependency>
             <groupId>com.tngtech.jgiven</groupId>
@@ -513,12 +522,12 @@
             <artifactId>jgiven-spring</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.code.bean-matchers</groupId>
-            <artifactId>bean-matchers</artifactId>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
         </dependency>
 
         <dependency>
@@ -664,7 +673,7 @@
                 <version>4.3.1</version>
                 <configuration>
                     <jdk>${java.sdk.version}</jdk>
-                    <title>together Platform [Module:${project.artifactId}] - Coverrage Report</title>
+                    <title>together Platform [Module:${project.artifactId}] - Coverage Report</title>
                     <cloverOutputDirectory>${project.build.directory}/clover</cloverOutputDirectory>
                     <alwaysReport>true</alwaysReport>
                     <codeType>ALL</codeType>
@@ -679,6 +688,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -686,6 +696,9 @@
                         </reports>
                     </reportSet>
                 </reportSets>
+                <configuration>
+                    <dataFile>${project.build.directory}/target/jacoco-unit.exec</dataFile>
+                </configuration>
             </plugin>
 
             <plugin>
