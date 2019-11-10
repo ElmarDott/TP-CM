@@ -7,7 +7,7 @@
                         http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>TP-Bundle: Logging (Logback)</name>
+    <name>TP-Bundle: Jarkarta (JavaEE)</name>
     <description>BUNDLE POM: Collection of Logging dependencies.</description>
     <inceptionYear>01/2013</inceptionYear>
     <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
