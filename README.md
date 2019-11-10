@@ -150,7 +150,7 @@ In the case you like this project, let me know it and rate it with a star.
 
 |Version | Comment
 |--------|----------------------------------------------------------------------
-| 1.1.1  | in progres (TP-CORE-1.2.0)
+| 1.1.1  | published: 11/2019 (TP-CORE-2.0.0)
 |        |  - migrate from java 8 to java 11 
 |--------|----------------------------------------------------------------------
 | 1.1.0  | published: 5/2019 Maven Central (TP-CORE-1.2.0)
