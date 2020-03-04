@@ -14,7 +14,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -29,11 +29,11 @@
         <skipJavaDoc>false</skipJavaDoc>
         <skipEnforcer>true</skipEnforcer>
 
-        <framework.spring.version>5.1.9</framework.spring.version>
-        <framework.hibernate.version>5.3.13</framework.hibernate.version>
-        <framework.logging.version>1.7.28</framework.logging.version>
-        <framework.jarkarta.version>8.0</framework.jarkarta.version>
-        <framework.spring-security.version>5.2.0</framework.spring-security.version>
+        <framework.spring.version>5.1.13</framework.spring.version>
+        <framework.hibernate.version>5.3.15</framework.hibernate.version>
+        <framework.logging.version>1.7.30</framework.logging.version>
+        <framework.jarkarta.version>8.0.1</framework.jarkarta.version>
+        <framework.spring-security.version>5.2.2</framework.spring-security.version>
         <framework.test.jgiven.version>0.18.2</framework.test.jgiven.version>
 
         <java.sdk.version>11</java.sdk.version>
@@ -54,14 +54,14 @@
     <!-- =========================== BUILD ================================= -->
     <!-- =================================================================== -->
     <build>
-        <defaultGoal>install</defaultGoal>
+        <defaultGoal>verify</defaultGoal>
 
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M2</version>
+                    <version>3.0.0-M3</version>
                     <executions>
                         <execution>
                             <phase>verify</phase>
@@ -130,18 +130,30 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M3</version>
+                    <version>3.0.0-M4</version>
                     <configuration>
                         <skipTests>${skipTests}</skipTests>
                         <testFailureIgnore>true</testFailureIgnore>
                         <useSystemClassLoader>false</useSystemClassLoader>
                     </configuration>
                 </plugin>
-
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>3.0.0-M4</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.2.0</version>
                     <executions>
                         <execution>
                             <id>default-jar</id>
@@ -152,7 +164,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
@@ -167,11 +178,28 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.6.0</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>java</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -250,7 +278,7 @@
                 <plugin>
                     <groupId>org.openclover</groupId>
                     <artifactId>clover-maven-plugin</artifactId>
-                    <version>4.3.1</version>
+                    <version>4.4.1</version>
                     <executions>
                         <execution>
                             <phase>pre-site</phase>
@@ -275,6 +303,25 @@
                         <skip>${skipCoveralls}</skip>
                         <jacocoReports>${project.build.directory}/site/jacoco/jacoco.xml</jacocoReports>
                     </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>io.swagger.core.v3</groupId>
+                    <artifactId>swagger-maven-plugin</artifactId>
+                    <version>2.1.1</version>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <outputPath>${project.build.directory}</outputPath>
+                        <prettyPrint>true</prettyPrint>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>resolve</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <plugin>
@@ -305,6 +352,31 @@
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
@@ -398,24 +470,38 @@
 
             <!-- TEST FRAMEWORKS -->
             <dependency>
+                <groupId>com.tngtech.archunit</groupId>
+                <artifactId>archunit</artifactId>
+                <version>0.13.1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
-                <version>1.5.10</version>
+                <version>1.5.11</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- RESTful Service  -->
+            <dependency>
+                <groupId>org.glassfish.grizzly</groupId>
+                <artifactId>grizzly-http-server-jaxws</artifactId>
+                <version>2.4.4</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.google.code.bean-matchers</groupId>
                 <artifactId>bean-matchers</artifactId>
-                <version>0.11</version>
+                <version>0.12</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.10.19</version>
+                <artifactId>mockito-core</artifactId>
+                <version>3.3.0</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-core</artifactId>
@@ -438,13 +524,13 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.5.2</version>
+                <version>5.6.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-runner</artifactId>
-                <version>1.5.2</version>
+                <version>1.6.0</version>
                 <scope>test</scope>
             </dependency>
 
@@ -502,13 +588,18 @@
             <artifactId>greenmail</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.glassfish.grizzly</groupId>
+            <artifactId>grizzly-http-server-jaxws</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.code.bean-matchers</groupId>
             <artifactId>bean-matchers</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <artifactId>mockito-core</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.tngtech.jgiven</groupId>
             <artifactId>jgiven-core</artifactId>
@@ -624,13 +715,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.0.0-M3</version>
+                <version>3.0.0-M4</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.12.0</version>
+                <version>3.13.0</version>
                 <configuration>
                     <format>xml</format>
                     <linkXref>true</linkXref>
@@ -670,7 +761,7 @@
             <plugin>
                 <groupId>org.openclover</groupId>
                 <artifactId>clover-maven-plugin</artifactId>
-                <version>4.3.1</version>
+                <version>4.4.1</version>
                 <configuration>
                     <jdk>${java.sdk.version}</jdk>
                     <title>together Platform [Module:${project.artifactId}] - Coverage Report</title>
