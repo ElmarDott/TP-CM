@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                        http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>together Platform - ArcitectureTest</name>
+    <description>Architecture Tests by ArchUnit</description>
+    <parent>
+        <groupId>io.github.together</groupId>
+        <artifactId>build-workflow</artifactId>
+        <version>1.2-SNAPSHOT</version>
+    </parent>
+
+    <groupId>io.github.together</groupId>
+    <artifactId>architecture</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- TEST FRAMEWORK -->
+        <dependency>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.together.modules</groupId>
+            <artifactId>acl</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.together.modules</groupId>
+            <artifactId>core</artifactId>
+            <version>2.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>
