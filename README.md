@@ -120,7 +120,7 @@ some other usful informations.
 The release policy for all together Platform modules is based on this reports. The
 rules for deployed (published) Releases are:
 * fix all compiler warnings
-* cobutura full project coverrage more than 80%
+* jacoco full project coverage more than 80%
 * all test have to pass (no skip)
 * no SNAPSHOT artifacts as dependencies
 * minimize all possible PMD, Findbugs & Checkstyle warnings. (sometimes they can't fixed)
@@ -136,7 +136,7 @@ udate a version of an dependency implies a new release of the bundle and the bui
 ## License
 
 This project is licensed under the Apache License 2.0 - For free private and
-commerial usage.
+commercial usage.
 
 ## Contributors
 
@@ -150,13 +150,15 @@ In the case you like this project, let me know it and rate it with a star.
 
 |Version | Comment
 |--------|----------------------------------------------------------------------
+| 1.2    | in progress
+|--------|----------------------------------------------------------------------
 | 1.1.1  | published: 11/2019 (TP-CORE-2.0.0)
-|        |  - migrate from java 8 to java 11 
+|        |  - migrate from java 8 to java 11
 |--------|----------------------------------------------------------------------
 | 1.1.0  | published: 5/2019 Maven Central (TP-CORE-1.2.0)
 |        |  - change license to Apache 2.0
 |        |  - extend bundle-jarkarta (JEE 7.0)
-|        |  - extend bundle-spring-security 
+|        |  - extend bundle-spring-security
 |        |  - update dependencies
 |--------|----------------------------------------------------------------------
 | 1.0.8  | published: 10/2018 Maven Central (TP-CORE-1.1.0)
