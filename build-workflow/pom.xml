@@ -31,11 +31,11 @@
         <skipEnforcer>true</skipEnforcer>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>5.1.13</framework.spring.version>
-        <framework.hibernate.version>5.3.15</framework.hibernate.version>
+        <framework.spring.version>5.1.14</framework.spring.version>
+        <framework.hibernate.version>5.3.16</framework.hibernate.version>
         <framework.logging.version>1.7.30</framework.logging.version>
         <framework.jarkarta.version>8.0.1</framework.jarkarta.version>
-        <framework.spring-security.version>5.2.2</framework.spring-security.version>
+        <framework.spring-security.version>5.3.1</framework.spring-security.version>
         <framework.test.jgiven.version>0.18.2</framework.test.jgiven.version>
 
         <java.sdk.version>11</java.sdk.version>
@@ -60,6 +60,11 @@
 
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>3.6.0</version>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
@@ -101,7 +106,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.2</version>
                     <executions>
                         <execution>
                             <phase>process-resources</phase>
@@ -313,7 +318,7 @@
                 <plugin>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-maven-plugin</artifactId>
-                    <version>2.1.1</version>
+                    <version>2.1.2</version>
                     <configuration>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <outputPath>${project.build.directory}</outputPath>
@@ -338,12 +343,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.8.2</version>
+                    <version>3.9.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.2.0</version>
                     <configuration>
                         <skip>${skipJavaDoc}</skip>
                         <includeDependencySources>false</includeDependencySources>
@@ -357,6 +362,10 @@
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -462,7 +471,7 @@
             </dependency>
             <dependency>
                 <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-jarkarta</artifactId>
+                <artifactId>bundle-jakarta</artifactId>
                 <version>${framework.jarkarta.version}</version>
                 <type>pom</type>
             </dependency>
@@ -477,14 +486,21 @@
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
                 <artifactId>archunit</artifactId>
-                <version>0.13.1</version>
+                <version>0.14.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
-                <version>1.5.11</version>
+                <version>1.5.12</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <!-- Embedded PostgreSQL -->
+                <groupId>com.opentable.components</groupId>
+                <artifactId>otj-pg-embedded</artifactId>
+                <version>0.13.3</version>
                 <scope>test</scope>
             </dependency>
             <!-- RESTful Service  -->
@@ -503,7 +519,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.3</version>
                 <scope>test</scope>
             </dependency>
 
@@ -529,13 +545,13 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.6.0</version>
+                <version>5.6.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-runner</artifactId>
-                <version>1.6.0</version>
+                <version>1.6.2</version>
                 <scope>test</scope>
             </dependency>
 
@@ -556,6 +572,14 @@
                 <artifactId>hibernate-testing</artifactId>
                 <version>${framework.hibernate.version}.Final</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- PLUGINS -->
+            <dependency>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>5.3.2</version>
+                <type>maven-plugin</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -591,6 +615,10 @@
         <dependency>
             <groupId>com.icegreen</groupId>
             <artifactId>greenmail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.opentable.components</groupId>
+            <artifactId>otj-pg-embedded</artifactId>
         </dependency>
         <dependency>
             <groupId>org.glassfish.grizzly</groupId>
@@ -644,7 +672,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.8.2</version>
+                <version>3.9.0</version>
                 <configuration>
                     <chmod>true</chmod>
                     <locales>en</locales>
@@ -673,7 +701,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.2.0</version>
                 <configuration>
                     <skip>${skipJavaDoc}</skip>
                     <includeDependencySources>false</includeDependencySources>
@@ -760,7 +788,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>3.1.12.2</version>
+                <version>4.0.0</version>
             </plugin>
 
             <plugin>
@@ -851,6 +879,7 @@
     <profiles>
         <profile>
             <id>release</id>
+
             <build>
                 <defaultGoal>deploy</defaultGoal>
 
@@ -926,6 +955,27 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+
+        <profile>
+            <id>owasp-dependency-report</id>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>5.3.2</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>aggregate</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+                </plugins>
+            </reporting>
+
         </profile>
     </profiles>
 </project>

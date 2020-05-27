@@ -4,7 +4,7 @@ import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import javax.persistence.Entity;
-import org.europa.together.utils.acl.Constraints;
+import org.europa.together.utils.Constraints;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Repository;
@@ -13,17 +13,17 @@ import org.springframework.stereotype.Service;
 /**
  * Architectural Test.
  */
-@DisplayName("TP-ACL Architekture Test")
-public class ACL_ArchitectureIT {
+@DisplayName("TP-CORE Architekture Test")
+public class CORE_ArchitectureIT {
 
     private final String modul = Constraints.MODULE_NAME;
-    private final String PKG_APPLICATION = "org.europa.together.application" + modul;
-    private final String PKG_BUSINESS = "org.europa.together.business" + modul;
-    private final String PKG_DOMAIN = "org.europa.together.domain" + modul;
-    private final String PKG_EXCEPTION = "org.europa.together.exceptions" + modul;
-    private final String PKG_ORCHESTRATION = "org.europa.together.orcestration" + modul;
-    private final String PKG_SERVICE = "org.europa.together.service" + modul;
-    private final String PKG_UTILS = "org.europa.together.utils" + modul;
+    private final String PKG_APPLICATION = "org.europa.together.application";
+    private final String PKG_BUSINESS = "org.europa.together.business";
+    private final String PKG_DOMAIN = "org.europa.together.domain";
+    private final String PKG_EXCEPTION = "org.europa.together.exceptions";
+    private final String PKG_ORCHESTRATION = "org.europa.together.orcestration";
+    private final String PKG_SERVICE = "org.europa.together.service";
+    private final String PKG_UTILS = "org.europa.together.utils";
 
     private final JavaClasses importedClasses
             = new ClassFileImporter().importPackages("org.europa.together");

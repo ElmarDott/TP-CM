@@ -18,7 +18,7 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-hibernate</artifactId>
-    <version>5.3.15</version>
+    <version>5.3.16</version>
     <packaging>pom</packaging>
 
     <dependencies>
@@ -50,12 +50,12 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.0.18.Final</version>
+            <version>6.0.19.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <version>6.0.18.Final</version>
+            <version>6.0.19.Final</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
@@ -77,12 +77,12 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>2.5.4</version>
+            <version>2.6.0</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.19</version>
+            <version>8.0.20</version>
         </dependency>
         <dependency>
             <groupId>org.xerial</groupId>
