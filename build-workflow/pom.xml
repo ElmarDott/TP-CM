@@ -28,7 +28,7 @@
         <skipClover>false</skipClover>
         <skipJarSigner>false</skipJarSigner>
         <skipJavaDoc>false</skipJavaDoc>
-        <skipEnforcer>true</skipEnforcer>
+        <skipEnforcer>false</skipEnforcer>
         <skipSwagger>true</skipSwagger>
 
         <framework.spring.version>5.1.14</framework.spring.version>
@@ -42,7 +42,6 @@
         <java.ee.version>7.0</java.ee.version>
         <maven.version>3.6.0</maven.version>
 
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
         <license.file>${basedir}/src/site/resources/license.html</license.file>
     </properties>
@@ -62,16 +61,11 @@
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-plugin-plugin</artifactId>
-                    <version>3.6.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>3.0.0-M3</version>
                     <executions>
                         <execution>
-                            <phase>verify</phase>
+                            <phase>validate</phase>
                             <goals>
                                 <goal>display-info</goal>
                                 <goal>enforce</goal>
@@ -90,18 +84,9 @@
                     </executions>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>properties-maven-plugin</artifactId>
-                    <version>1.0.0</version>
-                </plugin>
-                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.1.0</version>
-                    <configuration>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                        <filtering>true</filtering>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -125,7 +110,6 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.1</version>
                     <configuration>
-                        <encoding>${project.build.sourceEncoding}</encoding>
                         <source>${java.sdk.version}</source>
                         <target>${java.sdk.version}</target>
 
@@ -177,7 +161,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>3.2.3</version>
+                    <version>3.3.0</version>
                     <executions>
                         <execution>
                             <id>default-war</id>
@@ -190,13 +174,19 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.0.0-M1</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.0.0-M1</version>
+                </plugin>
+
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.6.0</version>
+                    <version>3.0.0</version>
                     <executions>
                         <execution>
                             <goals>
@@ -320,7 +310,6 @@
                     <artifactId>swagger-maven-plugin</artifactId>
                     <version>2.1.2</version>
                     <configuration>
-                        <encoding>${project.build.sourceEncoding}</encoding>
                         <outputPath>${project.build.directory}</outputPath>
                         <prettyPrint>true</prettyPrint>
                     </configuration>
@@ -353,7 +342,6 @@
                         <skip>${skipJavaDoc}</skip>
                         <includeDependencySources>false</includeDependencySources>
                         <quiet>true</quiet>
-                        <docencoding>${project.build.sourceEncoding}</docencoding>
                         <maxmemory>1g</maxmemory>
                         <failOnError>false</failOnError>
                     </configuration>
@@ -362,10 +350,6 @@
         </pluginManagement>
 
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-plugin-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -389,6 +373,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
 
             <plugin>
@@ -496,13 +488,6 @@
                 <version>1.5.12</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <!-- Embedded PostgreSQL -->
-                <groupId>com.opentable.components</groupId>
-                <artifactId>otj-pg-embedded</artifactId>
-                <version>0.13.3</version>
-                <scope>test</scope>
-            </dependency>
             <!-- RESTful Service  -->
             <dependency>
                 <groupId>org.glassfish.grizzly</groupId>
@@ -573,14 +558,6 @@
                 <version>${framework.hibernate.version}.Final</version>
                 <scope>test</scope>
             </dependency>
-
-            <!-- PLUGINS -->
-            <dependency>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>5.3.2</version>
-                <type>maven-plugin</type>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -594,7 +571,8 @@
             <artifactId>annotations</artifactId>
         </dependency>
 
-        <dependency>
+        <!-- Java 9 Modularization -->
+        <!-- dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
         </dependency>
@@ -609,16 +587,12 @@
         <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
-        </dependency>
+        </dependency -->
 
-        <!-- Do not change order for test frameworks -->
+        <!-- SCOPE: TEST - Do not change order for test frameworks -->
         <dependency>
             <groupId>com.icegreen</groupId>
             <artifactId>greenmail</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.opentable.components</groupId>
-            <artifactId>otj-pg-embedded</artifactId>
         </dependency>
         <dependency>
             <groupId>org.glassfish.grizzly</groupId>
@@ -676,8 +650,6 @@
                 <configuration>
                     <chmod>true</chmod>
                     <locales>en</locales>
-                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
-                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
                 </configuration>
             </plugin>
 
@@ -706,7 +678,6 @@
                     <skip>${skipJavaDoc}</skip>
                     <includeDependencySources>false</includeDependencySources>
                     <quiet>true</quiet>
-                    <docencoding>${project.build.sourceEncoding}</docencoding>
                     <maxmemory>1g</maxmemory>
                     <failOnError>false</failOnError>
                 </configuration>
@@ -758,7 +729,6 @@
                 <configuration>
                     <format>xml</format>
                     <linkXref>true</linkXref>
-                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>${java.sdk.version}</targetJdk>
                 </configuration>
@@ -788,7 +758,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.0</version>
+                <version>4.0.4</version>
             </plugin>
 
             <plugin>
@@ -866,11 +836,11 @@
             <name>Community Support - Open Source Project Repository Hosting</name>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
-        <!-- site>
+        <site>
             <id>local-site</id>
             <name>Local deployed site</name>
             <url>file:///home/wiki/local/apache2/htdocs/mext</url>
-        </site -->
+        </site>
     </distributionManagement>
 
     <!-- ==================================================================  -->
@@ -899,7 +869,7 @@
                             <skip>${skipEnforcer}</skip>
                             <rules>
                                 <requireReleaseVersion>
-                                    <message>No Snapshots Allowed!</message>
+                                    <message>No SNAPSHOTS allowed!</message>
                                 </requireReleaseVersion>
                             </rules>
                             <fail>true</fail>
