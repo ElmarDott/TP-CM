@@ -40,7 +40,7 @@ PARENT POM: build workflow
 <parent>
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.1.1</version>
+    <version>1.2</version>
 </parent>
 ```
 For useing the Bundels in your project you can place the following connfiguration
@@ -150,7 +150,8 @@ In the case you like this project, let me know it and rate it with a star.
 
 |Version | Comment
 |--------|----------------------------------------------------------------------
-| 1.2    | in progress
+| 1.2    | published: 11/2019 (TP-CORE-2.1.0)
+|        |  - update dependencies
 |--------|----------------------------------------------------------------------
 | 1.1.1  | published: 11/2019 (TP-CORE-2.0.0)
 |        |  - migrate from java 8 to java 11
