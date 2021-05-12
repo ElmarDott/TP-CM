@@ -14,7 +14,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.2</version>
+    <version>1.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -31,11 +31,11 @@
         <skipEnforcer>false</skipEnforcer>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>5.3.1</framework.spring.version>
-        <framework.hibernate.version>5.4.25</framework.hibernate.version>
-        <framework.logging.version>1.7.30</framework.logging.version>
-        <framework.jarkarta.version>8.0.2</framework.jarkarta.version>
-        <framework.spring-security.version>5.4.2</framework.spring-security.version>
+        <framework.spring.version>5.3.6</framework.spring.version>
+        <framework.hibernate.version>5.4.31</framework.hibernate.version>
+        <framework.logging.version>2.0.0-alpha1</framework.logging.version>
+        <framework.jarkarta.version>8.0.4</framework.jarkarta.version>
+        <framework.spring-security.version>5.4.6</framework.spring-security.version>
 
         <java.sdk.version>11</java.sdk.version>
         <java.ee.version>8.0</java.ee.version>
@@ -138,9 +138,10 @@
                     <version>3.0.0-M5</version>
                     <executions>
                         <execution>
+                            <phase>test</phase>
                             <goals>
                                 <goal>integration-test</goal>
-                                <goal>verify</goal>
+                                <!-- goal>verify</goal -->
                             </goals>
                         </execution>
                     </executions>
@@ -168,19 +169,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>3.0.0-M1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>3.0.0</version>
-                    <executions>
-                        <execution>
-                            <id>invoke-test-env</id>
-                            <goals>
-                                <goal>java</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
 
                 <plugin>
@@ -211,7 +199,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.6</version>
+                    <version>0.8.7</version>
                     <executions>
                         <execution>
                             <id>pre-unit-test</id>
@@ -246,7 +234,7 @@
                 <plugin>
                     <groupId>com.tngtech.jgiven</groupId>
                     <artifactId>jgiven-maven-plugin</artifactId>
-                    <version>0.18.2</version>
+                    <version>1.0.0</version>
                     <executions>
                         <execution>
                             <phase>pre-site</phase>
@@ -268,7 +256,7 @@
                     <version>4.4.1</version>
                     <executions>
                         <execution>
-                            <phase>pre-site</phase>
+                            <phase>post-integration-test</phase>
                             <goals>
                                 <goal>instrument</goal>
                                 <goal>check</goal>
@@ -295,7 +283,7 @@
                 <plugin>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-maven-plugin</artifactId>
-                    <version>2.1.6</version>
+                    <version>2.1.9</version>
                     <configuration>
                         <outputPath>${project.build.directory}</outputPath>
                         <prettyPrint>true</prettyPrint>
@@ -313,7 +301,7 @@
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.7.0.1746</version>
+                    <version>3.9.0.2155</version>
                 </plugin>
 
                 <plugin>
@@ -401,7 +389,7 @@
             <dependency>
                 <groupId>org.apiguardian</groupId>
                 <artifactId>apiguardian-api</artifactId>
-                <version>1.1.0</version>
+                <version>1.1.1</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.findbugs</groupId>
@@ -425,11 +413,6 @@
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
                 <version>2.3.2</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.activation</groupId>
-                <artifactId>activation</artifactId>
-                <version>1.1.1</version>
             </dependency>
 
             <!-- Bundels -->
@@ -468,77 +451,70 @@
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
                 <artifactId>archunit</artifactId>
-                <version>0.15.0</version>
+                <version>0.18.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
-                <version>1.6.1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <!-- RESTful Service  -->
-                <groupId>org.glassfish.grizzly</groupId>
-                <artifactId>grizzly-http-server-jaxws</artifactId>
-                <version>2.4.4</version>
+                <version>1.6.3</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.google.code.bean-matchers</groupId>
                 <artifactId>bean-matchers</artifactId>
-                <version>0.12</version>
+                <version>0.13</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>3.6.28</version>
+                <version>3.9.0</version>
                 <scope>test</scope>
             </dependency>
 
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-core</artifactId>
-                <version>0.18.2</version>
+                <version>1.0.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-junit5</artifactId>
-                <version>0.18.2</version>
+                <version>1.0.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-spring</artifactId>
-                <version>0.18.2</version>
+                <version>1.0.0</version>
                 <scope>test</scope>
             </dependency>
 
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
-                <version>5.7.0</version>
+                <version>5.7.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-params</artifactId>
-                <version>5.7.0</version>
+                <version>5.7.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.7.0</version>
+                <version>5.7.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-runner</artifactId>
-                <version>1.7.0</version>
+                <version>1.7.1</version>
                 <scope>test</scope>
             </dependency>
 
@@ -577,10 +553,6 @@
         <dependency>
             <groupId>com.icegreen</groupId>
             <artifactId>greenmail</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.grizzly</groupId>
-            <artifactId>grizzly-http-server-jaxws</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.code.bean-matchers</groupId>
@@ -689,7 +661,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.1.2</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -770,7 +742,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.1.2</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -791,7 +763,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.1.4</version>
+                <version>4.2.3</version>
             </plugin>
 
             <plugin>
@@ -815,7 +787,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.6</version>
+                <version>0.8.7</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -958,7 +930,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>6.0.3</version>
+                        <version>6.1.6</version>
                         <reportSets>
                             <reportSet>
                                 <reports>

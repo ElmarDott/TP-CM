@@ -14,7 +14,7 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring-security</artifactId>
-    <version>5.4.2</version>
+    <version>5.4.6</version>
     <packaging>pom</packaging>
 
     <dependencies>
