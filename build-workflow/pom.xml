@@ -10,7 +10,7 @@
     <name>together Platform - BUILD Workflow</name>
     <description>Default Build Workflow Definition for together Platform.</description>
     <inceptionYear>01/2013</inceptionYear>
-    <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
+    <url>https://elmar-dott.com</url>
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
@@ -22,20 +22,22 @@
     </modules>
 
     <properties>
-        <skipCoveralls>false</skipCoveralls>
         <skipUnitTests>false</skipUnitTests>
-        <skipIntegrationTests>false</skipIntegrationTests>
-        <skipClover>false</skipClover>
+        <skipIntegrationTests>true</skipIntegrationTests>
+
+        <skipEnforcer>false</skipEnforcer>
         <skipJarSigner>false</skipJarSigner>
         <skipJavaDoc>false</skipJavaDoc>
-        <skipEnforcer>false</skipEnforcer>
+
+        <skipCoveralls>false</skipCoveralls>
+        <skipClover>false</skipClover>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>5.3.6</framework.spring.version>
-        <framework.hibernate.version>5.4.31</framework.hibernate.version>
+        <framework.spring.version>5.3.10</framework.spring.version>
+        <framework.hibernate.version>5.4.32</framework.hibernate.version>
         <framework.logging.version>2.0.0-alpha1</framework.logging.version>
-        <framework.jarkarta.version>8.0.4</framework.jarkarta.version>
-        <framework.spring-security.version>5.4.6</framework.spring-security.version>
+        <framework.jakarta.version>8.0.5</framework.jakarta.version>
+        <framework.spring-security.version>5.5.2</framework.spring-security.version>
 
         <java.sdk.version>11</java.sdk.version>
         <java.ee.version>8.0</java.ee.version>
@@ -62,7 +64,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M3</version>
+                    <version>3.0.0</version>
                     <executions>
                         <execution>
                             <phase>validate</phase>
@@ -86,7 +88,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.0</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
                     </configuration>
@@ -94,7 +96,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.2.0</version>
                     <executions>
                         <execution>
                             <phase>process-resources</phase>
@@ -138,7 +140,7 @@
                     <version>3.0.0-M5</version>
                     <executions>
                         <execution>
-                            <phase>test</phase>
+                            <phase>integration-test</phase>
                             <goals>
                                 <goal>integration-test</goal>
                                 <!-- goal>verify</goal -->
@@ -158,7 +160,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>3.3.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -234,7 +236,7 @@
                 <plugin>
                     <groupId>com.tngtech.jgiven</groupId>
                     <artifactId>jgiven-maven-plugin</artifactId>
-                    <version>1.0.0</version>
+                    <version>1.1.0</version>
                     <executions>
                         <execution>
                             <phase>pre-site</phase>
@@ -256,15 +258,19 @@
                     <version>4.4.1</version>
                     <executions>
                         <execution>
-                            <phase>post-integration-test</phase>
+                            <phase>package</phase>
                             <goals>
                                 <goal>instrument</goal>
+                                <goal>instrument-test</goal>
                                 <goal>check</goal>
+                                <goal>save-history</goal>
                                 <goal>aggregate</goal>
                             </goals>
                         </execution>
                     </executions>
                     <configuration>
+                        <codeType>ALL</codeType>
+                        <historyDir>${basedir}/src/site/clover-history/</historyDir>
                         <cloverOutputDirectory>${project.build.directory}/clover</cloverOutputDirectory>
                         <skip>${skipClover}</skip>
                     </configuration>
@@ -283,8 +289,12 @@
                 <plugin>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-maven-plugin</artifactId>
-                    <version>2.1.9</version>
+                    <version>2.1.11</version>
                     <configuration>
+                        <skip>${skipSwagger}</skip>
+                        <outputFileName>swagger-API</outputFileName>
+                        <outputFormat>JSON</outputFormat>
+
                         <outputPath>${project.build.directory}</outputPath>
                         <prettyPrint>true</prettyPrint>
                     </configuration>
@@ -350,11 +360,11 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
+                <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
+                <artifactId>maven-install-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -389,7 +399,7 @@
             <dependency>
                 <groupId>org.apiguardian</groupId>
                 <artifactId>apiguardian-api</artifactId>
-                <version>1.1.1</version>
+                <version>1.1.2</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.findbugs</groupId>
@@ -415,50 +425,18 @@
                 <version>2.3.2</version>
             </dependency>
 
-            <!-- Bundels -->
-            <dependency>
-                <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-logging</artifactId>
-                <version>${framework.logging.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-spring</artifactId>
-                <version>${framework.spring.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-hibernate</artifactId>
-                <version>${framework.hibernate.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-jakarta</artifactId>
-                <version>${framework.jarkarta.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-spring-security</artifactId>
-                <version>${framework.spring-security.version}</version>
-                <type>pom</type>
-            </dependency>
-
             <!-- TEST FRAMEWORKS -->
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
                 <artifactId>archunit</artifactId>
-                <version>0.18.0</version>
+                <version>0.21.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
-                <version>1.6.3</version>
+                <version>1.6.5</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -470,51 +448,51 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>3.9.0</version>
+                <version>3.12.4</version>
                 <scope>test</scope>
             </dependency>
 
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-core</artifactId>
-                <version>1.0.0</version>
+                <version>1.1.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-junit5</artifactId>
-                <version>1.0.0</version>
+                <version>1.1.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-spring</artifactId>
-                <version>1.0.0</version>
+                <version>1.1.0</version>
                 <scope>test</scope>
             </dependency>
 
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
-                <version>5.7.1</version>
+                <version>5.7.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-params</artifactId>
-                <version>5.7.1</version>
+                <version>5.7.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.7.1</version>
+                <version>5.7.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-runner</artifactId>
-                <version>1.7.1</version>
+                <version>1.7.2</version>
                 <scope>test</scope>
             </dependency>
 
@@ -535,6 +513,32 @@
                 <artifactId>hibernate-testing</artifactId>
                 <version>${framework.hibernate.version}.Final</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- Bundels -->
+            <dependency>
+                <groupId>io.github.together.libraries</groupId>
+                <artifactId>bundle-spring</artifactId>
+                <version>${framework.spring.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>io.github.together.libraries</groupId>
+                <artifactId>bundle-hibernate</artifactId>
+                <version>${framework.hibernate.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>io.github.together.libraries</groupId>
+                <artifactId>bundle-jakarta</artifactId>
+                <version>${framework.jakarta.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>io.github.together.libraries</groupId>
+                <artifactId>bundle-spring-security</artifactId>
+                <version>${framework.spring-security.version}</version>
+                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -730,7 +734,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.14.0</version>
+                <version>3.15.0</version>
                 <configuration>
                     <format>xml</format>
                     <linkXref>true</linkXref>
@@ -763,7 +767,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.2.3</version>
+                <version>4.4.1</version>
             </plugin>
 
             <plugin>
@@ -772,15 +776,10 @@
                 <version>4.4.1</version>
                 <configuration>
                     <jdk>${java.sdk.version}</jdk>
+                    <generateHtml>true</generateHtml>
+                    <generateHistorical>true</generateHistorical>
                     <title>together Platform [Module:${project.artifactId}] - Coverage Report</title>
-                    <cloverOutputDirectory>${project.build.directory}/clover</cloverOutputDirectory>
-                    <alwaysReport>true</alwaysReport>
-                    <codeType>ALL</codeType>
-                    <project>
-                        <groupId>org.europa.together</groupId>
-                        <artifactId>build-workflow</artifactId>
-                        <version>${project.version}</version>
-                    </project>
+                    <cloverOutputDirectory>${project.build.directory}/clover/</cloverOutputDirectory>
                 </configuration>
             </plugin>
 
@@ -907,40 +906,31 @@
         </profile>
 
         <profile>
-            <id>owasp-dependency-report</id>
+            <id>owasp</id>
+            <properties>
+                <skipUnitTests>true</skipUnitTests>
+                <skipIntegrationTests>true</skipIntegrationTests>
+                <skipEnforcer>true</skipEnforcer>
+                <skipCoveralls>true</skipCoveralls>
+                <skipClover>true</skipClover>
+                <skipSwagger>true</skipSwagger>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-site-plugin</artifactId>
-                        <version>3.9.1</version>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>6.4.1</version>
                         <executions>
                             <execution>
-                                <phase>process-resources</phase>
                                 <goals>
-                                    <goal>site</goal>
+                                    <goal>check</goal>
                                 </goals>
                             </execution>
                         </executions>
                     </plugin>
                 </plugins>
             </build>
-            <reporting>
-                <plugins>
-                    <plugin>
-                        <groupId>org.owasp</groupId>
-                        <artifactId>dependency-check-maven</artifactId>
-                        <version>6.1.6</version>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <report>aggregate</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                    </plugin>
-                </plugins>
-            </reporting>
         </profile>
     </profiles>
 </project>

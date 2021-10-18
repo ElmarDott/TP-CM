@@ -8,13 +8,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>TP-Bundle: Spring</name>
-    <description>BUNDLE POM: Collection of Spring dependencies.</description>
+    <description>Bill of Materials</description>
     <inceptionYear>01/2013</inceptionYear>
-    <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
+    <url>https://elmar-dott.com</url>
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
-    <version>5.3.6</version>
+    <version>5.3.10</version>
     <packaging>pom</packaging>
 
     <dependencies>

@@ -37,7 +37,7 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>7.8.2</version>
+                <version>7.15.0</version>
                 <configuration>
                     <url>${dbms.url}</url>
                     <user>together</user>
@@ -72,7 +72,7 @@
         <dependency>
             <groupId>io.github.together.libraries</groupId>
             <artifactId>bundle-hibernate</artifactId>
-            <version>5.4.31</version>
+            <version>5.4.32</version>
             <type>pom</type>
         </dependency>
     </dependencies>
