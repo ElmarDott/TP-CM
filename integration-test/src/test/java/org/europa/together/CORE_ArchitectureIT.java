@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import org.europa.together.utils.Constraints;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
  * Architectural Test.
  */
 @DisplayName("TP-CORE Architekture Test")
+@RunWith(JUnitPlatform.class)
 public class CORE_ArchitectureIT {
 
     private final String modul = Constraints.MODULE_NAME;
@@ -33,7 +36,8 @@ public class CORE_ArchitectureIT {
         //Access
         classes().that()
                 .resideInAPackage(PKG_EXCEPTION).or().resideInAPackage(PKG_UTILS)
-                .should().onlyBeAccessed().byAnyPackage(PKG_EXCEPTION, PKG_UTILS, PKG_DOMAIN, PKG_APPLICATION, PKG_BUSINESS, PKG_SERVICE, PKG_ORCHESTRATION)
+                .should().onlyBeAccessed().byAnyPackage(PKG_EXCEPTION, PKG_UTILS, PKG_DOMAIN,
+                        PKG_APPLICATION, PKG_BUSINESS, PKG_SERVICE, PKG_ORCHESTRATION)
                 .check(importedClasses);
     }
 
@@ -94,9 +98,9 @@ public class CORE_ArchitectureIT {
         classes().that()
                 .resideInAPackage(PKG_APPLICATION)
                 .should().notBeInterfaces()
-                .andShould().notBeEnums()
-                .andShould().notBeInnerClasses()
-                .andShould().notBeLocalClasses()
+                .orShould().notBeEnums()
+                .orShould().notBeInnerClasses()
+                .orShould().notBeLocalClasses()
                 .check(importedClasses);
     }
 

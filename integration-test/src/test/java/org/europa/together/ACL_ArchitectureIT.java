@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import org.europa.together.utils.acl.Constraints;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
  * Architectural Test.
  */
 @DisplayName("TP-ACL Architekture Test")
+@RunWith(JUnitPlatform.class)
 public class ACL_ArchitectureIT {
 
     private final String modul = Constraints.MODULE_NAME;
@@ -32,14 +35,15 @@ public class ACL_ArchitectureIT {
     void zeroLayer() {
         //Access
         classes().that()
-                .resideInAPackage(PKG_EXCEPTION).or().resideInAPackage(PKG_UTILS)
-                .should().onlyBeAccessed().byAnyPackage(PKG_EXCEPTION, PKG_UTILS, PKG_DOMAIN, PKG_APPLICATION, PKG_BUSINESS, PKG_SERVICE, PKG_ORCHESTRATION)
+                .resideInAPackage(PKG_EXCEPTION).and().resideInAPackage(PKG_UTILS)
+                .should().onlyBeAccessed()
+                .byAnyPackage(PKG_EXCEPTION, PKG_UTILS, PKG_DOMAIN, PKG_APPLICATION, PKG_BUSINESS, PKG_SERVICE, PKG_ORCHESTRATION)
                 .check(importedClasses);
     }
 
     @Test
     void domainLayer() {
-        //Access
+        //Acces
         classes().that()
                 .resideInAPackage(PKG_DOMAIN)
                 .should().onlyBeAccessed().byAnyPackage(PKG_BUSINESS, PKG_APPLICATION, PKG_SERVICE, PKG_ORCHESTRATION)
