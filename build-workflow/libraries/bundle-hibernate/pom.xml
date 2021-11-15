@@ -138,6 +138,23 @@
         </license>
     </licenses>
 
+    <!-- Deploy  -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-oss</id>
+            <url>${release.repo}</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-oss</id>
+            <url>${snapshot.repro}</url>
+        </repository>
+        <site>
+            <id>local-site</id>
+            <name>Local deployed site</name>
+            <url>${site.repro}</url>
+        </site>
+    </distributionManagement>
+
     <!-- ==================================================================  -->
     <!-- ===========================   PROFILES   =========================  -->
     <!-- ==================================================================  -->
@@ -164,17 +181,6 @@
                         <configuration>
                             <keyname>togetherPlatform</keyname>
                             <passphraseServerId>togetherPlatform</passphraseServerId>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.8</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
                     <plugin>
