@@ -33,20 +33,18 @@
     <!-- Deploy  -->
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh</id>
-            <name>Community Support - Open Source Project Repository Hosting</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>nexus-oss</id>
+            <url>${release.repo}</url>
         </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <name>Community Support - Open Source Project Repository Hosting</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>nexus-oss</id>
+            <url>${snapshot.repro}</url>
         </repository>
-        <!-- site>
+        <site>
             <id>local-site</id>
             <name>Local deployed site</name>
-            <url>file:///home/wiki/local/apache2/htdocs/mext</url>
-        </site -->
+            <url>${site.repro}</url>
+        </site>
     </distributionManagement>
 
     <repositories>
