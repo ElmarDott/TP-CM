@@ -41,13 +41,14 @@
 
         <java.sdk.version>11</java.sdk.version>
         <java.ee.version>8.0</java.ee.version>
+        <java.fx.version>11.0.2</java.fx.version>
         <maven.version>3.6.0</maven.version>
 
         <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
         <license.file>${basedir}/src/site/resources/license.html</license.file>
 
-        <release.repo>http://localhost:8082/repository/maven-snapshots/</release.repo>
-        <snapshot.repro>http://localhost:8082/repository/maven-releases/</snapshot.repro>
+        <release.repo>http://192.168.0.8:8082/repository/maven-snapshots/</release.repo>
+        <snapshot.repro>http://192.168.0.8:8082/repository/maven-releases/</snapshot.repro>
         <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
     </properties>
 
@@ -334,7 +335,7 @@
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.9.0.2155</version>
+                    <version>3.9.1.2184</version>
                 </plugin>
 
                 <plugin>
@@ -666,11 +667,18 @@
             <url>${snapshot.repro}</url>
         </repository>
         <site>
-            <id>local-site</id>
+            <id>local-oss</id>
             <name>Local deployed site</name>
             <url>${site.repro}</url>
         </site>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>nexus-oss</id>
+            <url>http://localhost:8082/repository/maven-public/</url>
+        </repository>
+    </repositories>
 
     <!-- ==================================================================  -->
     <!-- ===========================   REPORTS   ==========================  -->
@@ -792,7 +800,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.4.1</version>
+                <version>4.4.2.2</version>
             </plugin>
 
             <plugin>

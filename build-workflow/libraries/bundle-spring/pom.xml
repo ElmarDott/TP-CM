@@ -17,6 +17,12 @@
     <version>5.3.10</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <release.repo>http://192.168.0.8:8082/repository/maven-snapshots/</release.repo>
+        <snapshot.repro>http://192.168.0.8:8082/repository/maven-releases/</snapshot.repro>
+        <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
+    </properties>
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -122,7 +128,7 @@
             <url>${snapshot.repro}</url>
         </repository>
         <site>
-            <id>local-site</id>
+            <id>local-oss</id>
             <name>Local deployed site</name>
             <url>${site.repro}</url>
         </site>
