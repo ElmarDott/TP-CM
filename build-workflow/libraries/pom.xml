@@ -10,7 +10,7 @@
     <name>together Platform - libraries</name>
     <description>Reactor POM: Collection of all Libraries.</description>
     <inceptionYear>01/2013</inceptionYear>
-    <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
+    <url>https://elmar-dott.com</url>
 
     <groupId>io.github.together</groupId>
     <artifactId>libraries</artifactId>
@@ -222,17 +222,6 @@
                         <configuration>
                             <keyname>togetherPlatform</keyname>
                             <passphraseServerId>togetherPlatform</passphraseServerId>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.8</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
                     <plugin>
