@@ -14,7 +14,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.3.0</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -45,6 +45,7 @@
         <maven.version>3.6.0</maven.version>
 
         <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
+        <license.name>Apache License 2.0</license.name>
         <license.file>${basedir}/src/site/resources/license.html</license.file>
 
         <release.repo>http://192.168.0.8:8082/repository/maven-snapshots/</release.repo>
@@ -638,7 +639,7 @@
 
     <licenses>
         <license>
-            <name>Apache License 2.0</name>
+            <name>${license.name}</name>
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>

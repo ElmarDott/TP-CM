@@ -40,7 +40,7 @@ PARENT POM: build workflow
 <parent>
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.2</version>
+    <version>1.3.0</version>
 </parent>
 ```
 For useing the Bundels in your project you can place the following connfiguration
