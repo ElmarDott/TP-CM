@@ -2,7 +2,7 @@
 
 This repository includes all necessary files to build and compile atrifacts of the
 project together platform (TP). All Artifacts of the together platform are build
-Maven 3.5.x and developed with the NetBeans IDE.
+Maven and developed with the NetBeans IDE.
 
 ## Getting Started
 
@@ -131,7 +131,7 @@ udate a version of an dependency implies a new release of the bundle and the bui
 
 ## Authors
 
-* **Elmar Dott** - *Concept, Architecture, Development* - [enRebaja](https://enRebaja.wordpress.com)
+* **Elmar Dott** - [*Concept, Architecture, Development*](https://elmar-dott.com)
 
 ## License
 
@@ -149,6 +149,9 @@ In the case you like this project, let me know it and rate it with a star.
 ## Release Notes
 
 |Version | Comment
+|--------|----------------------------------------------------------------------
+| 1.3    | published: 11/2021 (TP-CORE-2.2.0)
+|        |  - update dependencies
 |--------|----------------------------------------------------------------------
 | 1.2    | published: 11/2019 (TP-CORE-2.1.0)
 |        |  - update dependencies
