@@ -33,11 +33,10 @@
         <skipClover>false</skipClover>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>5.3.10</framework.spring.version>
+        <framework.spring.version>5.3.12</framework.spring.version>
         <framework.hibernate.version>5.4.32</framework.hibernate.version>
-        <framework.logging.version>2.0.0-alpha1</framework.logging.version>
         <framework.jakarta.version>8.0.5</framework.jakarta.version>
-        <framework.spring-security.version>5.5.2</framework.spring-security.version>
+        <framework.spring-security.version>5.5.3</framework.spring-security.version>
 
         <java.sdk.version>11</java.sdk.version>
         <java.ee.version>8.0</java.ee.version>
@@ -48,8 +47,8 @@
         <license.name>Apache License 2.0</license.name>
         <license.file>${basedir}/src/site/resources/license.html</license.file>
 
-        <release.repo>http://192.168.0.8:8082/repository/maven-snapshots/</release.repo>
-        <snapshot.repro>http://192.168.0.8:8082/repository/maven-releases/</snapshot.repro>
+        <release.repo>http://192.168.0.8:8082/repository/maven-releases/</release.repo>
+        <snapshot.repro>http://192.168.0.8:8082/repository/maven-snapshots/</snapshot.repro>
         <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
     </properties>
 
@@ -396,11 +395,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
-
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
@@ -662,11 +656,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>nexus-oss</id>
-            <url>${release.repo}</url>
+            <url>${snapshot.repro}</url>
         </snapshotRepository>
         <repository>
             <id>nexus-oss</id>
-            <url>${snapshot.repro}</url>
+            <url>${release.repo}</url>
         </repository>
         <site>
             <id>local-oss</id>
@@ -924,6 +918,10 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
                     </plugin>
                 </plugins>
             </build>

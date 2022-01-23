@@ -23,8 +23,8 @@
     <packaging>pom</packaging>
 
     <properties>
-        <release.repo>http://192.168.0.8:8082/repository/maven-snapshots/</release.repo>
-        <snapshot.repro>http://192.168.0.8:8082/repository/maven-releases/</snapshot.repro>
+        <release.repo>http://192.168.0.8:8082/repository/maven-releases/</release.repo>
+        <snapshot.repro>http://192.168.0.8:8082/repository/maven-snapshots/</snapshot.repro>
         <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
     </properties>
 
@@ -148,11 +148,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>nexus-oss</id>
-            <url>${release.repo}</url>
+            <url>${snapshot.repro}</url>
         </snapshotRepository>
         <repository>
             <id>nexus-oss</id>
-            <url>${snapshot.repro}</url>
+            <url>${release.repo}</url>
         </repository>
         <site>
             <id>local-oss</id>
