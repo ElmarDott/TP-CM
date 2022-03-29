@@ -30,18 +30,18 @@
         <skipJavaDoc>false</skipJavaDoc>
 
         <skipCoveralls>false</skipCoveralls>
-        <skipClover>false</skipClover>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>5.3.12</framework.spring.version>
-        <framework.hibernate.version>5.4.32</framework.hibernate.version>
-        <framework.jakarta.version>8.0.5</framework.jakarta.version>
-        <framework.spring-security.version>5.5.3</framework.spring-security.version>
+        <framework.spring.version>5.3.17</framework.spring.version>
+        <framework.hibernate.version>5.6.7</framework.hibernate.version>
+        <framework.jakarta.version>8.0.6</framework.jakarta.version>
+        <framework.spring-security.version>5.6.2</framework.spring-security.version>
 
-        <java.sdk.version>11</java.sdk.version>
+        <java.sdk.source>11</java.sdk.source>
+        <java.sdk.target>11</java.sdk.target>
         <java.ee.version>8.0</java.ee.version>
         <java.fx.version>11.0.2</java.fx.version>
-        <maven.version>3.6.0</maven.version>
+        <maven.version>[3.6,)</maven.version>
 
         <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
         <license.name>Apache License 2.0</license.name>
@@ -80,7 +80,7 @@
                             <configuration>
                                 <rules>
                                     <requireJavaVersion>
-                                        <version>${java.sdk.version}</version>
+                                        <version>${java.sdk.target}</version>
                                     </requireJavaVersion>
                                     <requireMavenVersion>
                                         <version>${maven.version}</version>
@@ -101,7 +101,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                     <executions>
                         <execution>
                             <phase>process-resources</phase>
@@ -118,11 +118,11 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>3.10.1</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
-                        <source>${java.sdk.version}</source>
-                        <target>${java.sdk.version}</target>
+                        <source>${java.sdk.source}</source>
+                        <target>${java.sdk.target}</target>
 
                         <compilerArgument>-Xlint:all</compilerArgument>
                         <showWarnings>true</showWarnings>
@@ -136,7 +136,6 @@
                     <configuration>
                         <skip>${skipUnitTests}</skip>
                         <testFailureIgnore>true</testFailureIgnore>
-                        <useSystemClassLoader>false</useSystemClassLoader>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -160,7 +159,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.2.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -175,12 +174,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.0.0-M2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.8</version>
+                    <version>1.6.12</version>
                     <extensions>true</extensions>
                     <executions>
                         <execution>
@@ -206,7 +205,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.6</version>
+                    <version>3.0.1</version>
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>
@@ -261,7 +260,7 @@
                 <plugin>
                     <groupId>com.tngtech.jgiven</groupId>
                     <artifactId>jgiven-maven-plugin</artifactId>
-                    <version>1.1.0</version>
+                    <version>1.2.0</version>
                     <executions>
                         <execution>
                             <phase>pre-site</phase>
@@ -278,30 +277,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.openclover</groupId>
-                    <artifactId>clover-maven-plugin</artifactId>
-                    <version>4.4.1</version>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>instrument</goal>
-                                <goal>instrument-test</goal>
-                                <goal>check</goal>
-                                <goal>save-history</goal>
-                                <goal>aggregate</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <codeType>ALL</codeType>
-                        <historyDir>${basedir}/src/site/clover-history/</historyDir>
-                        <cloverOutputDirectory>${project.build.directory}/clover</cloverOutputDirectory>
-                        <skip>${skipClover}</skip>
-                    </configuration>
-                </plugin>
-
-                <plugin>
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
                     <version>4.3.0</version>
@@ -314,7 +289,7 @@
                 <plugin>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-maven-plugin</artifactId>
-                    <version>2.1.11</version>
+                    <version>2.1.13</version>
                     <configuration>
                         <skip>${skipSwagger}</skip>
                         <outputFileName>swagger-API</outputFileName>
@@ -342,12 +317,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.9.1</version>
+                    <version>3.11.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>3.3.2</version>
                     <configuration>
                         <skip>${skipJavaDoc}</skip>
                         <includeDependencySources>false</includeDependencySources>
@@ -407,10 +382,6 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.openclover</groupId>
-                <artifactId>clover-maven-plugin</artifactId>
-            </plugin>
         </plugins>
     </build>
 
@@ -428,7 +399,7 @@
             <dependency>
                 <groupId>com.google.code.findbugs</groupId>
                 <artifactId>annotations</artifactId>
-                <version>3.0.1</version>
+                <version>3.0.1u2</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -441,19 +412,19 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>2.3.2</version>
+                <version>2.3.6</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
-                <version>2.3.2</version>
+                <version>2.3.6</version>
             </dependency>
 
             <!-- TEST FRAMEWORKS -->
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
                 <artifactId>archunit-junit5</artifactId>
-                <version>0.22.0</version>
+                <version>0.23.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -472,26 +443,26 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>4.0.0</version>
+                <version>4.4.0</version>
                 <scope>test</scope>
             </dependency>
 
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-core</artifactId>
-                <version>1.1.0</version>
+                <version>1.2.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-junit5</artifactId>
-                <version>1.1.0</version>
+                <version>1.2.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-spring</artifactId>
-                <version>1.1.0</version>
+                <version>1.2.0</version>
                 <scope>test</scope>
             </dependency>
 
@@ -684,7 +655,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.9.1</version>
+                <version>3.11.0</version>
                 <configuration>
                     <chmod>true</chmod>
                     <locales>en</locales>
@@ -694,7 +665,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>3.2.2</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -711,7 +682,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.3.2</version>
                 <configuration>
                     <skip>${skipJavaDoc}</skip>
                     <includeDependencySources>false</includeDependencySources>
@@ -732,7 +703,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.0.0</version>
                 <configuration>
                     <tagListOptions>
                         <tagClasses>
@@ -763,7 +734,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.15.0</version>
+                <version>3.16.0</version>
                 <configuration>
                     <format>xml</format>
                     <linkXref>true</linkXref>
@@ -796,20 +767,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.4.2.2</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.openclover</groupId>
-                <artifactId>clover-maven-plugin</artifactId>
-                <version>4.4.1</version>
-                <configuration>
-                    <jdk>${java.sdk.version}</jdk>
-                    <generateHtml>true</generateHtml>
-                    <generateHistorical>true</generateHistorical>
-                    <title>together Platform [Module:${project.artifactId}] - Coverage Report</title>
-                    <cloverOutputDirectory>${project.build.directory}/clover/</cloverOutputDirectory>
-                </configuration>
+                <version>4.6.0.0</version>
             </plugin>
 
             <plugin>
@@ -928,13 +886,60 @@
         </profile>
 
         <profile>
+            <id>clover</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.openclover</groupId>
+                        <artifactId>clover-maven-plugin</artifactId>
+                        <version>4.4.1</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>instrument</goal>
+                                    <goal>instrument-test</goal>
+                                    <goal>check</goal>
+                                    <goal>save-history</goal>
+                                    <goal>aggregate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <codeType>ALL</codeType>
+                            <historyDir>${basedir}/src/site/clover-history/</historyDir>
+                            <cloverOutputDirectory>${project.build.directory}/clover</cloverOutputDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.openclover</groupId>
+                        <artifactId>clover-maven-plugin</artifactId>
+                        <version>4.4.1</version>
+                        <configuration>
+                            <jdk>${java.sdk.target}</jdk>
+                            <generateHtml>true</generateHtml>
+                            <generatePdf>true</generatePdf>
+                            <generateHistorical>true</generateHistorical>
+                            <title>together Platform [Module:${project.artifactId}] - Coverage Report</title>
+                            <cloverOutputDirectory>${project.build.directory}/clover/</cloverOutputDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </reporting>
+        </profile>
+
+        <profile>
             <id>owasp</id>
             <properties>
                 <skipUnitTests>true</skipUnitTests>
                 <skipIntegrationTests>true</skipIntegrationTests>
                 <skipEnforcer>true</skipEnforcer>
                 <skipCoveralls>true</skipCoveralls>
-                <skipClover>true</skipClover>
                 <skipSwagger>true</skipSwagger>
             </properties>
             <build>
@@ -942,7 +947,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>6.4.1</version>
+                        <version>7.0.1</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -950,6 +955,9 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/site</outputDirectory>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

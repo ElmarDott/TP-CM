@@ -31,13 +31,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.9.1</version>
+                <version>3.11.0</version>
             </plugin>
 
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>7.15.0</version>
+                <version>8.5.4</version>
                 <configuration>
                     <url>${dbms.url}</url>
                     <user>together</user>
@@ -72,7 +72,7 @@
         <dependency>
             <groupId>io.github.together.libraries</groupId>
             <artifactId>bundle-hibernate</artifactId>
-            <version>5.4.32</version>
+            <version>5.6.7</version>
             <type>pom</type>
         </dependency>
     </dependencies>
