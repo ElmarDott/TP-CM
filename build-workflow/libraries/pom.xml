@@ -21,7 +21,6 @@
         <module>bundle-spring</module>
         <module>bundle-hibernate</module>
         <module>bundle-jakarta</module>
-        <module>bundle-spring-security</module>
     </modules>
 
     <scm>

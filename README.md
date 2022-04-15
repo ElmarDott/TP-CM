@@ -1,3 +1,5 @@
+<img src="https://elmar-dott.com/wp-content/uploads/ElmarDott.com_.jpg" style="float:left; height:50%; width:50%;" />
+
 # together Platform :: Configuration Management
 
 This repository includes all necessary files to build and compile atrifacts of the
@@ -26,7 +28,7 @@ detailed information how to run the image in the context of together platform.
 ### Prerequisites
 
 * Java 11 SE JDK
-* Maven 3.6.x
+* Maven 3.8.x
 * Docker
 * NetBeans IDE (recommended) / JetBrains IntelliJ / Eclipse
 
@@ -49,12 +51,6 @@ don't need to insert the <dependency> section.
 ...
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-logging</artifactId>
-                <version>${framework.logging.version}</version>
-                <type>pom</type>
-            </dependency>
             <dependency>
                 <groupId>io.github.together.libraries</groupId>
                 <artifactId>bundle-spring</artifactId>
@@ -85,11 +81,6 @@ don't need to insert the <dependency> section.
     </dependencies>
     <dependency>
         <groupId>io.github.together.libraries</groupId>
-        <artifactId>bundle-logging</artifactId>
-        <type>pom</type>
-    </dependency>
-    <dependency>
-        <groupId>io.github.together.libraries</groupId>
         <artifactId>bundle-hibernate</artifactId>
         <type>pom</type>
     </dependency>
@@ -111,7 +102,7 @@ don't need to insert the <dependency> section.
 
 ## Usage
 
-The build workflow (parent-pom) contains some useful features like distributed
+The build workflow (parent-pom) contains some useful features like distributed 
 dependency management and a well defined reporting. For report creation, it is only
 neccesary to run the mvn site command. This will generate JavaDoc,
 Cobertura test Coverrage, Checkytle, PMD, Findbugs, BDD JGiven documentation and
@@ -135,14 +126,13 @@ udate a version of an dependency implies a new release of the bundle and the bui
 
 ## License
 
-This project is licensed under the Apache License 2.0 - For free private and
-commercial usage.
+This project is licensed under the Apache 2.0 license.
 
 ## Contributors
 
-Feel free to send a request by e-mail in the case you want to contribute the
-project. Everyone is welcome, even beginners in programming. We also appreciate
-help by optimizing our documentation and creating tutorials.
+Feel free open a pull request or to send a feature request by e-mail in the case you want to contribute the project. Everyone is welcome, even beginners in programming. I also appreciate help by optimizing the documentation and creating tutorials.
+
+Mistakes happen. But we only able to fix them, when we you inform us you found a bug. Do not hesitate to send a report in the way you feel common. I try to give as much as possible fast & direct support.
 
 In the case you like this project, let me know it and rate it with a star.
 
