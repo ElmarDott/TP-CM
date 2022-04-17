@@ -2,34 +2,23 @@
 
 # together Platform :: Configuration Management
 
-This repository includes all necessary files to build and compile atrifacts of the
-project together platform (TP). All Artifacts of the together platform are build
-Maven and developed with the NetBeans IDE.
+This repository includes all necessary files to build and compile artifacts of the project together platform (TP).
 
 ## Getting Started
 
-The directory build-workflow contains the parent-pom and all global dependencies
-groupt by libraries. To make the POMs available for your project, run the pom.xml
-in the root folder from the command line and type mvn. Thats all.
+The directory build-workflow contains the parent-pom and all global dependencies groupt by libraries. To make the POMs available for your project, run the pom.xml in the root folder from the command line and type mvn. Thats all.
 
 The initializations scripts for the DBMS you will find in the dbms/src/sql directory.
 
-For additional services like database server and so on, docker containers are our
-choice. in the folder docker you find a linux script to install docker on Ubuntu.
-Depending on your OS and Docker version, some adaptions to install docker could
-be needed. Please use check as first the official documentation to install and run
-docker on your maschine.
+For additional services like database server and so on, are Docker containers the choice. in the folder docker you find a linux script to install docker on Ubuntu. Depending on your OS and Docker version, some adoptions to install docker could be needed. Please use check as first the official documentation to install and run docker on your maschine.
 
-We like to do the things simple. For that we decided to use community images from
-docker hub. To make those images ready for production please check the documenation
-page of the images. The README files inside of the docker sevice folders gives
-detailed information how to run the image in the context of together platform.
+KISS: Keep it simple stupid. Because of this community images from DockerHub are completely sufficient to deal with. To make those images ready for production please check the documenation page of the images. The README files inside of the docker sevice folders gives detailed information how to run the image in the context of together platform.
 
 ### Prerequisites
 
-* Java 11 SE JDK
+* Java 11 SE adopt openJDK
 * Maven 3.8.x
-* Docker
+* Docker.io
 * NetBeans IDE (recommended) / JetBrains IntelliJ / Eclipse
 
 ### Installation
@@ -45,9 +34,7 @@ PARENT POM: build workflow
     <version>1.3.0</version>
 </parent>
 ```
-For useing the Bundels in your project you can place the following connfiguration
-in your POM. If you already use the the build-workflow as your parent POM then you
-don't need to insert the <dependency> section.
+For using the bundles in your project you can place the following configuration in your POM. If you already use the the build-workflow as your parent POM then you don't need to insert the <dependency> section.
 ...
     <dependencyManagement>
         <dependencies>
@@ -69,12 +56,6 @@ don't need to insert the <dependency> section.
                 <version>${framework.jarkarta.version}</version>
                 <type>pom</type>
             </dependency>
-            <dependency>
-                <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-spring-security</artifactId>
-                <version>${framework.spring-security.version}</version>
-                <type>pom</type>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -92,10 +73,6 @@ don't need to insert the <dependency> section.
     <dependency>
         <groupId>io.github.together.libraries</groupId>
         <artifactId>bundle-jarkarta</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>io.github.together.libraries</groupId>
-        <artifactId>bundle-spring-security</artifactId>
     </dependency>
     </dependencies>
 ...
@@ -138,29 +115,31 @@ In the case you like this project, let me know it and rate it with a star.
 
 ## Release Notes
 
-|Version | Comment
-|--------|----------------------------------------------------------------------
-| 1.3    | published: 11/2021 (TP-CORE-2.2.0)
-|        |  - update dependencies
-|--------|----------------------------------------------------------------------
-| 1.2    | published: 11/2019 (TP-CORE-2.1.0)
-|        |  - update dependencies
-|--------|----------------------------------------------------------------------
-| 1.1.1  | published: 11/2019 (TP-CORE-2.0.0)
-|        |  - migrate from java 8 to java 11
-|--------|----------------------------------------------------------------------
-| 1.1.0  | published: 5/2019 Maven Central (TP-CORE-1.2.0)
-|        |  - change license to Apache 2.0
-|        |  - extend bundle-jarkarta (JEE 7.0)
-|        |  - extend bundle-spring-security
-|        |  - update dependencies
-|--------|----------------------------------------------------------------------
-| 1.0.8  | published: 10/2018 Maven Central (TP-CORE-1.1.0)
-|        |  - update dependency Versions
-|--------|----------------------------------------------------------------------
-| 1.0.7  | published: 04/2018 Maven Central (TP-CORE-1.0.2)
-|        | Libraries: 1.0
-|        |  - dependencies: TP-BUNDLE Spring 5.0.2
-|        |  - dependencies: TP-BUNDLE Hibernate 4.3.11
-|        |  - dependencies: TP-BUNDLE Logback 1.2.3
-|--------|----------------------------------------------------------------------
+|Version | Comment|
+|--------|----------------------------------------------------------------------|
+|1.4 | inprogress: (TP-CORE 3.0) |
+|-------- | ---------------------------------------------------------------------- |
+| 1.3    | published: 11/2021 (TP-CORE-2.2.0)|
+|        |  - update dependencies|
+|--------|----------------------------------------------------------------------|
+| 1.2    | published: 11/2019 (TP-CORE-2.1.0)|
+|        |  - update dependencies|
+|--------|----------------------------------------------------------------------|
+| 1.1.1  | published: 11/2019 (TP-CORE-2.0.0)|
+|        |  - migrate from java 8 to java 11|
+|--------|----------------------------------------------------------------------|
+| 1.1.0  | published: 5/2019 Maven Central (TP-CORE-1.2.0)|
+|        |  - change license to Apache 2.0|
+|        |  - extend bundle-jarkarta (JEE 7.0)|
+|        |  - extend bundle-spring-security|
+|        |  - update dependencies|
+|--------|----------------------------------------------------------------------|
+| 1.0.8  | published: 10/2018 Maven Central (TP-CORE-1.1.0)|
+|        |  - update dependency Versions|
+|--------|----------------------------------------------------------------------|
+| 1.0.7  | published: 04/2018 Maven Central (TP-CORE-1.0.2)|
+|        | Libraries: 1.0|
+|        |  - dependencies: TP-BUNDLE Spring 5.0.2|
+|        |  - dependencies: TP-BUNDLE Hibernate 4.3.11|
+|        |  - dependencies: TP-BUNDLE Logback 1.2.3|
+|--------|----------------------------------------------------------------------|
