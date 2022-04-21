@@ -27,7 +27,7 @@ All released Artifacts will be available on Maven Central for usage.
 
 **Maven**
 PARENT POM: build workflow
-```
+```XML
 <parent>
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
@@ -35,31 +35,33 @@ PARENT POM: build workflow
 </parent>
 ```
 For using the bundles in your project you can place the following configuration in your POM. If you already use the the build-workflow as your parent POM then you don't need to insert the <dependency> section.
-...
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-spring</artifactId>
-                <version>${framework.spring.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-hibernate</artifactId>
-                <version>${framework.hibernate.version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>io.github.together.libraries</groupId>
-                <artifactId>bundle-jarkarta</artifactId>
-                <version>${framework.jarkarta.version}</version>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
+```XML
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>io.github.together.libraries</groupId>
+            <artifactId>bundle-spring</artifactId>
+            <version>${framework.spring.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>io.github.together.libraries</groupId>
+            <artifactId>bundle-hibernate</artifactId>
+            <version>${framework.hibernate.version}</version>
+            <type>pom</type>`
+        </dependency>`
+        <dependency>`
+            <groupId>io.github.together.libraries</groupId>
+            <artifactId>bundle-jarkarta</artifactId>
+            <version>${framework.jarkarta.version}</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
+</dependencyManagement>
+```
+
+```XML
+</dependencies>
     <dependency>
         <groupId>io.github.together.libraries</groupId>
         <artifactId>bundle-hibernate</artifactId>
@@ -74,8 +76,8 @@ For using the bundles in your project you can place the following configuration 
         <groupId>io.github.together.libraries</groupId>
         <artifactId>bundle-jarkarta</artifactId>
     </dependency>
-    </dependencies>
-...
+</dependencies>
+```
 
 ## Usage
 
