@@ -3,12 +3,10 @@ package org.europa.together;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 import org.europa.together.utils.acl.Constraints;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
  * Architectural Test.
  */
 @DisplayName("TP-ACL Architekture Test")
-@RunWith(JUnitPlatform.class)
 public class ACL_ArchitectureIT {
 
     private final String modul = Constraints.MODULE_NAME;

@@ -18,7 +18,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <dbms.url>jdbc:postgresql://172.18.0.2:5432/together</dbms.url>
+        <dbms.url>jdbc:postgresql://192.168.0.12:5432/together</dbms.url>
     </properties>
 
     <!-- =================================================================== -->
@@ -37,14 +37,13 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>8.5.4</version>
+                <version>8.5.7</version>
                 <configuration>
-                    <url>${dbms.url}</url>
-                    <user>together</user>
-                    <password>together</password>
-
+                    <url>${dbms.connection.uri}</url>
+                    <user>${dbms.connection.user}</user>
+                    <password>${dbms.connection.password}</password>
                     <schemas>
-                        <schema>together</schema>
+                        <schema>dbms.connection.schemata</schema>
                     </schemas>
                 </configuration>
             </plugin>

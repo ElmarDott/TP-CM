@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project
     xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -24,21 +23,19 @@
     <properties>
         <skipUnitTests>false</skipUnitTests>
         <skipIntegrationTests>true</skipIntegrationTests>
+        <skipEnforcer>true</skipEnforcer>
 
-        <skipEnforcer>false</skipEnforcer>
-        <skipJarSigner>false</skipJarSigner>
-        <skipJavaDoc>false</skipJavaDoc>
-
-        <skipCoveralls>false</skipCoveralls>
+        <skipClover>true</skipClover>
+        <skipCoveralls>true</skipCoveralls>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>5.3.17</framework.spring.version>
+        <framework.spring.version>5.3.18</framework.spring.version>
         <framework.hibernate.version>5.6.7</framework.hibernate.version>
-        <framework.jakarta.version>8.0.6</framework.jakarta.version>
+        <framework.jakarta.version>8.0.7</framework.jakarta.version>
 
         <java.sdk.source>11</java.sdk.source>
         <java.sdk.target>11</java.sdk.target>
-        <java.ee.version>8.0</java.ee.version>
+        <java.ee.version>9.0</java.ee.version>
         <java.fx.version>11.0.2</java.fx.version>
         <maven.version>[3.6,)</maven.version>
 
@@ -57,12 +54,36 @@
         <url>scm:git:https://github.com/ElmarDott/TP-CM.git</url>
     </scm>
 
+    <!-- ==================================================================  -->
+    <!-- ==========================   DEPLOYMENT   ========================  -->
+    <!-- ==================================================================  -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>local-nexus</id>
+            <url>${snapshot.repro}</url>
+        </snapshotRepository>
+        <repository>
+            <id>local-nexus</id>
+            <url>${release.repo}</url>
+        </repository>
+        <site>
+            <id>local-http-nexus</id>
+            <name>local deployed site</name>
+            <url>${site.repro}</url>
+        </site>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>local-nexus</id>
+            <url>http://localhost:8082/repository/maven-public/</url>
+        </repository>
+    </repositories>
+
     <!-- =================================================================== -->
     <!-- =========================== BUILD ================================= -->
     <!-- =================================================================== -->
     <build>
-        <defaultGoal>verify</defaultGoal>
-
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -131,7 +152,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>3.0.0-M6</version>
                     <configuration>
                         <skip>${skipUnitTests}</skip>
                         <testFailureIgnore>true</testFailureIgnore>
@@ -140,7 +161,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>3.0.0-M6</version>
                     <executions>
                         <execution>
                             <phase>integration-test</phase>
@@ -174,49 +195,45 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>3.0.0-M2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.12</version>
-                    <extensions>true</extensions>
                     <executions>
                         <execution>
-                            <id>default-deploy</id>
+                            <id>deploy-private-nexus</id>
                             <phase>deploy</phase>
                             <goals>
                                 <goal>deploy</goal>
                             </goals>
                         </execution>
                     </executions>
-                    <configuration>
-                        <serverId>ossrh</serverId>
-                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                    </configuration>
                 </plugin>
 
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.12</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.2.1</version>
                 </plugin>
+
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.0.1</version>
-                    <executions>
-                        <execution>
-                            <id>sign-artifacts</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>sign</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                    <groupId>org.flywaydb</groupId>
+                    <artifactId>flyway-maven-plugin</artifactId>
+                    <version>8.5.7</version>
                     <configuration>
-                        <keyname>${gpg.keyname}</keyname>
-                        <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                        <url>${dbms.connection.uri}</url>
+                        <user>${dbms.connection.user}</user>
+                        <password>${dbms.connection.password}</password>
+                        <schemas>
+                            <schema>dbms.connection.schemata</schema>
+                        </schemas>
                     </configuration>
                 </plugin>
 
@@ -224,7 +241,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.7</version>
+                    <version>0.8.8</version>
                     <executions>
                         <execution>
                             <id>pre-unit-test</id>
@@ -286,6 +303,30 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.openclover</groupId>
+                    <artifactId>clover-maven-plugin</artifactId>
+                    <version>4.4.1</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>instrument</goal>
+                                <goal>instrument-test</goal>
+                                <goal>check</goal>
+                                <goal>save-history</goal>
+                                <goal>aggregate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <skip>${skipClover}</skip>
+                        <codeType>ALL</codeType>
+                        <historyDir>${basedir}/src/site/clover-history/</historyDir>
+                        <cloverOutputDirectory>${project.build.directory}/clover</cloverOutputDirectory>
+                    </configuration>
+                </plugin>
+
+                <plugin>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-maven-plugin</artifactId>
                     <version>2.2.0</version>
@@ -318,17 +359,17 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.11.0</version>
                 </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.2</version>
-                    <configuration>
-                        <skip>${skipJavaDoc}</skip>
-                        <includeDependencySources>false</includeDependencySources>
-                        <quiet>true</quiet>
-                        <maxmemory>1g</maxmemory>
-                        <failOnError>false</failOnError>
-                    </configuration>
+                    <version>3.4.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.owasp</groupId>
+                    <artifactId>dependency-check-maven</artifactId>
+                    <version>7.0.4</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -369,6 +410,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
@@ -426,6 +468,7 @@
                 <version>0.23.1</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
                 <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
@@ -441,9 +484,10 @@
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
+                <artifactId>mockito-bom</artifactId>
                 <version>4.4.0</version>
-                <scope>test</scope>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <dependency>
@@ -464,30 +508,12 @@
                 <version>1.2.0</version>
                 <scope>test</scope>
             </dependency>
-
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
                 <version>5.8.2</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-params</artifactId>
-                <version>5.8.2</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.8.2</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>5.8.2</version>
-                <scope>test</scope>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <dependency>
@@ -553,6 +579,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -571,18 +598,22 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -594,51 +625,6 @@
             <artifactId>hibernate-testing</artifactId>
         </dependency>
     </dependencies>
-
-    <licenses>
-        <license>
-            <name>${license.name}</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <id>CEO</id>
-            <name>Elmar Dott</name>
-            <roles>
-                <role>CEO</role>
-                <role>Architect</role>
-                <role>Build Maanager</role>
-                <role>Lead Developer</role>
-            </roles>
-            <email>elmar.dott@gmail.com</email>
-        </developer>
-    </developers>
-
-    <!-- Deploy  -->
-    <distributionManagement>
-        <snapshotRepository>
-            <id>nexus-oss</id>
-            <url>${snapshot.repro}</url>
-        </snapshotRepository>
-        <repository>
-            <id>nexus-oss</id>
-            <url>${release.repo}</url>
-        </repository>
-        <site>
-            <id>local-oss</id>
-            <name>Local deployed site</name>
-            <url>${site.repro}</url>
-        </site>
-    </distributionManagement>
-
-    <repositories>
-        <repository>
-            <id>nexus-oss</id>
-            <url>http://localhost:8082/repository/maven-public/</url>
-        </repository>
-    </repositories>
 
     <!-- ==================================================================  -->
     <!-- ===========================   REPORTS   ==========================  -->
@@ -675,7 +661,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
                 <configuration>
                     <skip>${skipJavaDoc}</skip>
                     <includeDependencySources>false</includeDependencySources>
@@ -721,7 +707,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.0.0-M6</version>
             </plugin>
 
             <plugin>
@@ -733,6 +719,21 @@
                     <linkXref>true</linkXref>
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>${java.sdk.version}</targetJdk>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.openclover</groupId>
+                <artifactId>clover-maven-plugin</artifactId>
+                <version>4.4.1</version>
+                <configuration>
+                    <skip>${skipClover}</skip>
+                    <jdk>${java.sdk.target}</jdk>
+                    <generateHtml>true</generateHtml>
+                    <!-- generatePdf>true</generatePdf -->
+                    <generateHistorical>true</generateHistorical>
+                    <title>together Platform [Module:${project.artifactId}] - Coverage Report</title>
+                    <cloverOutputDirectory>${project.build.directory}/clover/</cloverOutputDirectory>
                 </configuration>
             </plugin>
 
@@ -766,7 +767,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>0.8.8</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -792,17 +793,8 @@
     <!-- ==================================================================  -->
     <profiles>
         <profile>
-            <id>release</id>
-
+            <id>tp-release</id>
             <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-war-plugin</artifactId>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -817,6 +809,7 @@
                             <fail>true</fail>
                         </configuration>
                     </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
@@ -841,6 +834,7 @@
                             <testFailureIgnore>false</testFailureIgnore>
                         </configuration>
                     </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
@@ -854,76 +848,70 @@
                             </execution>
                         </executions>
                     </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>attach-javadocs</id>
+                                <id>attach-apidocs</id>
                                 <goals>
+                                    <goal>javadoc</goal>
                                     <goal>jar</goal>
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <javadocDirectory>${project.build.directory}/target/apidocs</javadocDirectory>
+                            <failOnError>false</failOnError>
+                        </configuration>
                     </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <keyname>${gpg.keyname}</keyname>
+                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
 
         <profile>
-            <id>clover</id>
+            <id>nexus-deploy</id>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.openclover</groupId>
-                        <artifactId>clover-maven-plugin</artifactId>
-                        <version>4.4.1</version>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
                         <executions>
                             <execution>
-                                <phase>package</phase>
+                                <id>deploy-public-oss</id>
+                                <phase>deploy</phase>
                                 <goals>
-                                    <goal>instrument</goal>
-                                    <goal>instrument-test</goal>
-                                    <goal>check</goal>
-                                    <goal>save-history</goal>
-                                    <goal>aggregate</goal>
+                                    <goal>deploy</goal>
                                 </goals>
                             </execution>
                         </executions>
                         <configuration>
-                            <codeType>ALL</codeType>
-                            <historyDir>${basedir}/src/site/clover-history/</historyDir>
-                            <cloverOutputDirectory>${project.build.directory}/clover</cloverOutputDirectory>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
-
-            <reporting>
-                <plugins>
-                    <plugin>
-                        <groupId>org.openclover</groupId>
-                        <artifactId>clover-maven-plugin</artifactId>
-                        <version>4.4.1</version>
-                        <configuration>
-                            <jdk>${java.sdk.target}</jdk>
-                            <generateHtml>true</generateHtml>
-                            <generatePdf>true</generatePdf>
-                            <generateHistorical>true</generateHistorical>
-                            <title>together Platform [Module:${project.artifactId}] - Coverage Report</title>
-                            <cloverOutputDirectory>${project.build.directory}/clover/</cloverOutputDirectory>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </reporting>
         </profile>
 
         <profile>
@@ -940,7 +928,6 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>7.0.1</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -955,5 +942,44 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>dbms-flyway</id>
+
+            <properties>
+                <skipUnitTests>false</skipUnitTests>
+                <skipIntegrationTests>false</skipIntegrationTests>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
+
+    <licenses>
+        <license>
+            <name>${license.name}</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>CEO</id>
+            <name>Elmar Dott</name>
+            <roles>
+                <role>CEO</role>
+                <role>Architect</role>
+                <role>Build Maanager</role>
+                <role>Lead Developer</role>
+            </roles>
+            <email>elmar.dott@gmail.com</email>
+            <url>https://elmar-dott.com</url>
+        </developer>
+    </developers>
 </project>

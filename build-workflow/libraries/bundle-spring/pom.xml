@@ -14,7 +14,7 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
-    <version>5.3.17</version>
+    <version>5.3.18</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -117,37 +117,44 @@
         </license>
     </licenses>
 
-    <!-- Deploy  -->
+    <!-- ==================================================================  -->
+    <!-- ==========================   DEPLOYMENT   ========================  -->
+    <!-- ==================================================================  -->
     <distributionManagement>
         <snapshotRepository>
-            <id>nexus-oss</id>
+            <id>local-nexus</id>
             <url>${snapshot.repro}</url>
         </snapshotRepository>
         <repository>
-            <id>nexus-oss</id>
+            <id>local-nexus</id>
             <url>${release.repo}</url>
         </repository>
         <site>
-            <id>local-oss</id>
-            <name>Local deployed site</name>
+            <id>local-http-nexus</id>
+            <name>local deployed site</name>
             <url>${site.repro}</url>
         </site>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>local-nexus</id>
+            <url>http://localhost:8082/repository/maven-public/</url>
+        </repository>
+    </repositories>
 
     <!-- ==================================================================  -->
     <!-- ===========================   PROFILES   =========================  -->
     <!-- ==================================================================  -->
     <profiles>
         <profile>
-            <id>release</id>
-
+            <id>tp-release</id>
             <build>
-                <defaultGoal>deploy</defaultGoal>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -158,14 +165,9 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <keyname>togetherPlatform</keyname>
-                            <passphraseServerId>togetherPlatform</passphraseServerId>
+                            <keyname>${gpg.keyname}</keyname>
+                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
                         </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-deploy-plugin</artifactId>
-                        <version>3.0.0-M2</version>
                     </plugin>
                 </plugins>
             </build>
