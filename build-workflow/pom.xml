@@ -43,8 +43,8 @@
         <license.name>Apache License 2.0</license.name>
         <license.file>${basedir}/src/site/resources/license.html</license.file>
 
-        <release.repo>http://192.168.0.8:8082/repository/maven-releases/</release.repo>
-        <snapshot.repro>http://192.168.0.8:8082/repository/maven-snapshots/</snapshot.repro>
+        <release.repo>http://192.168.0.11:8082/repository/maven-releases/</release.repo>
+        <snapshot.repro>http://192.168.0.11:8082/repository/maven-snapshots/</snapshot.repro>
         <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
     </properties>
 
@@ -76,7 +76,7 @@
     <repositories>
         <repository>
             <id>local-nexus</id>
-            <url>http://localhost:8082/repository/maven-public/</url>
+            <url>http://192.168.0.11:8082/repository/maven-public/</url>
         </repository>
     </repositories>
 
