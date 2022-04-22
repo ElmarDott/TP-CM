@@ -75,7 +75,7 @@
 
     <repositories>
         <repository>
-            <id>local-nexus</id>
+            <id>RepositoryServer</id>
             <url>http://192.168.0.11:8082/repository/maven-public/</url>
         </repository>
     </repositories>
