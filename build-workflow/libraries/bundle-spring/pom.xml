@@ -21,6 +21,7 @@
         <release.repo>http://192.168.0.11:8082/repository/maven-releases/</release.repo>
         <snapshot.repro>http://192.168.0.11:8082/repository/maven-snapshots/</snapshot.repro>
         <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
+        <fetch.repo>http://192.168.0.11:8082/repository/maven-public/</fetch.repo>
     </properties>
 
     <dependencies>
@@ -139,7 +140,7 @@
     <repositories>
         <repository>
             <id>RepositoryServer</id>
-            <url>http://192.168.0.11:8082/repository/maven-public/</url>
+            <url>${fetch.repo}</url>
         </repository>
     </repositories>
 
