@@ -18,7 +18,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <jersey.version>2.36</jersey.version>
+        <jersey.version>2.37</jersey.version>
 
         <release.repo>http://192.168.0.11:8082/repository/maven-releases/</release.repo>
         <snapshot.repro>http://192.168.0.11:8082/repository/maven-snapshots/</snapshot.repro>
@@ -125,17 +125,17 @@
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-core</artifactId>
-            <version>2.2.1</version>
+            <version>2.2.2</version>
         </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>2.2.1</version>
+            <version>2.2.2</version>
         </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-jaxrs2</artifactId>
-            <version>2.2.1</version>
+            <version>2.2.2</version>
         </dependency>
     </dependencies>
 

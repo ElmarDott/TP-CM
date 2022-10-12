@@ -28,8 +28,8 @@
         <skipCoveralls>true</skipCoveralls>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>5.3.21</framework.spring.version>
-        <framework.hibernate.version>5.6.9</framework.hibernate.version>
+        <framework.spring.version>5.3.23</framework.spring.version>
+        <framework.hibernate.version>5.6.12</framework.hibernate.version>
         <framework.jakarta.version>8.0.8</framework.jakarta.version>
 
         <java.sdk.source>17</java.sdk.source>
@@ -114,7 +114,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
                     </configuration>
@@ -180,7 +180,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.2</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -190,12 +190,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.0.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0-M2</version>
+                    <version>3.0.0</version>
                     <executions>
                         <execution>
                             <id>deploy-private-nexus</id>
@@ -227,7 +227,7 @@
                 <plugin>
                     <groupId>org.flywaydb</groupId>
                     <artifactId>flyway-maven-plugin</artifactId>
-                    <version>8.5.13</version>
+                    <version>9.4.0</version>
                     <configuration>
                         <url>${dbms.connection.uri}</url>
                         <user>${dbms.connection.user}</user>
@@ -306,7 +306,7 @@
                 <plugin>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-maven-plugin</artifactId>
-                    <version>2.2.1</version>
+                    <version>2.2.2</version>
                     <configuration>
                         <skip>${skipSwagger}</skip>
                         <outputFileName>swagger-API</outputFileName>
@@ -334,13 +334,13 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.12.0</version>
+                    <version>3.12.1</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>3.4.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -436,7 +436,7 @@
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
                 <artifactId>archunit-junit5</artifactId>
-                <version>0.23.1</version>
+                <version>1.0.0</version>
                 <scope>test</scope>
             </dependency>
 
@@ -444,19 +444,19 @@
                 <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
-                <version>1.6.9</version>
+                <version>2.0.0-alpha-2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.google.code.bean-matchers</groupId>
                 <artifactId>bean-matchers</artifactId>
-                <version>0.13</version>
+                <version>0.14</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-bom</artifactId>
-                <version>4.6.1</version>
+                <version>4.8.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -482,7 +482,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.8.2</version>
+                <version>5.9.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -605,7 +605,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.12.0</version>
+                <version>3.12.1</version>
                 <configuration>
                     <chmod>true</chmod>
                     <locales>en</locales>
@@ -615,7 +615,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.4.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -632,7 +632,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>3.4.1</version>
                 <configuration>
                     <skip>${skipJavaDoc}</skip>
                     <includeDependencySources>false</includeDependencySources>
@@ -684,7 +684,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.17.0</version>
+                <version>3.19.0</version>
                 <configuration>
                     <format>xml</format>
                     <linkXref>true</linkXref>
@@ -696,7 +696,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>3.2.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -717,7 +717,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.0.0</version>
+                <version>4.7.2.0</version>
             </plugin>
 
             <plugin>
@@ -884,7 +884,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>7.1.1</version>
+                        <version>7.2.1</version>
                         <executions>
                             <execution>
                                 <goals>
