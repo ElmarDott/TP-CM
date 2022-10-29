@@ -13,7 +13,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -416,7 +416,7 @@
             </dependency>
 
             <!-- Java 9 Modularization Dependencies -->
-            <dependency>
+            <!--dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
                 <version>2.3.1</version>
@@ -424,13 +424,13 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>2.3.7</version>
+                <version>3.0.2</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
-                <version>2.3.7</version>
-            </dependency>
+                <version>3.0.2</version>
+            </dependency -->
 
             <!-- TEST FRAMEWORKS -->
             <dependency>
