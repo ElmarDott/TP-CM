@@ -31,7 +31,7 @@ PARENT POM: build workflow
 <parent>
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.3.0</version>
+    <version>1.4.0</version>
 </parent>
 ```
 For using the bundles in your project you can place the following configuration in your POM. If you already use the the build-workflow as your parent POM then you don't need to insert the <dependency> section.
@@ -119,7 +119,7 @@ In the case you like this project, let me know it and rate it with a star.
 
 |Version | Comment|
 |--------|----------------------------------------------------------------------|
-|1.4 | inprogress: (TP-CORE 3.0) |
+|1.4 | published: 10/2022: (TP-CORE 3.00) |
 |-------- | ---------------------------------------------------------------------- |
 | 1.3    | published: 11/2021 (TP-CORE-2.2.0)|
 |        |  - update dependencies|
