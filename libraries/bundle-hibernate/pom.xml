@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                        http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>TP-Bundle: Hibernate</name>
+    <description>BUNDLE POM: Collection of Hibernate dependencies.\n
+        HBM 3.2 + | JPA 1.0 | JSR 220 - 05.2006\n
+        HBM 3.5 + | JPA 2.0 | JSR 317 - 12.2009\n
+        HBM 4.3 + | JPA 2.1 | JSR 338 - 04.2013\n
+    </description>
+    <inceptionYear>01/2013</inceptionYear>
+    <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
+
+    <parent>
+        <groupId>io.github.together</groupId>
+        <artifactId>libraries</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <groupId>io.github.together.libraries</groupId>
+    <artifactId>bundle-hibernate</artifactId>
+    <version>4.3.11</version>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${project.version}.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${project.version}.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>${project.version}.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <!-- JDBC DRIVER -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4.1212</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.21.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.196</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.14.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbyclient</artifactId>
+            <version>10.14.1.0</version>
+        </dependency>
+    </dependencies>
+
+    <developers>
+        <developer>
+            <id>CEO</id>
+            <name>Elmar Dott</name>
+            <roles>
+                <role>CEO</role>
+                <role>Architect</role>
+                <role>Build Maanager</role>
+                <role>Lead Developer</role>
+            </roles>
+            <email>elmar.dott@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/ElmarDott/TP-CM.git</connection>
+        <developerConnection>scm:git:file://media/veracrypt1/repositories/git-togetherPlatform/Modules/CM</developerConnection>
+        <url>scm:git:https://github.com/ElmarDott/TP-CM.git</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License - Version 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+        </license>
+    </licenses>
+</project>
