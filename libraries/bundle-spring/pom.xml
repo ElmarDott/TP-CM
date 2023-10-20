@@ -8,15 +8,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>TP-Bundle: Spring</name>
-    <description>BUNDLE POM: Collection of Spring dependencies.</description>
+    <description>Bill of Materials</description>
     <inceptionYear>01/2013</inceptionYear>
-    <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
+    <url>https://elmar-dott.com</url>
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
-    <version>5.3.1</version>
+    <version>5.3.10</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <release.repo>http://192.168.0.8:8082/repository/maven-snapshots/</release.repo>
+        <snapshot.repro>http://192.168.0.8:8082/repository/maven-releases/</snapshot.repro>
+        <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
+    </properties>
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -111,6 +117,23 @@
         </license>
     </licenses>
 
+    <!-- Deploy  -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-oss</id>
+            <url>${release.repo}</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-oss</id>
+            <url>${snapshot.repro}</url>
+        </repository>
+        <site>
+            <id>local-oss</id>
+            <name>Local deployed site</name>
+            <url>${site.repro}</url>
+        </site>
+    </distributionManagement>
+
     <!-- ==================================================================  -->
     <!-- ===========================   PROFILES   =========================  -->
     <!-- ==================================================================  -->
@@ -140,20 +163,9 @@
                         </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.8</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>
-                        <version>2.8.2</version>
+                        <version>3.0.0-M1</version>
                     </plugin>
                 </plugins>
             </build>

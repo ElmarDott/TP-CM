@@ -8,17 +8,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>TP-Bundle: Jakarta (JavaEE)</name>
-    <description>BUNDLE POM: Collection of Logging dependencies.</description>
+    <description>Bill of Materials</description>
     <inceptionYear>01/2013</inceptionYear>
-    <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
+    <url>https://elmar-dott.com</url>
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-jakarta</artifactId>
-    <version>8.0.2</version>
+    <version>8.0.5</version>
     <packaging>pom</packaging>
 
     <properties>
-        <jersey.version>2.32</jersey.version>
+        <jersey.version>2.35</jersey.version>
+
+        <release.repo>http://192.168.0.8:8082/repository/maven-snapshots/</release.repo>
+        <snapshot.repro>http://192.168.0.8:8082/repository/maven-releases/</snapshot.repro>
+        <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
     </properties>
 
     <dependencies>
@@ -28,34 +32,40 @@
             <version>8.0.0</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>4.0.4</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>jakarta.faces</groupId>
             <artifactId>jakarta.faces-api</artifactId>
             <version>2.3.2</version>
-            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.faces</artifactId>
+            <version>2.3.16</version>
         </dependency>
 
         <!-- JSON for Jersey RET -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.12.0</version>
+            <version>2.13.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.12.0</version>
+            <version>2.13.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.12.0</version>
+            <version>2.13.0</version>
         </dependency>
 
         <!-- JaxRs support & Swagger API -->
@@ -78,32 +88,6 @@
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>${jersey.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
-            <version>${jersey.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-jdk-http</artifactId>
-            <version>${jersey.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-simple-http</artifactId>
-            <version>${jersey.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-grizzly2-http</artifactId>
-            <version>${jersey.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-grizzly2-servlet</artifactId>
             <version>${jersey.version}</version>
         </dependency>
 
@@ -135,19 +119,30 @@
         </dependency>
 
         <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-http</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-servlet</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-core</artifactId>
-            <version>2.1.6</version>
+            <version>2.1.11</version>
         </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>2.1.6</version>
+            <version>2.1.11</version>
         </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-jaxrs2</artifactId>
-            <version>2.1.6</version>
+            <version>2.1.11</version>
         </dependency>
     </dependencies>
 
@@ -178,6 +173,23 @@
         </license>
     </licenses>
 
+    <!-- Deploy  -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-oss</id>
+            <url>${release.repo}</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-oss</id>
+            <url>${snapshot.repro}</url>
+        </repository>
+        <site>
+            <id>local-oss</id>
+            <name>Local deployed site</name>
+            <url>${site.repro}</url>
+        </site>
+    </distributionManagement>
+
     <!-- ==================================================================  -->
     <!-- ===========================   PROFILES   =========================  -->
     <!-- ==================================================================  -->
@@ -207,20 +219,9 @@
                         </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.8</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>
-                        <version>2.8.2</version>
+                        <version>3.0.0-M1</version>
                     </plugin>
                 </plugins>
             </build>
