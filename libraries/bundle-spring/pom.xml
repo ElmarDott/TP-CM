@@ -14,7 +14,7 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
-    <version>5.1.7</version>
+    <version>5.1.9</version>
     <packaging>pom</packaging>
 
     <dependencies>
@@ -44,6 +44,7 @@
             <artifactId>spring-beans</artifactId>
             <version>${project.version}.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
@@ -54,6 +55,7 @@
             <artifactId>spring-aspects</artifactId>
             <version>${project.version}.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
@@ -69,6 +71,7 @@
             <artifactId>spring-tx</artifactId>
             <version>${project.version}.RELEASE</version>
         </dependency>
+        
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>

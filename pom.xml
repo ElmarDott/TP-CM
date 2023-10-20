@@ -14,7 +14,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -22,23 +22,23 @@
     </modules>
 
     <properties>
+        <skipCoveralls>false</skipCoveralls>
         <skipTests>false</skipTests>
-        <skipCoveralls>true</skipCoveralls>
         <skipClover>false</skipClover>
         <skipJarSigner>false</skipJarSigner>
         <skipJavaDoc>false</skipJavaDoc>
-        <skipEnforcer>false</skipEnforcer>
+        <skipEnforcer>true</skipEnforcer>
 
-        <framework.spring.version>5.1.7</framework.spring.version>
-        <framework.hibernate.version>5.3.10</framework.hibernate.version>
-        <framework.logging.version>1.7.26</framework.logging.version>
-        <framework.jarkarta.version>7.0</framework.jarkarta.version>
-        <framework.spring-security.version>5.1.5</framework.spring-security.version>
-        <framework.test.jgiven.version>0.17.1</framework.test.jgiven.version>
+        <framework.spring.version>5.1.9</framework.spring.version>
+        <framework.hibernate.version>5.3.13</framework.hibernate.version>
+        <framework.logging.version>1.7.28</framework.logging.version>
+        <framework.jarkarta.version>8.0</framework.jarkarta.version>
+        <framework.spring-security.version>5.2.0</framework.spring-security.version>
+        <framework.test.jgiven.version>0.18.2</framework.test.jgiven.version>
 
-        <java.sdk.version>1.8</java.sdk.version>
+        <java.sdk.version>11</java.sdk.version>
         <java.ee.version>7.0</java.ee.version>
-        <maven.version>3.5.0</maven.version>
+        <maven.version>3.6.0</maven.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
@@ -58,11 +58,6 @@
 
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
@@ -138,11 +133,11 @@
                     <version>3.0.0-M3</version>
                     <configuration>
                         <skipTests>${skipTests}</skipTests>
-                        <argLine>-XX:-UseSplitVerifier</argLine>
                         <testFailureIgnore>true</testFailureIgnore>
                         <useSystemClassLoader>false</useSystemClassLoader>
                     </configuration>
                 </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
@@ -158,22 +153,10 @@
                     </executions>
                 </plugin>
 
-                <!-- Local IDE deployment for WAR projects-->
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>2.2</version>
-                    <configuration>
-                        <systemProperties>
-                            <java.util.logging.manager>org.apache.juli.ClassLoaderLogManager</java.util.logging.manager>
-                            <logback.ContextSelector>JNDI</logback.ContextSelector>
-                        </systemProperties>
-                    </configuration>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>3.2.2</version>
+                    <version>3.2.3</version>
                     <executions>
                         <execution>
                             <id>default-war</id>
@@ -184,27 +167,11 @@
                         </execution>
                     </executions>
                 </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.1.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0-M1</version>
-                </plugin>
-
-                <!-- RELEASE artifact -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.3</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-scm-plugin</artifactId>
-                    <version>1.11.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -225,104 +192,58 @@
                     </configuration>
                 </plugin>
 
+                <!-- REPORTING -->
                 <plugin>
-                    <groupId>net.alchim31.maven</groupId>
-                    <artifactId>yuicompressor-maven-plugin</artifactId>
-                    <version>1.5.1</version>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.5</version>
                     <executions>
                         <execution>
-                            <phase>process-resources</phase>
+                            <id>pre-unit-test</id>
                             <goals>
-                                <goal>compress</goal>
+                                <goal>prepare-agent</goal>
                             </goals>
                             <configuration>
-                                <nosuffix>true</nosuffix>
-                                <warSourceDirectory>src/main/webapp</warSourceDirectory>
-                                <sourceDirectory>src/main/webapp/</sourceDirectory>
-                                <outputDirectory>${project.build.directory}/${project.build.finalName}/</outputDirectory>
+                                <configuration>
+                                    <destFile>${project.build.directory}/jacoco.exec</destFile>
+                                </configuration>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>post-unit-test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <configuration>
+                                <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+                                <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
                             </configuration>
                         </execution>
                     </executions>
-                </plugin>
-
-                <!-- REPORTING -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.7.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.0</version>
                     <configuration>
-                        <skip>${skipJavaDoc}</skip>
-                        <includeDependencySources>false</includeDependencySources>
-                        <quiet>true</quiet>
-                        <docencoding>${project.build.sourceEncoding}</docencoding>
-                        <maxmemory>1g</maxmemory>
-                        <failOnError>false</failOnError>
+                        <excludes>
+                            <exclude>org/europa/together/business/**/*</exclude>
+                        </excludes>
                     </configuration>
                 </plugin>
+
                 <plugin>
                     <groupId>com.tngtech.jgiven</groupId>
                     <artifactId>jgiven-maven-plugin</artifactId>
                     <version>${framework.test.jgiven.version}</version>
                     <executions>
                         <execution>
+                            <phase>pre-site</phase>
                             <goals>
                                 <goal>report</goal>
                             </goals>
                         </execution>
                     </executions>
                     <configuration>
+                        <title>together Platform [Module:${project.artifactId}] - JGiven Behavior Driven Design Report (BDD)</title>
                         <outputDirectory>${project.build.directory}/site/jgiven</outputDirectory>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>cobertura-maven-plugin</artifactId>
-                    <version>2.7</version>
-                    <executions>
-                        <execution>
-                            <phase>process-classes</phase>
-                            <goals>
-                                <goal>cobertura</goal>
-                            </goals>
-
-                            <configuration>
-                                <format>xml</format>
-                                <outputDirectory>${project.build.directory}/cobertura</outputDirectory>
-                                <instrumentation>
-                                    <ignores>
-                                        <ignore>eu.freeplace.infrastructure.business.*</ignore>
-                                    </ignores>
-                                    <excludes>
-                                        <exclude>eu/freeplace/infrastructure/business/**/*.class</exclude>
-                                        <exclude>eu/freeplace/infrastructure/business/**/*Test.class</exclude>
-                                    </excludes>
-                                </instrumentation>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.eluder.coveralls</groupId>
-                    <artifactId>coveralls-maven-plugin</artifactId>
-                    <version>4.3.0</version>
-                    <executions>
-                        <execution>
-                            <phase>install</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <skip>${skipCoveralls}</skip>
-                        <coberturaReports>${project.build.directory}/cobertura/coverage.xml</coberturaReports>
+                        <sourceDirectory>${project.build.directory}/jgiven-reports/json/</sourceDirectory>
                     </configuration>
                 </plugin>
 
@@ -347,9 +268,38 @@
                 </plugin>
 
                 <plugin>
+                    <groupId>org.eluder.coveralls</groupId>
+                    <artifactId>coveralls-maven-plugin</artifactId>
+                    <version>4.3.0</version>
+                    <configuration>
+                        <skip>${skipCoveralls}</skip>
+                        <jacocoReports>${project.build.directory}/site/jacoco/jacoco.xml</jacocoReports>
+                    </configuration>
+                </plugin>
+
+                <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.6.0.1398</version>
+                    <version>3.7.0.1746</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.8.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.1</version>
+                    <configuration>
+                        <skip>${skipJavaDoc}</skip>
+                        <includeDependencySources>false</includeDependencySources>
+                        <quiet>true</quiet>
+                        <docencoding>${project.build.sourceEncoding}</docencoding>
+                        <maxmemory>1g</maxmemory>
+                        <failOnError>false</failOnError>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -359,30 +309,17 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
             </plugin>
-
             <plugin>
                 <groupId>com.tngtech.jgiven</groupId>
                 <artifactId>jgiven-maven-plugin</artifactId>
-                <configuration>
-                    <title>together Platform [Module:${project.artifactId}] - JGiven Behavior Driven Design Report (BDD)</title>
-                </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.openclover</groupId>
                 <artifactId>clover-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
@@ -396,7 +333,35 @@
             <dependency>
                 <groupId>org.apiguardian</groupId>
                 <artifactId>apiguardian-api</artifactId>
-                <version>1.0.0</version>
+                <version>1.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>annotations</artifactId>
+                <version>3.0.1</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Java 9 Modularization Dependencies -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>1.1.1</version>
             </dependency>
 
             <!-- Bundels -->
@@ -433,23 +398,22 @@
 
             <!-- TEST FRAMEWORKS -->
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.5.0-M1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.platform</groupId>
-                <artifactId>junit-platform-runner</artifactId>
-                <version>1.5.0-M1</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- SMTP Server Mock -->
-            <dependency>
+                <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
                 <version>1.5.10</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.bean-matchers</groupId>
+                <artifactId>bean-matchers</artifactId>
+                <version>0.11</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.10.19</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -470,16 +434,17 @@
                 <version>${framework.test.jgiven.version}</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.10.19</version>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>5.5.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>com.google.code.bean-matchers</groupId>
-                <artifactId>bean-matchers</artifactId>
-                <version>0.11</version>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-runner</artifactId>
+                <version>1.5.2</version>
                 <scope>test</scope>
             </dependency>
 
@@ -509,19 +474,40 @@
             <groupId>org.apiguardian</groupId>
             <artifactId>apiguardian-api</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>annotations</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+        </dependency>
+
+        <!-- Do not change order for test frameworks -->
         <dependency>
             <groupId>com.icegreen</groupId>
             <artifactId>greenmail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.bean-matchers</groupId>
+            <artifactId>bean-matchers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
         </dependency>
         <dependency>
             <groupId>com.tngtech.jgiven</groupId>
@@ -536,12 +522,12 @@
             <artifactId>jgiven-spring</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.code.bean-matchers</groupId>
-            <artifactId>bean-matchers</artifactId>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
         </dependency>
 
         <dependency>
@@ -562,7 +548,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
+                <version>3.8.2</version>
                 <configuration>
                     <chmod>true</chmod>
                     <locales>en</locales>
@@ -591,7 +577,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.1</version>
                 <configuration>
                     <skip>${skipJavaDoc}</skip>
                     <includeDependencySources>false</includeDependencySources>
@@ -667,35 +653,18 @@
                 </reportSets>
                 <configuration>
                     <configLocation>${checkstyle.rules}</configLocation>
-                    <encoding>${project.build.sourceEncoding}</encoding>
                     <sourceDirectories>src/main/java</sourceDirectories>
                     <includes>**/*.java</includes>
-                    <excludes>/eu/freeplace/collaboration/**/*.properties</excludes>
                     <format>xml</format>
+                    <enableRSS>false</enableRSS>
                     <enableRulesSummary>false</enableRulesSummary>
                 </configuration>
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.5</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <fork>true</fork>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <formats>
-                        <format>xml</format>
-                        <format>html</format>
-                    </formats>
-                </configuration>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>3.1.12.2</version>
             </plugin>
 
             <plugin>
@@ -704,7 +673,7 @@
                 <version>4.3.1</version>
                 <configuration>
                     <jdk>${java.sdk.version}</jdk>
-                    <title>together Platform [Module:${project.artifactId}] - Coverrage Report</title>
+                    <title>together Platform [Module:${project.artifactId}] - Coverage Report</title>
                     <cloverOutputDirectory>${project.build.directory}/clover</cloverOutputDirectory>
                     <alwaysReport>true</alwaysReport>
                     <codeType>ALL</codeType>
@@ -717,22 +686,25 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jdepend-maven-plugin</artifactId>
-                <version>2.0</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.1</version>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
                 <reportSets>
                     <reportSet>
                         <reports>
-                            <report>analyze-report</report>
+                            <report>report</report>
                         </reports>
                     </reportSet>
                 </reportSets>
+                <configuration>
+                    <dataFile>${project.build.directory}/target/jacoco-unit.exec</dataFile>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jdepend-maven-plugin</artifactId>
+                <version>2.0</version>
             </plugin>
         </plugins>
     </reporting>
@@ -791,9 +763,6 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-war-plugin</artifactId>
-                            <configuration>
-                                <warSourceExcludes>**/*.css,**/*.js</warSourceExcludes>
-                            </configuration>
                         </plugin>
                     </plugins>
                 </pluginManagement>
@@ -818,10 +787,6 @@
                             <debug>false</debug>
                             <optimize>true</optimize>
                         </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>net.alchim31.maven</groupId>
-                        <artifactId>yuicompressor-maven-plugin</artifactId>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
