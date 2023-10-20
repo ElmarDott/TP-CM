@@ -12,29 +12,22 @@
     <inceptionYear>01/2013</inceptionYear>
     <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
 
-    <parent>
-        <groupId>io.github.together</groupId>
-        <artifactId>libraries</artifactId>
-        <version>1.0</version>
-    </parent>
-
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
-    <version>5.0.8</version>
+    <version>5.1.7</version>
     <packaging>pom</packaging>
 
     <dependencies>
-        <!-- dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
-            <version>1.4.01</version>
-            <scope>runtime</scope>
-        </dependency -->
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${project.version}.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -88,6 +81,13 @@
         </dependency>
     </dependencies>
 
+
+    <scm>
+        <connection>scm:git:https://github.com/ElmarDott/TP-CM.git</connection>
+        <developerConnection>scm:git:file://media/veracrypt1/repositories/git-togetherPlatform/Modules/CM</developerConnection>
+        <url>scm:git:https://github.com/ElmarDott/TP-CM.git</url>
+    </scm>
+
     <developers>
         <developer>
             <id>CEO</id>
@@ -102,16 +102,59 @@
         </developer>
     </developers>
 
-    <scm>
-        <connection>scm:git:https://github.com/ElmarDott/TP-CM.git</connection>
-        <developerConnection>scm:git:file://media/veracrypt1/repositories/git-togetherPlatform/Modules/CM</developerConnection>
-        <url>scm:git:https://github.com/ElmarDott/TP-CM.git</url>
-    </scm>
-
     <licenses>
         <license>
             <name>GNU General Public License - Version 3</name>
             <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
         </license>
     </licenses>
+
+    <!-- ==================================================================  -->
+    <!-- ===========================   PROFILES   =========================  -->
+    <!-- ==================================================================  -->
+    <profiles>
+        <profile>
+            <id>release</id>
+
+            <build>
+                <defaultGoal>deploy</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <keyname>togetherPlatform</keyname>
+                            <passphraseServerId>togetherPlatform</passphraseServerId>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>2.8.2</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

@@ -7,52 +7,40 @@
                         http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>TP-Bundle: Logging (Logback)</name>
-    <description>BUNDLE POM: Collection of Logging dependencies.</description>
+    <name>TP-Bundle: Spring Security</name>
+    <description>BUNDLE POM: Collection of Spring dependencies.</description>
     <inceptionYear>01/2013</inceptionYear>
     <url>https://enrebaja.wordpress.com/diaries-in-digital/together-platform/</url>
 
     <groupId>io.github.together.libraries</groupId>
-    <artifactId>bundle-logging</artifactId>
-    <version>1.7.26</version>
+    <artifactId>bundle-spring-security</artifactId>
+    <version>5.1.5</version>
     <packaging>pom</packaging>
-
-    <properties>
-        <dependency.slf4j.version>1.7.26</dependency.slf4j.version>
-        <dependency.logback.version>1.2.3</dependency.logback.version>
-    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${dependency.slf4j.version}</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${project.version}.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${dependency.slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>${dependency.slf4j.version}</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${project.version}.RELEASE</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${dependency.logback.version}</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${project.version}.RELEASE</version>
         </dependency>
+
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${dependency.logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-access</artifactId>
-            <version>${dependency.logback.version}</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>${project.version}.RELEASE</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -78,8 +66,8 @@
 
     <licenses>
         <license>
-            <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <name>GNU General Public License - Version 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
         </license>
     </licenses>
 
