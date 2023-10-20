@@ -14,15 +14,16 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
-    <version>5.3.10</version>
+    <version>5.3.23</version>
     <packaging>pom</packaging>
 
     <properties>
-        <release.repo>http://192.168.0.8:8082/repository/maven-snapshots/</release.repo>
-        <snapshot.repro>http://192.168.0.8:8082/repository/maven-releases/</snapshot.repro>
+        <release.repo>http://192.168.0.11:8082/repository/maven-releases/</release.repo>
+        <snapshot.repro>http://192.168.0.11:8082/repository/maven-snapshots/</snapshot.repro>
         <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
+        <fetch.repo>http://192.168.0.11:8082/repository/maven-public/</fetch.repo>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -117,32 +118,39 @@
         </license>
     </licenses>
 
-    <!-- Deploy  -->
+    <!-- ==================================================================  -->
+    <!-- ==========================   DEPLOYMENT   ========================  -->
+    <!-- ==================================================================  -->
     <distributionManagement>
         <snapshotRepository>
-            <id>nexus-oss</id>
-            <url>${release.repo}</url>
+            <id>local-nexus</id>
+            <url>${snapshot.repro}</url>
         </snapshotRepository>
         <repository>
-            <id>nexus-oss</id>
-            <url>${snapshot.repro}</url>
+            <id>local-nexus</id>
+            <url>${release.repo}</url>
         </repository>
         <site>
-            <id>local-oss</id>
-            <name>Local deployed site</name>
+            <id>local-http-nexus</id>
+            <name>local deployed site</name>
             <url>${site.repro}</url>
         </site>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>RepositoryServer</id>
+            <url>${fetch.repo}</url>
+        </repository>
+    </repositories>
 
     <!-- ==================================================================  -->
     <!-- ===========================   PROFILES   =========================  -->
     <!-- ==================================================================  -->
     <profiles>
         <profile>
-            <id>release</id>
-
+            <id>tp-release</id>
             <build>
-                <defaultGoal>deploy</defaultGoal>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -158,14 +166,9 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <keyname>togetherPlatform</keyname>
-                            <passphraseServerId>togetherPlatform</passphraseServerId>
+                            <keyname>${gpg.keyname}</keyname>
+                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
                         </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-deploy-plugin</artifactId>
-                        <version>3.0.0-M1</version>
                     </plugin>
                 </plugins>
             </build>
