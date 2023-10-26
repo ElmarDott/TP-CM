@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                        http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>TP-Bundle: Hibernate</name>
+    <description>Bill of Materials \n
+        HBM 3.2 + | JPA 1.0 | JSR 220 \n
+        HBM 3.5 + | JPA 2.0 | JSR 317 \n
+        HBM 4.3 + | JPA 2.1 | JSR 338 \n
+        HBM 5.3 + | JPA 2.2 | JSR 338 \n
+        HBM 5.5 + | JPA 2.2 | Jakarta EE 8 \n
+        HBM 6.0 + | JPA 3.0 | Jakarta EE 9 \n
+        HBM 6.1 + | JPA 3.1 | Jakarta EE 10
+    </description>
+    <inceptionYear>01/2013</inceptionYear>
+    <url>https://elmar-dott.com</url>
+
+    <groupId>io.github.together.libraries</groupId>
+    <artifactId>bundle-hibernate</artifactId>
+    <version>6.3.1</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <release.repo>http://192.168.0.11:8082/repository/maven-releases/</release.repo>
+        <snapshot.repro>http://192.168.0.11:8082/repository/maven-snapshots/</snapshot.repro>
+        <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
+        <fetch.repo>http://192.168.0.11:8082/repository/maven-public/</fetch.repo>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${project.version}.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>6.0.0.Alpha7</version>
+        </dependency>
+
+        <!-- Bean Validation -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
+            <version>8.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.el</artifactId>
+            <version>5.0.0-M1</version>
+        </dependency>
+
+        <!-- Database Connection Pool -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+        <!-- JDBC DRIVER -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.ojdbc</groupId>
+            <artifactId>ojdbc10</artifactId>
+            <version>19.3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.43.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.2.224</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.16.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbyclient</artifactId>
+            <version>10.16.1.1</version>
+        </dependency>
+    </dependencies>
+
+    <scm>
+        <connection>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</connection>
+        <developerConnection>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</developerConnection>
+        <url>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</url>
+    </scm>
+
+    <issueManagement>
+        <system>Redmine</system>
+        <url>https://issues.elmar-dott.com/projects/tp</url>
+    </issueManagement>
+
+    <!-- ==================================================================  -->
+    <!-- ==========================   DEPLOYMENT   ========================  -->
+    <!-- ==================================================================  -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>local-nexus</id>
+            <url>${snapshot.repro}</url>
+        </snapshotRepository>
+        <repository>
+            <id>local-nexus</id>
+            <url>${release.repo}</url>
+        </repository>
+        <site>
+            <id>local-http-nexus</id>
+            <name>local deployed site</name>
+            <url>${site.repro}</url>
+        </site>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>RepositoryServer</id>
+            <url>${fetch.repo}</url>
+        </repository>
+    </repositories>
+
+    <licenses>
+        <license>
+            <name>${license.name}</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>CEO</id>
+            <name>Elmar Dott</name>
+            <roles>
+                <role>CEO</role>
+                <role>Architect</role>
+                <role>Build Maanager</role>
+                <role>Lead Developer</role>
+            </roles>
+            <email>elmar.dott@gmail.com</email>
+            <url>https://elmar-dott.com</url>
+        </developer>
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>4.0.0-M11</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>2.0.0-M7</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- ==================================================================  -->
+    <!-- ===========================   PROFILES   =========================  -->
+    <!-- ==================================================================  -->
+    <profiles>
+        <profile>
+            <id>tp-release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <!-- version>3.1.0</version -->
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <keyname>${gpg.keyname}</keyname>
+                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

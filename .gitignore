@@ -1,0 +1,5 @@
+/target/
+/libraries/target/
+/libraries/bundle-jakarta/target/
+/libraries/bundle-spring/target/
+/libraries/bundle-hibernate/target/
