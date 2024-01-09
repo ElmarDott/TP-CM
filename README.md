@@ -2,15 +2,15 @@
 
 # together Platform :: Configuration Management
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.together/build-workflow.svg?label=Build%20Workflow)](https://search.maven.org/artifact/io.github.together/build-workflow) 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.together/libraries.svg?label=Libraries)](https://search.maven.org/artifact/io.github.together/libraries) 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.together.libraries/bundle-hibernate.svg?label=Bundle:%20Hibernate)](https://search.maven.org/artifact/io.github.together.libraries/bundle-hibernate) 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.together.libraries/bundle-spring.svg?label=Bundle:%20Spring%20Framework)](https://search.maven.org/artifact/io.github.together.libraries/bundle-spring) 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.together.libraries/bundle-jakarta.svg?label=Bundle:%20JakartaEE)](https://search.maven.org/artifact/io.github.together.libraries/bundle-jakarta) 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.together/build-workflow.svg?label=Build%20Workflow)](https://search.maven.org/artifact/io.github.together/build-workflow)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.together/libraries.svg?label=Libraries)](https://search.maven.org/artifact/io.github.together/libraries)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.together.libraries/bundle-hibernate.svg?label=Bundle:%20Hibernate)](https://search.maven.org/artifact/io.github.together.libraries/bundle-hibernate)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.together.libraries/bundle-spring.svg?label=Bundle:%20Spring%20Framework)](https://search.maven.org/artifact/io.github.together.libraries/bundle-spring)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.together.libraries/bundle-jakarta.svg?label=Bundle:%20JakartaEE)](https://search.maven.org/artifact/io.github.together.libraries/bundle-jakarta)
 [![License Apache 2](https://img.shields.io/github/license/ElmarDott/TP-CM)](https://www.apache.org/licenses/LICENSE-2.0)
 
 
-**Homepage:** [together-platform.com](https://together-platform.com)
+**Homepage:** [together-platform.org](https://together-platform.com)
 This repository includes all necessary files to build and compile artifacts of the project together platform (TP).
 
 ## Getting Started
