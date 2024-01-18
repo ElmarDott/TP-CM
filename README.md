@@ -11,6 +11,7 @@
 
 
 **Homepage:** [together-platform.org](https://together-platform.com)
+The GitHub Code Reposity contains just a backup branch of releases from https://git.elmar-dott.com.
 This repository includes all necessary files to build and compile artifacts of the project together platform (TP).
 
 ## Getting Started
@@ -35,7 +36,7 @@ PARENT POM: build workflow
 <parent>
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.4.1</version>
+    <version>1.5.0</version>
 </parent>
 ```
 For using the bundles in your project you can place the following configuration in your POM. If you already use the the build-workflow as your parent POM then you don't need to insert the <dependency> section.
@@ -104,8 +105,13 @@ In the case you like this project, let me know it and rate it with a star.
 
 | Version | Comment
 |---------|--------------------------------------------------------------------|
-| 1.5     | published: in prograess
+| 1.5.0   | published: 01/2004
+|         | Libraries: 1.4.0
+|         |  - dependencies: TP-BUNDLE Spring 6.1.2
+|         |  - dependencies: TP-BUNDLE Hibernate 6.4.1
+|         |  - dependencies: TP-BUNDLE JavaEE 10.0.0
 |         |  - migrate to Jakarta 10 EE
+|         |  - migrate to Java 17 SE
 |---------|--------------------------------------------------------------------|
 | 1.4.1   | published: 10/2023: (TP-CORE 3.00)
 |         | Libraries: 1.3.3

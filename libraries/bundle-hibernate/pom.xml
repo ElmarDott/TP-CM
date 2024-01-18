@@ -22,7 +22,7 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-hibernate</artifactId>
-    <version>6.4.0</version>
+    <version>6.4.1</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -180,7 +180,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>4.0.0-M12</version>
+                <version>4.0.0-M13</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>

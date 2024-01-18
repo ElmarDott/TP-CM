@@ -13,7 +13,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -28,8 +28,8 @@
         <skipCoveralls>true</skipCoveralls>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>6.1.1</framework.spring.version>
-        <framework.hibernate.version>6.4.0</framework.hibernate.version>
+        <framework.spring.version>6.1.2</framework.spring.version>
+        <framework.hibernate.version>6.4.1</framework.hibernate.version>
         <framework.jakarta.version>10.0.0</framework.jakarta.version>
 
         <java.sdk.source>17</java.sdk.source>
