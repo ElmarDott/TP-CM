@@ -13,7 +13,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.4.1</version>
+    <version>1.5.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -28,36 +28,36 @@
         <skipCoveralls>true</skipCoveralls>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>5.3.30</framework.spring.version>
-        <framework.hibernate.version>5.6.15</framework.hibernate.version>
-        <framework.jakarta.version>8.0.11</framework.jakarta.version>
+        <framework.spring.version>6.1.2</framework.spring.version>
+        <framework.hibernate.version>6.4.1</framework.hibernate.version>
+        <framework.jakarta.version>10.0.0</framework.jakarta.version>
 
         <java.sdk.source>17</java.sdk.source>
         <java.sdk.target>17</java.sdk.target>
-        <java.ee.version>8.0</java.ee.version>
+        <java.ee.version>10</java.ee.version>
         <java.fx.version>17.0.6</java.fx.version>
         <maven.version>[3.9,)</maven.version>
 
         <directory.reporting.out>${basedir}/target/site/</directory.reporting.out>
         <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
         <license.name>Apache License 2.0</license.name>
-        <license.file>${basedir}/src/site/resources/license.html</license.file>
+        <license.file>${basedir}/LICENSE</license.file>
 
         <release.repo>http://192.168.0.11:8082/repository/maven-releases/</release.repo>
         <snapshot.repro>http://192.168.0.11:8082/repository/maven-snapshots/</snapshot.repro>
-        <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
+        <site.repro>https://togeter-platform.com</site.repro>
         <fetch.repo>http://192.168.0.11:8082/repository/maven-public/</fetch.repo>
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com/ElmarDott/TP-CM.git</connection>
-        <developerConnection>scm:git:file://media/veracrypt1/repositories/git-togetherPlatform/Modules/CM</developerConnection>
-        <url>scm:git:https://github.com/ElmarDott/TP-CM.git</url>
+        <connection>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</connection>
+        <developerConnection>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</developerConnection>
+        <url>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</url>
     </scm>
 
     <issueManagement>
         <system>Redmine</system>
-        <url>https://issues.elmar-dott.com/projects/tp-cm</url>
+        <url>https://issues.elmar-dott.com/projects/tp</url>
     </issueManagement>
 
     <!-- ==================================================================  -->
@@ -105,8 +105,10 @@
                             </goals>
                             <configuration>
                                 <rules>
+                                    <banDuplicatePomDependencyVersions/>
                                     <requireJavaVersion>
                                         <version>${java.sdk.target}</version>
+                                        <message>The project used only openJDK LTS Java Versions.</message>
                                     </requireJavaVersion>
                                     <requireMavenVersion>
                                         <version>${maven.version}</version>
@@ -127,7 +129,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.6.0</version>
+                    <version>3.6.1</version>
                     <executions>
                         <execution>
                             <phase>process-resources</phase>
@@ -144,7 +146,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version>
+                    <version>3.12.1</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
                         <source>${java.sdk.source}</source>
@@ -158,7 +160,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.2.3</version>
                     <configuration>
                         <skip>${skipUnitTests}</skip>
                         <testFailureIgnore>true</testFailureIgnore>
@@ -168,7 +170,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.2.3</version>
                     <executions>
                         <execution>
                             <phase>integration-test</phase>
@@ -223,7 +225,16 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.6</version>
+                    <version>3.1.0</version>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -249,7 +260,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.10</version>
+                    <version>0.8.11</version>
                     <executions>
                         <execution>
                             <id>pre-unit-test</id>
@@ -282,25 +293,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>com.tngtech.jgiven</groupId>
-                    <artifactId>jgiven-maven-plugin</artifactId>
-                    <version>1.3.0</version>
-                    <executions>
-                        <execution>
-                            <phase>pre-site</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <title>together Platform [Module:${project.artifactId}] - JGiven Behavior Driven Design Report (BDD)</title>
-                        <outputDirectory>${directory.reporting.out}/jgiven</outputDirectory>
-                        <sourceDirectory>${project.build.directory}/jgiven-reports/json/</sourceDirectory>
-                    </configuration>
-                </plugin>
-
-                <plugin>
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
                     <version>4.3.0</version>
@@ -312,8 +304,8 @@
 
                 <plugin>
                     <groupId>io.swagger.core.v3</groupId>
-                    <artifactId>swagger-maven-plugin</artifactId>
-                    <version>2.2.16</version>
+                    <artifactId>swagger-maven-plugin-jakarta</artifactId>
+                    <version>2.2.20</version>
                     <configuration>
                         <skip>${skipSwagger}</skip>
                         <outputFileName>swagger-API</outputFileName>
@@ -341,13 +333,24 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.12.1</version>
+                    <version>4.0.0-M13</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.doxia</groupId>
+                            <artifactId>doxia-module-markdown</artifactId>
+                            <version>2.0.0-M8</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <inputEncoding>UTF-8</inputEncoding>
+                        <outputEncoding>UTF-8</outputEncoding>
+                    </configuration>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.6.0</version>
+                    <version>3.6.3</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -394,10 +397,6 @@
                 <artifactId>maven-site-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>com.tngtech.jgiven</groupId>
-                <artifactId>jgiven-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
             </plugin>
@@ -422,21 +421,15 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- TEST FRAMEWORKS -->
-            <dependency>
-                <groupId>com.tngtech.archunit</groupId>
-                <artifactId>archunit-junit5</artifactId>
-                <version>1.1.0</version>
-                <scope>test</scope>
-            </dependency>
-
             <dependency>
                 <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
-                <version>2.0.0</version>
+                <version>2.0.1</version>
                 <scope>test</scope>
             </dependency>
+
+            <!-- TEST FRAMEWORKS -->
             <dependency>
                 <groupId>com.google.code.bean-matchers</groupId>
                 <artifactId>bean-matchers</artifactId>
@@ -446,35 +439,24 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-bom</artifactId>
-                <version>5.5.0</version>
+                <version>5.8.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
             <dependency>
-                <groupId>com.tngtech.jgiven</groupId>
-                <artifactId>jgiven-core</artifactId>
-                <version>1.3.0</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.tngtech.jgiven</groupId>
-                <artifactId>jgiven-junit5</artifactId>
-                <version>1.3.0</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.tngtech.jgiven</groupId>
-                <artifactId>jgiven-spring</artifactId>
-                <version>1.3.0</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.10.0</version>
+                <version>5.10.1</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>1.19.3</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
@@ -520,6 +502,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.icegreen</groupId>
+            <artifactId>greenmail</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.apiguardian</groupId>
             <artifactId>apiguardian-api</artifactId>
         </dependency>
@@ -529,10 +517,6 @@
         </dependency>
 
         <!-- SCOPE: TEST - Do not change order for test frameworks -->
-        <dependency>
-            <groupId>com.icegreen</groupId>
-            <artifactId>greenmail</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.google.code.bean-matchers</groupId>
             <artifactId>bean-matchers</artifactId>
@@ -544,16 +528,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.tngtech.jgiven</groupId>
-            <artifactId>jgiven-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.tngtech.jgiven</groupId>
-            <artifactId>jgiven-junit5</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.tngtech.jgiven</groupId>
-            <artifactId>jgiven-spring</artifactId>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -595,8 +572,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.12.1</version>
+                <version>4.0.0-M13</version>
                 <configuration>
+                    <moduleExcludes>
+                        <fml>*.fml</fml>
+                    </moduleExcludes>
                     <chmod>true</chmod>
                     <locales>en</locales>
                 </configuration>
@@ -605,7 +585,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.4.5</version>
+                <version>3.5.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -622,7 +602,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>3.6.3</version>
                 <configuration>
                     <skip>${skipJavaDoc}</skip>
                     <includeDependencySources>false</includeDependencySources>
@@ -668,13 +648,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>3.2.3</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.21.0</version>
+                <version>3.21.2</version>
                 <configuration>
                     <format>xml</format>
                     <linkXref>true</linkXref>
@@ -686,7 +666,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -707,13 +687,13 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.3.6</version>
+                <version>4.8.2.0</version>
             </plugin>
 
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
+                <version>0.8.11</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -724,12 +704,6 @@
                 <configuration>
                     <dataFile>${project.build.directory}/target/jacoco-unit.exec</dataFile>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jdepend-maven-plugin</artifactId>
-                <version>2.0</version>
             </plugin>
         </plugins>
     </reporting>
@@ -816,18 +790,9 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                         <configuration>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                            <keyname>togetherPlatform</keyname>
+                            <secretKeyring>${gpg.tp.keypasspharse}</secretKeyring>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -874,7 +839,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>8.4.0</version>
+                        <version>9.0.7</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -898,7 +863,7 @@
                     <plugin>
                         <groupId>org.openclover</groupId>
                         <artifactId>clover-maven-plugin</artifactId>
-                        <version>4.4.1</version>
+                        <version>4.5.1</version>
                         <executions>
                             <execution>
                                 <phase>test</phase>

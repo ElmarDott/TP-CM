@@ -8,13 +8,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>together Platform - libraries</name>
-    <description>Reactor POM: Collection of all Libraries.</description>
+    <description>Reactor POM: Bill of Materials (BoM).</description>
     <inceptionYear>01/2013</inceptionYear>
     <url>https://elmar-dott.com</url>
 
     <groupId>io.github.together</groupId>
     <artifactId>libraries</artifactId>
-    <version>1.3.3</version>
+    <version>1.4.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -24,10 +24,15 @@
     </modules>
 
     <scm>
-        <connection>scm:git:https://github.com/ElmarDott/TP-CM.git</connection>
-        <developerConnection>scm:git:file://media/veracrypt1/repositories/git-togetherPlatform/Modules/CM</developerConnection>
-        <url>scm:git:https://github.com/ElmarDott/TP-CM.git</url>
+        <connection>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</connection>
+        <developerConnection>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</developerConnection>
+        <url>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</url>
     </scm>
+
+    <issueManagement>
+        <system>Redmine</system>
+        <url>https://issues.elmar-dott.com/projects/tp</url>
+    </issueManagement>
 
     <properties>
         <release.repo>http://192.168.0.11:8082/repository/maven-releases/</release.repo>
@@ -62,6 +67,13 @@
         </repository>
     </repositories>
 
+    <licenses>
+        <license>
+            <name>${license.name}</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
     <developers>
         <developer>
             <id>CEO</id>
@@ -73,15 +85,26 @@
                 <role>Lead Developer</role>
             </roles>
             <email>elmar.dott@gmail.com</email>
+            <url>https://elmar-dott.com</url>
         </developer>
     </developers>
 
-    <licenses>
-        <license>
-            <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
-        </license>
-    </licenses>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>4.0.0-M13</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>2.0.0-M8</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 
     <!-- ==================================================================  -->
     <!-- ===========================   PROFILES   =========================  -->
@@ -94,7 +117,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -105,8 +128,8 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                            <keyname>togetherPlatform</keyname>
+                            <secretKeyring>${gpg.tp.keypasspharse}</secretKeyring>
                         </configuration>
                     </plugin>
                 </plugins>

@@ -22,7 +22,7 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-hibernate</artifactId>
-    <version>5.6.15</version>
+    <version>6.4.1</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -41,38 +41,38 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>${project.version}.Final</version>
+            <version>6.0.0.Alpha7</version>
         </dependency>
 
         <!-- Bean Validation -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.2.5.Final</version>
+            <version>8.0.1.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <version>6.2.5.Final</version>
+            <version>8.0.1.Final</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.el</artifactId>
-            <version>3.0.4</version>
+            <version>5.0.0-M1</version>
         </dependency>
 
         <!-- Database Connection Pool -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
-            <version>2.10.0</version>
+            <version>2.11.0</version>
         </dependency>
 
         <!-- JDBC DRIVER -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.6.0</version>
+            <version>42.7.1</version>
         </dependency>
         <dependency>
             <groupId>com.oracle.ojdbc</groupId>
@@ -82,7 +82,7 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>3.2.0</version>
+            <version>3.3.2</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -92,7 +92,7 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.43.0.0</version>
+            <version>3.44.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -107,39 +107,25 @@
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
-            <version>10.16.1.1</version>
+            <version>10.17.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derbyclient</artifactId>
-            <version>10.16.1.1</version>
+            <version>10.17.1.0</version>
         </dependency>
     </dependencies>
 
     <scm>
-        <connection>scm:git:https://github.com/ElmarDott/TP-CM.git</connection>
-        <developerConnection>scm:git:file://media/veracrypt1/repositories/git-togetherPlatform/Modules/CM</developerConnection>
-        <url>scm:git:https://github.com/ElmarDott/TP-CM.git</url>
+        <connection>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</connection>
+        <developerConnection>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</developerConnection>
+        <url>scm:https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/</url>
     </scm>
 
-    <developers>
-        <developer>
-            <id>ElmarDott</id>
-            <name>Elmar Dott</name>
-            <roles>
-                <role>Trainer</role>
-            </roles>
-            <url>https://elmar-dott.com</url>
-            <email>elmar.dott@gmail.com</email>
-        </developer>
-    </developers>
-
-    <licenses>
-        <license>
-            <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
-        </license>
-    </licenses>
+    <issueManagement>
+        <system>Redmine</system>
+        <url>https://issues.elmar-dott.com/projects/tp</url>
+    </issueManagement>
 
     <!-- ==================================================================  -->
     <!-- ==========================   DEPLOYMENT   ========================  -->
@@ -167,6 +153,45 @@
         </repository>
     </repositories>
 
+    <licenses>
+        <license>
+            <name>${license.name}</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>CEO</id>
+            <name>Elmar Dott</name>
+            <roles>
+                <role>CEO</role>
+                <role>Architect</role>
+                <role>Build Maanager</role>
+                <role>Lead Developer</role>
+            </roles>
+            <email>elmar.dott@gmail.com</email>
+            <url>https://elmar-dott.com</url>
+        </developer>
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>4.0.0-M13</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>2.0.0-M8</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
     <!-- ==================================================================  -->
     <!-- ===========================   PROFILES   =========================  -->
     <!-- ==================================================================  -->
@@ -178,7 +203,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -189,8 +214,8 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                            <keyname>togetherPlatform</keyname>
+                            <secretKeyring>${gpg.tp.keypasspharse}</secretKeyring>
                         </configuration>
                     </plugin>
                 </plugins>
