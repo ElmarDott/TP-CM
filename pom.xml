@@ -13,7 +13,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.5.0</version>
+    <version>1.6-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -28,8 +28,8 @@
         <skipCoveralls>true</skipCoveralls>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>6.1.2</framework.spring.version>
-        <framework.hibernate.version>6.4.1</framework.hibernate.version>
+        <framework.spring.version>6.1.4</framework.spring.version>
+        <framework.hibernate.version>6.4.4</framework.hibernate.version>
         <framework.jakarta.version>10.0.0</framework.jakarta.version>
 
         <java.sdk.source>17</java.sdk.source>
@@ -160,7 +160,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.3</version>
+                    <version>3.2.5</version>
                     <configuration>
                         <skip>${skipUnitTests}</skip>
                         <testFailureIgnore>true</testFailureIgnore>
@@ -170,7 +170,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.2.3</version>
+                    <version>3.2.5</version>
                     <executions>
                         <execution>
                             <phase>integration-test</phase>
@@ -439,7 +439,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-bom</artifactId>
-                <version>5.8.0</version>
+                <version>5.10.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -447,7 +447,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.10.1</version>
+                <version>5.10.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -455,7 +455,7 @@
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>postgresql</artifactId>
-                <version>1.19.3</version>
+                <version>1.19.6</version>
                 <scope>test</scope>
             </dependency>
 
@@ -472,9 +472,9 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-testing</artifactId>
-                <version>${framework.hibernate.version}.Final</version>
+                <groupId>org.hibernate.orm</groupId>
+                <artifactId>hibernate-testing-jakarta</artifactId>
+                <version>6.0.0.Alpha9</version>
                 <scope>test</scope>
             </dependency>
 
@@ -557,10 +557,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-testing</artifactId>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-testing-jakarta</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -648,7 +650,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.2.3</version>
+                <version>3.2.5</version>
             </plugin>
 
             <plugin>
@@ -687,7 +689,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.8.2.0</version>
+                <version>4.8.3.1</version>
             </plugin>
 
             <plugin>
@@ -839,7 +841,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>9.0.7</version>
+                        <version>9.0.9</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -863,7 +865,7 @@
                     <plugin>
                         <groupId>org.openclover</groupId>
                         <artifactId>clover-maven-plugin</artifactId>
-                        <version>4.5.1</version>
+                        <version>4.5.2</version>
                         <executions>
                             <execution>
                                 <phase>test</phase>
@@ -905,6 +907,35 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+
+        <profile>
+            <id>site-tp-cm</id>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-project-info-reports-plugin</artifactId>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>index</report>
+                                    <report>plugin-management</report>
+                                    <report>dependency-management</report>
+                                    <report>licenses</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </reporting>
         </profile>
     </profiles>
 

@@ -10,7 +10,7 @@
 [![License Apache 2](https://img.shields.io/github/license/ElmarDott/TP-CM)](https://www.apache.org/licenses/LICENSE-2.0)
 
 
-**Homepage:** [together-platform.org](https://together-platform.com)
+**Homepage:** [together-platform.org](https://together-platform.org)
 The GitHub Code Reposity contains just a backup branch of releases from https://git.elmar-dott.com.
 This repository includes all necessary files to build and compile artifacts of the project together platform (TP).
 
@@ -53,9 +53,9 @@ For using the bundles in your project you can place the following configuration 
             <groupId>io.github.together.libraries</groupId>
             <artifactId>bundle-hibernate</artifactId>
             <version>${framework.hibernate.version}</version>
-            <type>pom</type>`
-        </dependency>`
-        <dependency>`
+            <type>pom</type>
+        </dependency>
+        <dependency>
             <groupId>io.github.together.libraries</groupId>
             <artifactId>bundle-jarkarta</artifactId>
             <version>${framework.jarkarta.version}</version>
@@ -63,9 +63,7 @@ For using the bundles in your project you can place the following configuration 
         </dependency>
     </dependencies>
 </dependencyManagement>
-```
 
-```XML
 </dependencies>
     <dependency>
         <groupId>io.github.together.libraries</groupId>

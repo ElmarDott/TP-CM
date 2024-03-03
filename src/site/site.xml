@@ -3,6 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 https://maven.apache.org/xsd/decoration-1.8.0.xsd"
          name="Module: ConfigurationManagement">
 
+    <!--
+        https://maven.apache.org/guides/mini/guide-site.html
+        https://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html
+        https://maven.apache.org/skins/maven-fluido-skin/
+    -->
     <bannerLeft>
         <name>together Platform</name>
         <src>images/logo.gif</src>
@@ -14,11 +19,16 @@
 
     <body>
         <breadcrumbs>
-            <item name="Home" href="https://together-platform.com"/>
+            <item name="Home" href="https://together-platform.org"/>
         </breadcrumbs>
 
-        <menu ref="parent" />
-        <menu ref="modules" />
+        <!-- menu ref="parent" / -->
+        <!-- menu ref="modules" / -->
+
+        <menu name="Resources">
+            <item name="Git Repository" href="https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/readme" target="_blank" />
+        </menu>
+
         <menu ref="reports" />
 
         <footer><![CDATA[<p style="text-align:center; font-weight:bold;">&copy; <span id="year"></span> <a href="https://elmar-dott.com" target="_blank">Elmar Dott Consulting</a></p>
