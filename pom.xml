@@ -28,15 +28,18 @@
         <skipCoveralls>true</skipCoveralls>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>6.1.4</framework.spring.version>
-        <framework.hibernate.version>6.4.4</framework.hibernate.version>
-        <framework.jakarta.version>10.0.0</framework.jakarta.version>
+        <framework.spring.version>6.1.8</framework.spring.version>
+        <framework.hibernate.version>6.4.9</framework.hibernate.version>
+        <framework.jakarta.version>10.0.1</framework.jakarta.version>
 
         <java.sdk.source>17</java.sdk.source>
         <java.sdk.target>17</java.sdk.target>
         <java.ee.version>10</java.ee.version>
         <java.fx.version>17.0.6</java.fx.version>
         <maven.version>[3.9,)</maven.version>
+
+        <!-- Docker execution -->
+        <start.postgres>false</start.postgres>
 
         <directory.reporting.out>${basedir}/target/site/</directory.reporting.out>
         <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
@@ -95,7 +98,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.4.1</version>
+                    <version>3.5.0</version>
                     <executions>
                         <execution>
                             <phase>validate</phase>
@@ -121,7 +124,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.3.0</version>
                     <executions>
                         <execution>
                             <id>docker-run</id>
@@ -130,6 +133,7 @@
                                 <goal>exec</goal>
                             </goals>
                             <configuration>
+                                <skip>${start.postgres}</skip>
                                 <executable>docker</executable>
                                 <arguments>
                                     <argument>start</argument>
@@ -150,7 +154,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.6.1</version>
+                    <version>3.7.1</version>
                     <executions>
                         <execution>
                             <phase>process-resources</phase>
@@ -167,7 +171,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.12.1</version>
+                    <version>3.13.0</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
                         <source>${java.sdk.source}</source>
@@ -181,7 +185,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.5</version>
+                    <version>3.3.1</version>
                     <configuration>
                         <skip>${skipUnitTests}</skip>
                         <testFailureIgnore>true</testFailureIgnore>
@@ -191,7 +195,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.2.5</version>
+                    <version>3.3.1</version>
                     <executions>
                         <execution>
                             <phase>integration-test</phase>
@@ -210,7 +214,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.4.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -220,12 +224,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.1.2</version>
                     <executions>
                         <execution>
                             <id>deploy-private-nexus</id>
@@ -240,13 +244,13 @@
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.13</version>
+                    <version>1.7.0</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.4</version>
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>
@@ -260,28 +264,14 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.flywaydb</groupId>
-                    <artifactId>flyway-maven-plugin </artifactId>
-                    <version>9.16.3</version>
-                    <configuration>
-                        <url>${dbms.connection.uri}</url>
-                        <user>${dbms.connection.user}</user>
-                        <password>${dbms.connection.password}</password>
-                        <schemas>
-                            <schema>dbms.connection.schemata</schema>
-                        </schemas>
-                    </configuration>
+                    <version>3.3.1</version>
                 </plugin>
 
                 <!-- REPORTING -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.11</version>
+                    <version>0.8.12</version>
                     <executions>
                         <execution>
                             <id>pre-unit-test</id>
@@ -326,7 +316,7 @@
                 <plugin>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-maven-plugin-jakarta</artifactId>
-                    <version>2.2.20</version>
+                    <version>2.2.22</version>
                     <configuration>
                         <skip>${skipSwagger}</skip>
                         <outputFileName>swagger-API</outputFileName>
@@ -348,18 +338,18 @@
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>3.10.0.2594</version>
+                    <version>4.0.0.4121</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>4.0.0-M13</version>
+                    <version>4.0.0-M15</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.apache.maven.doxia</groupId>
                             <artifactId>doxia-module-markdown</artifactId>
-                            <version>2.0.0-M8</version>
+                            <version>2.0.0-M12</version>
                         </dependency>
                     </dependencies>
                     <configuration>
@@ -371,7 +361,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.6.3</version>
+                    <version>3.7.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -464,7 +454,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-bom</artifactId>
-                <version>5.10.0</version>
+                <version>5.12.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -472,7 +462,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.10.2</version>
+                <version>5.10.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -586,7 +576,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>4.0.0-M13</version>
+                <version>4.0.0-M15</version>
                 <configuration>
                     <moduleExcludes>
                         <fml>*.fml</fml>
@@ -599,7 +589,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.6.1</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -616,7 +606,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.3</version>
+                <version>3.7.0</version>
                 <configuration>
                     <skip>${skipJavaDoc}</skip>
                     <includeDependencySources>false</includeDependencySources>
@@ -637,7 +627,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.0</version>
                 <configuration>
                     <tagListOptions>
                         <tagClasses>
@@ -662,13 +652,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.2.5</version>
+                <version>3.3.1</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.21.2</version>
+                <version>3.23.0</version>
                 <configuration>
                     <format>xml</format>
                     <linkXref>true</linkXref>
@@ -680,7 +670,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.4.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -701,13 +691,13 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.8.3.1</version>
+                <version>4.8.6.2</version>
             </plugin>
 
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.11</version>
+                <version>0.8.12</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -853,7 +843,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>9.0.9</version>
+                        <version>10.0.2</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -902,52 +892,6 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
-
-        <profile>
-            <id>dbms-flyway</id>
-
-            <properties>
-                <skipUnitTests>true</skipUnitTests>
-                <skipIntegrationTests>true</skipIntegrationTests>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.flywaydb</groupId>
-                        <artifactId>flyway-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>site-tp-cm</id>
-            <reporting>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-project-info-reports-plugin</artifactId>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <report>index</report>
-                                    <report>plugin-management</report>
-                                    <report>dependency-management</report>
-                                    <report>licenses</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-pmd-plugin</artifactId>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </reporting>
         </profile>
     </profiles>
 
