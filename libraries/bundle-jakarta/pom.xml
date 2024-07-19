@@ -20,10 +20,10 @@
     <properties>
         <jersey.version>3.1.7</jersey.version>
 
-        <release.repo>http://192.168.0.11:8082/repository/maven-releases/</release.repo>
-        <snapshot.repro>http://192.168.0.11:8082/repository/maven-snapshots/</snapshot.repro>
-        <site.repro>file:///home/wiki/local/apache2/htdocs/mext</site.repro>
-        <fetch.repo>http://192.168.0.11:8082/repository/maven-public/</fetch.repo>
+        <release.repo>http://192.168.0.201:8081/repository/maven-releases/</release.repo>
+        <snapshot.repro>http://192.168.0.201:8081/repository/maven-snapshots/</snapshot.repro>
+        <site.repro>https://togeter-platform.com</site.repro>
+        <fetch.repo>http://192.168.0.201:8081/repository/maven-public/</fetch.repo>
     </properties>
 
     <dependencyManagement>
@@ -214,6 +214,7 @@
             </plugin>
         </plugins>
     </build>
+    
     <!-- ==================================================================  -->
     <!-- ===========================   PROFILES   =========================  -->
     <!-- ==================================================================  -->

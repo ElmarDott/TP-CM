@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
         <action>
-            <actionName>CUSTOM-TP-CM site</actionName>
-            <displayName>TP-CM site</displayName>
-            <recursive>false</recursive>
+            <actionName>CUSTOM-deploy</actionName>
+            <displayName>deploy</displayName>
             <goals>
-                <goal>site</goal>
+                <goal>deploy</goal>
             </goals>
-            <activatedProfiles>
-                <activatedProfile>site-tp-cm</activatedProfile>
-            </activatedProfiles>
         </action>
     </actions>
