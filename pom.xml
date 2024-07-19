@@ -344,12 +344,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>4.0.0-M15</version>
+                    <version>4.0.0-M13</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.apache.maven.doxia</groupId>
                             <artifactId>doxia-module-markdown</artifactId>
-                            <version>2.0.0-M12</version>
+                            <version>2.0.0-M8</version>
                         </dependency>
                     </dependencies>
                     <configuration>
@@ -576,7 +576,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>4.0.0-M15</version>
+                <version>4.0.0-M13</version>
                 <configuration>
                     <moduleExcludes>
                         <fml>*.fml</fml>
