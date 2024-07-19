@@ -39,7 +39,7 @@
         <maven.version>[3.9,)</maven.version>
 
         <!-- Docker execution -->
-        <start.postgres>false</start.postgres>
+        <skip.start.postgres>true</skip.start.postgres>
 
         <directory.reporting.out>${basedir}/target/site/</directory.reporting.out>
         <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
@@ -133,7 +133,7 @@
                                 <goal>exec</goal>
                             </goals>
                             <configuration>
-                                <skip>${start.postgres}</skip>
+                                <skip>${skip.start.postgres}</skip>
                                 <executable>docker</executable>
                                 <arguments>
                                     <argument>start</argument>
