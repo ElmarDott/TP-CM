@@ -860,6 +860,7 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <failOnError>false</failOnError>
                             <outputDirectory>${directory.reporting.out}</outputDirectory>
                         </configuration>
                     </plugin>
