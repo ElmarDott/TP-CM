@@ -23,7 +23,7 @@
     <properties>
         <skipUnitTests>false</skipUnitTests>
         <skipIntegrationTests>true</skipIntegrationTests>
-        <skipEnforcer>true</skipEnforcer>
+        <skipEnforcer>false</skipEnforcer>
 
         <skipCoveralls>true</skipCoveralls>
         <skipSwagger>true</skipSwagger>
@@ -44,7 +44,6 @@
         <directory.reporting.out>${basedir}/target/site/</directory.reporting.out>
         <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
         <license.name>Apache License 2.0</license.name>
-        <license.file>${basedir}/LICENSE</license.file>
 
         <release.repo>http://192.168.0.201:8081/repository/maven-releases/</release.repo>
         <snapshot.repro>http://192.168.0.201:8081/repository/maven-snapshots/</snapshot.repro>
