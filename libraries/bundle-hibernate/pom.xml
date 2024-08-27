@@ -22,7 +22,7 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-hibernate</artifactId>
-    <version>6.4.9</version>
+    <version>6.4.10</version>
     <packaging>pom</packaging>
 
     <properties>

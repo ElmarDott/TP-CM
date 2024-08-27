@@ -14,11 +14,13 @@
 
     <body>
         <breadcrumbs>
-            <item name="Home" href="https://together-platform.com"/>
+            <item name="Elmar Dott Consulting" href="https://elmar-dott.com"/>
+            <item name="Home" href="https://together-platform.org"/>
         </breadcrumbs>
 
         <menu ref="parent" />
         <menu ref="modules" />
+
         <menu ref="reports" />
 
         <footer><![CDATA[<p style="text-align:center; font-weight:bold;">&copy; <span id="year"></span> <a href="https://elmar-dott.com" target="_blank">Elmar Dott Consulting</a></p>
@@ -28,7 +30,7 @@
     <skin>
         <groupId>org.apache.maven.skins</groupId>
         <artifactId>maven-fluido-skin</artifactId>
-        <version>2.0.0-M8</version>
+        <version>2.0.0-M10</version>
     </skin>
     <custom>
         <fluidoSkin>
