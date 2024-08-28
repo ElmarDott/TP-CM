@@ -358,6 +358,7 @@
                     <executions>
                         <execution>
                             <id>attach-descriptor</id>
+                            <phase>process-resources</phase>
                             <goals>
                                 <goal>attach-descriptor</goal>
                             </goals>
