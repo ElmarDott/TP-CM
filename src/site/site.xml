@@ -19,8 +19,8 @@
 
     <body>
         <breadcrumbs>
+            <item name="Together Platform" href="https://together-platform.org"/>
             <item name="Elmar Dott Consulting" href="https://elmar-dott.com"/>
-            <item name="Home" href="https://together-platform.org"/>
         </breadcrumbs>
 
         <!-- menu ref="modules" / -->
