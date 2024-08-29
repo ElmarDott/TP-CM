@@ -47,7 +47,6 @@
 
         <release.repo>http://192.168.0.201:8081/repository/maven-releases/</release.repo>
         <snapshot.repro>http://192.168.0.201:8081/repository/maven-snapshots/</snapshot.repro>
-        <site.repro>https://togeter-platform.com</site.repro>
         <fetch.repo>http://192.168.0.201:8081/repository/maven-public/</fetch.repo>
     </properties>
 
@@ -74,11 +73,6 @@
             <id>local-nexus</id>
             <url>${release.repo}</url>
         </repository>
-        <site>
-            <id>local-http-nexus</id>
-            <name>local deployed site</name>
-            <url>${site.repro}</url>
-        </site>
     </distributionManagement>
 
     <repositories>
@@ -357,8 +351,15 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <id>attach-descriptor</id>
+                            <id>attach-descriptor-build</id>
                             <phase>process-resources</phase>
+                            <goals>
+                                <goal>attach-descriptor</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>attach-descriptor</id>
+                            <phase>site</phase>
                             <goals>
                                 <goal>attach-descriptor</goal>
                             </goals>
@@ -373,10 +374,10 @@
                     <executions>
                         <execution>
                             <id>aggregate</id>
+                            <phase>site</phase>
                             <goals>
                                 <goal>aggregate</goal>
                             </goals>
-                            <phase>site</phase>
                         </execution>
                     </executions>
                 </plugin>
