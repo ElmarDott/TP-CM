@@ -821,7 +821,9 @@
                         <artifactId>maven-gpg-plugin</artifactId>
                         <configuration>
                             <keyname>togetherPlatform</keyname>
-                            <secretKeyring>${gpg.tp.keypasspharse}</secretKeyring>
+                            <!-- secretKeyring>${gpg.tp.keypasspharse}</secretKeyring -->
+                            <defaultKeyring>${gpg.tp.keypasspharse}</defaultKeyring>
+                            <homedir>${gpg.homedir}</homedir>
                         </configuration>
                     </plugin>
                 </plugins>
