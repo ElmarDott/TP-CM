@@ -820,10 +820,13 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <configuration>
-                            <keyname>togetherPlatform</keyname>
-                            <!-- secretKeyring>${gpg.tp.keypasspharse}</secretKeyring -->
-                            <defaultKeyring>${gpg.tp.keypasspharse}</defaultKeyring>
                             <homedir>${gpg.homedir}</homedir>
+
+                            <keyname>togetherPlatform</keyname>
+                            <passphrase>${gpg.tp.keypasspharse}</passphrase>
+
+                            <secretKeyring>${gpg.tp.keypasspharse}</secretKeyring>
+                            <defaultKeyring>${gpg.tp.keypasspharse}</defaultKeyring>
                         </configuration>
                     </plugin>
                 </plugins>
