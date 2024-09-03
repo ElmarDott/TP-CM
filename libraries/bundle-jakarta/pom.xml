@@ -247,6 +247,7 @@
                         <configuration>
                             <keyname>togetherPlatform</keyname>
                             <secretKeyring>${gpg.tp.keypasspharse}</secretKeyring>
+                            <homedir>${gpg.homedir}</homedir>
                         </configuration>
                     </plugin>
                 </plugins>
