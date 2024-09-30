@@ -15,14 +15,15 @@
         HBM 5.3 + | JPA 2.2 | JSR 338 \n
         HBM 5.5 + | JPA 2.2 | Jakarta EE 8 \n
         HBM 6.0 + | JPA 3.0 | Jakarta EE 9 \n
-        HBM 6.1 + | JPA 3.1 | Jakarta EE 10
+        HBM 6.1 + | JPA 3.1 | Jakarta EE 10 \n
+        HBM 7.0 + | JPA 3.2 | Jakarta EE 11
     </description>
     <inceptionYear>01/2013</inceptionYear>
     <url>https://elmar-dott.com</url>
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-hibernate</artifactId>
-    <version>6.4.10</version>
+    <version>6.6.1</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -72,7 +73,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.7.3</version>
+            <version>42.7.4</version>
         </dependency>
         <dependency>
             <groupId>com.oracle.ojdbc</groupId>
@@ -211,7 +212,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.2.5</version>
+                        <version>3.2.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -223,9 +224,7 @@
                         </executions>
                         <configuration>
                             <homedir>${gpg.homedir}</homedir>
-
                             <keyname>togetherPlatform</keyname>
-                            <passphrase>${gpg.tp.keypasspharse}</passphrase>
 
                             <secretKeyring>${gpg.tp.keypasspharse}</secretKeyring>
                             <defaultKeyring>${gpg.tp.keypasspharse}</defaultKeyring>
