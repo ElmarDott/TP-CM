@@ -28,6 +28,7 @@
         <menu name="Resources">
             <item name="Git Repository" href="https://git.elmar-dott.com/scm/repo/TogetherPlatform/TP-CM/readme" target="_blank" />
             <item name="Issue Management" href="https://issues.elmar-dott.com/projects/tp-cm" target="_blank" />
+            <item name="Release Notes" href="release-notes.html" />
         </menu>
 
         <menu ref="reports" />

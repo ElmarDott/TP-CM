@@ -9,7 +9,7 @@
     <name>together Platform - BUILD Workflow</name>
     <description>Default Build Workflow Definition for together Platform.</description>
     <inceptionYear>01/2013</inceptionYear>
-    <url>https://elmar-dott.com</url>
+    <url>https://together-platform.org</url>
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
@@ -28,7 +28,7 @@
         <skipCoveralls>true</skipCoveralls>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>6.1.13</framework.spring.version>
+        <framework.spring.version>6.1.14</framework.spring.version>
         <framework.hibernate.version>6.6.1</framework.hibernate.version>
         <framework.jakarta.version>10.0.1</framework.jakarta.version>
 
@@ -117,7 +117,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>3.4.1</version>
+                    <version>3.5.0</version>
                     <executions>
                         <execution>
                             <id>docker-run</id>
@@ -147,7 +147,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.8.0</version>
+                    <version>3.8.1</version>
                     <executions>
                         <execution>
                             <phase>process-resources</phase>
@@ -178,7 +178,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>3.5.1</version>
                     <configuration>
                         <skip>${skipUnitTests}</skip>
                         <testFailureIgnore>true</testFailureIgnore>
@@ -188,7 +188,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>3.5.1</version>
                     <executions>
                         <execution>
                             <phase>integration-test</phase>
@@ -243,7 +243,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.2.6</version>
+                    <version>3.2.7</version>
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>
@@ -309,7 +309,7 @@
                 <plugin>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-maven-plugin-jakarta</artifactId>
-                    <version>2.2.23</version>
+                    <version>2.2.25</version>
                     <configuration>
                         <skip>${skipSwagger}</skip>
                         <outputFileName>swagger-API</outputFileName>
@@ -342,7 +342,7 @@
                         <dependency>
                             <groupId>org.apache.maven.doxia</groupId>
                             <artifactId>doxia-module-markdown</artifactId>
-                            <version>2.0.0-M12</version>
+                            <version>2.0.0</version>
                         </dependency>
                     </dependencies>
                     <configuration>
@@ -370,7 +370,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.10.0</version>
+                    <version>3.10.1</version>
                     <executions>
                         <execution>
                             <id>aggregate</id>
@@ -444,7 +444,7 @@
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
-                <version>5.1.5</version>
+                <version>5.2.0</version>
             </dependency>
 
             <!-- Global TEsting Libraries -->
@@ -478,7 +478,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-bom</artifactId>
-                <version>5.13.0</version>
+                <version>5.14.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -486,7 +486,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.11.0</version>
+                <version>5.11.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -613,7 +613,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -630,7 +630,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.10.0</version>
+                <version>3.10.1</version>
                 <configuration>
                     <skip>${skipJavaDoc}</skip>
                     <includeDependencySources>false</includeDependencySources>
@@ -652,7 +652,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>taglist-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.1</version>
                 <configuration>
                     <tagListOptions>
                         <tagClasses>
@@ -677,13 +677,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.5.1</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.25.0</version>
+                <version>3.26.0</version>
                 <configuration>
                     <format>xml</format>
                     <linkXref>true</linkXref>
@@ -695,7 +695,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.6.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -716,7 +716,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.8.6.4</version>
+                <version>4.8.6.5</version>
             </plugin>
 
             <plugin>
@@ -871,7 +871,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>10.0.4</version>
+                        <version>11.0.0</version>
                         <executions>
                             <execution>
                                 <goals>
