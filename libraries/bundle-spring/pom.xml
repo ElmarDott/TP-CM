@@ -14,14 +14,14 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
-    <version>6.1.14</version>
+    <version>6.2.1</version>
     <packaging>pom</packaging>
 
     <properties>
-        <release.repo>http://192.168.0.201:8081/repository/maven-releases/</release.repo>
-        <snapshot.repro>http://192.168.0.201:8081/repository/maven-snapshots/</snapshot.repro>
+        <release.repo>http://172.18.0.250:8081/repository/maven-releases/</release.repo>
+        <snapshot.repro>http://172.18.0.250:8081/repository/maven-snapshots/</snapshot.repro>
         <site.repro>https://togeter-platform.com</site.repro>
-        <fetch.repo>http://192.168.0.201:8081/repository/maven-public/</fetch.repo>
+        <fetch.repo>http://172.18.0.250:8081/repository/maven-public/</fetch.repo>
     </properties>
 
     <dependencies>
