@@ -28,8 +28,8 @@
         <skipCoveralls>true</skipCoveralls>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>6.2.1</framework.spring.version>
-        <framework.hibernate.version>6.6.4</framework.hibernate.version>
+        <framework.spring.version>6.2.7</framework.spring.version>
+        <framework.hibernate.version>6.6.17</framework.hibernate.version>
         <framework.jakarta.version>10.0.1</framework.jakarta.version>
 
         <java.sdk.source>17</java.sdk.source>
@@ -43,6 +43,8 @@
 
         <directory.reporting.out>${basedir}/target/site/</directory.reporting.out>
         <checkstyle.rules>${basedir}/checkstyle.xml</checkstyle.rules>
+        <pmd.rules>${basedir}/pmd-ruleset.xml</pmd.rules>
+        <spotbugs.rules>${basedir}/spotbugs-exclude.xml</spotbugs.rules>
         <license.name>Apache License 2.0</license.name>
 
         <release.repo>http://172.18.0.250:8081/repository/maven-releases/</release.repo>
@@ -118,7 +120,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>3.5.1</version>
                     <executions>
                         <execution>
                             <id>docker-run</id>
@@ -165,7 +167,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.13.0</version>
+                    <version>3.14.0</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
                         <source>${java.sdk.source}</source>
@@ -179,7 +181,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>3.5.3</version>
                     <configuration>
                         <skip>${skipUnitTests}</skip>
                         <testFailureIgnore>true</testFailureIgnore>
@@ -189,7 +191,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <version>3.5.3</version>
                     <executions>
                         <execution>
                             <phase>integration-test</phase>
@@ -218,12 +220,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>3.1.3</version>
+                    <version>3.1.4</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.3</version>
+                    <version>3.1.4</version>
                     <executions>
                         <execution>
                             <id>deploy-private-nexus</id>
@@ -265,7 +267,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.12</version>
+                    <version>0.8.13</version>
                     <executions>
                         <execution>
                             <id>pre-unit-test</id>
@@ -310,7 +312,7 @@
                 <plugin>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-maven-plugin-jakarta</artifactId>
-                    <version>2.2.26</version>
+                    <version>2.2.32</version>
                     <configuration>
                         <skip>${skipSwagger}</skip>
                         <outputFileName>swagger-API</outputFileName>
@@ -332,7 +334,7 @@
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>5.0.0.4389</version>
+                    <version>5.1.0.4751</version>
                 </plugin>
 
                 <plugin>
@@ -445,7 +447,7 @@
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
-                <version>5.2.0</version>
+                <version>6.0.0</version>
             </dependency>
 
             <!-- Global TEsting Libraries -->
@@ -465,7 +467,7 @@
                 <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
-                <version>2.1.2</version>
+                <version>2.1.3</version>
                 <scope>test</scope>
             </dependency>
 
@@ -479,7 +481,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-bom</artifactId>
-                <version>5.14.2</version>
+                <version>5.18.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -487,7 +489,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.11.4</version>
+                <version>5.13.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -614,7 +616,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.9.0</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -678,19 +680,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>3.5.2</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.26.0</version>
-                <configuration>
-                    <format>xml</format>
-                    <linkXref>true</linkXref>
-                    <minimumTokens>100</minimumTokens>
-                    <targetJdk>${java.sdk.version}</targetJdk>
-                </configuration>
+                <version>3.5.3</version>
             </plugin>
 
             <plugin>
@@ -715,15 +705,40 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.26.0</version>
+                <configuration>
+                    <!-- rulesets>
+                        <ruleset>${pmd.rules}</ruleset>
+                    </rulesets -->
+                    <format>xml</format>
+                    <linkXref>true</linkXref>
+                    <minimumTokens>100</minimumTokens>
+                    <targetJdk>${java.sdk.version}</targetJdk>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.8.6.6</version>
+                <version>4.9.3.0</version>
+                <configuration>
+                    <!-- excludeFilterFile>${spotbugs.rules}</excludeFilterFile -->
+                    <plugins>
+                        <plugin>
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>1.13.0</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
+                <version>0.8.13</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -872,7 +887,7 @@
                     <plugin>
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
-                        <version>11.1.1</version>
+                        <version>12.1.1</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -890,8 +905,57 @@
         </profile>
 
         <profile>
-            <id>clover-report</id>
+            <id>mutation-test</id>
+            <properties>
+                <skipUnitTests>true</skipUnitTests>
+                <skipIntegrationTests>true</skipIntegrationTests>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-maven</artifactId>
+                        <version>1.19.4</version>
+                        <executions>
+                            <execution>
+                                <id>pit-report</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>mutationCoverage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <!-- https://github.com/hcoles/pitest/issues/284 -->
+                            <!-- Need this to support JUnit 5 -->
+                            <dependency>
+                                <groupId>org.pitest</groupId>
+                                <artifactId>pitest-junit5-plugin</artifactId>
+                                <version>1.2.3</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <targetClasses>
+                                <param>org.europa.together.*</param>
+                            </targetClasses>
+                            <targetTests>
+                                <param>org.europa.together.*</param>
+                            </targetTests>
+                            <timeoutFactor>1.5</timeoutFactor>
+                            <sourceDataFormats>
+                                <sourceDataFormat>HTML</sourceDataFormat>
+                            </sourceDataFormats>
+                            <siteReportName>Mutation Test</siteReportName>
+                            <reportsDirectory>${directory.reporting.out}/mutation-tests</reportsDirectory>
+                            <siteReportDirectory>pit-site-directory</siteReportDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
+        <profile>
+            <id>clover-report</id>
             <build>
                 <plugins>
                     <plugin>
