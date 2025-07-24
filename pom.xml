@@ -103,7 +103,6 @@
                                 <goal>enforce</goal>
                             </goals>
                             <configuration>
-                                <skip>${skipEnforcer}</skip>
                                 <rules>
                                     <banDuplicatePomDependencyVersions/>
                                     <requireJavaVersion>
@@ -392,6 +391,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
+                <configuration>
+                    <skip>${skipEnforcer}</skip>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
