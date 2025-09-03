@@ -36,7 +36,7 @@ PARENT POM: build workflow
 <parent>
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.6.0</version>
+    <version>1.6.1</version>
 </parent>
 ```
 For using the bundles in your project you can place the following configuration in your POM. If you already use the the build-workflow as your parent POM then you don't need to insert the <dependency> section.

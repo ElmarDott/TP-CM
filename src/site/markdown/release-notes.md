@@ -2,7 +2,7 @@
 
 | **Version** | **Comment**
 |-------------|--------------------------------------------------------------------|
-| **1.6.0**   | **published** : 09/2025
+| **1.6.1**   | **published** : 09/2025
 |             | Libraries: 1.5.0
 |             |  - dependencies: TP-BUNDLE Spring 6.2.9
 |             |  - dependencies: TP-BUNDLE Hibernate 7.1.0
