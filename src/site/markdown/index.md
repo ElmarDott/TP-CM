@@ -2,8 +2,8 @@
 The build-workflow is the parent-pom and the libraries module is a reactor to prepare all neccesary global dependencies (BOM) for the TP project.
 
 ## Prerequisites
-* Java 17 SE adopt openJDK
-* Jakarta EE 10
+* Java 21 SE adopt openJDK
+* Jakarta EE 11
 * Maven 3.9.x
 * Docker.io (Testcontainers)
 * NetBeans IDE (recommended) / JetBrains IntelliJ / Eclipse
@@ -17,7 +17,7 @@ PARENT POM: build workflow
 <parent>
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.5.0</version>
+    <version>1.6.0</version>
 </parent>
 ```
 

@@ -13,7 +13,7 @@
 
     <groupId>io.github.together</groupId>
     <artifactId>build-workflow</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.6.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -28,13 +28,13 @@
         <skipCoveralls>true</skipCoveralls>
         <skipSwagger>true</skipSwagger>
 
-        <framework.spring.version>6.2.8</framework.spring.version>
-        <framework.hibernate.version>6.6.20</framework.hibernate.version>
-        <framework.jakarta.version>10.0.1</framework.jakarta.version>
+        <framework.spring.version>6.2.9</framework.spring.version>
+        <framework.hibernate.version>7.1.0</framework.hibernate.version>
+        <framework.jakarta.version>11.0.0</framework.jakarta.version>
 
-        <java.sdk.source>17</java.sdk.source>
-        <java.sdk.target>17</java.sdk.target>
-        <java.ee.version>10</java.ee.version>
+        <java.sdk.source>21</java.sdk.source>
+        <java.sdk.target>21</java.sdk.target>
+        <java.ee.version>11</java.ee.version>
         <java.fx.version>17.0.6</java.fx.version>
         <maven.version>[3.9,)</maven.version>
 
@@ -94,7 +94,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.6.0</version>
+                    <version>3.6.1</version>
                     <executions>
                         <execution>
                             <phase>validate</phase>
@@ -312,7 +312,7 @@
                 <plugin>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-maven-plugin-jakarta</artifactId>
-                    <version>2.2.34</version>
+                    <version>2.2.35</version>
                     <configuration>
                         <skip>${skipSwagger}</skip>
                         <outputFileName>swagger-API</outputFileName>
@@ -447,7 +447,7 @@
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
-                <version>6.0.0</version>
+                <version>6.1.0</version>
             </dependency>
 
             <!-- Global TEsting Libraries -->
@@ -467,7 +467,7 @@
                 <!-- SMTP Server Mock -->
                 <groupId>com.icegreen</groupId>
                 <artifactId>greenmail</artifactId>
-                <version>2.1.4</version>
+                <version>2.1.5</version>
                 <scope>test</scope>
             </dependency>
 
@@ -476,6 +476,12 @@
                 <groupId>com.google.code.bean-matchers</groupId>
                 <artifactId>bean-matchers</artifactId>
                 <version>0.14</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest</artifactId>
+                <version>3.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -489,7 +495,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.13.3</version>
+                <version>5.13.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -555,6 +561,10 @@
         <dependency>
             <groupId>com.google.code.bean-matchers</groupId>
             <artifactId>bean-matchers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
@@ -915,7 +925,7 @@
                     <plugin>
                         <groupId>org.pitest</groupId>
                         <artifactId>pitest-maven</artifactId>
-                        <version>1.20.0</version>
+                        <version>1.20.1</version>
                         <executions>
                             <execution>
                                 <id>pit-report</id>
