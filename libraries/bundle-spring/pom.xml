@@ -14,7 +14,7 @@
 
     <groupId>io.github.together.libraries</groupId>
     <artifactId>bundle-spring</artifactId>
-    <version>6.2.9</version>
+    <version>6.2.18</version>
     <packaging>pom</packaging>
 
     <properties>
